@@ -1,0 +1,30 @@
+[GitCommit]
+bears = GitCommitBear
+ignore_length_regex = Signed-off-by,
+    Also-by,
+    Co-authored-by,
+    http://,
+    https://
+
+[JSON]
+bears = JSONFormatBear
+files = **/*.json
+ignore = .*/**
+indent_size = 2
+
+[YAML]
+bears = YAMLLintBear
+files = jjb/**/*.yaml,openstack-hot/**/*.yaml
+document_start = True
+yamllint_config = yamllint.conf
+
+[ShellCheck]
+bears = ShellCheckBear,SpaceConsistencyBear
+files = jenkins-scripts/**/*.sh,
+    jjb/**/*.sh,
+    scripts/**/*.sh
+ignore = jenkins-scripts/*-local-env.sh,
+    jjb/global-jjb/shell/*.sh,
+shell = bash
+indent_size = 4
+use_spaces = yeah

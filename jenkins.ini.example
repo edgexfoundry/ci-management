@@ -1,0 +1,11 @@
+[job_builder]
+ignore_cache=True
+keep_descriptions=False
+include_path=.
+recursive=True
+
+[jenkins]
+user=#LFID#
+password=#api_token#
+url=https://jenkins.edgexfoundry.org/sandbox
+query_plugins_info=False

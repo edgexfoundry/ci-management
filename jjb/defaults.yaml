@@ -1,0 +1,23 @@
+---
+# GLOBAL jenkins defaults
+
+- defaults:
+    name: global
+
+    # lf-infra-defaults
+    jenkins-ssh-credential: 'edgex-jenkins-ssh'
+
+    # build discards
+    build-days-to-keep: 30
+
+    # Timeout in minutes
+    build-timeout: 360
+    build-node: centos7-basebuild-2c-1g
+
+    archive-artifacts: ''
+
+    # Set default maven version used for everything
+    maven-version: 'mvn33'
+
+    # GitHub configuration
+    github-org: edgexfoundry
