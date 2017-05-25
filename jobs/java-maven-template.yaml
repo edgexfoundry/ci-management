@@ -1,0 +1,101 @@
+# Library and Micro Service build creation
+
+# Template for all Java libraries
+- job-template:
+    name: '{name}-library'
+    display-name: '{name}-library'
+    description: '{description}
+
+'
+    project-type: maven
+    maven:
+      name: '{name}'
+      root-pom:  pom.xml
+      ignore-upstream-changes: false
+      resolve-dependencies: true
+      process-plugins: true
+      goals:  install
+    triggers:
+      - github
+    scm:
+      - git:
+          url: https://bitbucket.org/clientcto/{name}
+          credentials-id: '{repos-cred-id}'
+          skip-tag: true
+          per-build-tag: false
+          wipe-workspace: false
+          branches:
+             - master
+
+# Template for all Java micro services
+- job-template:
+    name: '{name}-microservice'
+    display-name: '{name}-microservice'
+    description: '{description}
+
+'
+    project-type: maven
+    maven:
+      name: '{name}'
+      root-pom:  pom.xml
+      resolve-dependencies: true
+      process-plugins: true
+      ignore-upstream-changes: false
+      goals:  install
+      post-step-run-condition: SUCCESS
+      root-module:
+        group-id: org.edgexfoundry
+        artifact-id: '{name}'
+    triggers:
+      - github
+    scm:
+      - git:
+          url: https://bitbucket.org/clientcto/{name}
+          credentials-id: '{repos-cred-id}'
+          skip-tag: true
+          per-build-tag: false
+          wipe-workspace: false
+          branches:
+             - master
+    postbuilders:
+      - trigger-builds:
+        - project:  '{name}-docker'
+
+
+
+# Template for all dockerization jobs
+- job-template:
+    name: '{name}-docker'
+    display-name: '{name}-docker'
+    description: '{description}
+
+'
+    project-type: freestyle
+    scm:
+      - git:
+          url: https://bitbucket.org/clientcto/docker-{name}
+          credentials-id: '{repos-cred-id}'
+          skip-tag: true
+          per-build-tag: false
+          wipe-workspace: false
+          branches:
+             - master
+    builders:
+      - shell: | 
+         echo "updating docker-{name}"
+         cp $WORKSPACE/../{name}-microservice/docker-files/* $WORKSPACE
+         cp $WORKSPACE/../{name}-microservice/target/{name}*.jar {name}.jar
+         cp $WORKSPACE/../{name}-microservice/pom.xml $WORKSPACE
+         {extra-script}
+         git add --all
+         git commit -m "jenkins build"
+    publishers:
+      - git:
+          push-merge: true
+          push-only-if-success: true
+          force-push:  true
+          branches:
+              - branch:
+                  remote: origin
+                  name: master
+

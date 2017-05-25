@@ -1,0 +1,155 @@
+# EdgeX Foundry library and micro services.
+
+## need to dockerize mongo, mongo seed and consul
+
+- project:
+    name:  edgex-build
+    jobs:
+      - '{name}-microservice':
+           name: "core-config-seed"
+           description:  "config seed micro service"
+
+      - '{name}-docker':
+           name: "core-config-seed"
+           description:  "dockerize core-config-seed"
+           extra-script: |
+             rm -Rf ./*config
+             cp -r $WORKSPACE/../{name}-microservice/*config .
+
+      - '{name}-library':
+           name: "core-domain"
+           description:  "core domain library"
+
+      - '{name}-library':
+           name: "core-exception"
+           description:  "core exception library"
+
+      - '{name}-library':
+           name: "core-test"
+           description:  "core test library"
+  
+      - '{name}-library':
+           name: "support-domain"
+           description:  "support domain library"
+
+      - '{name}-microservice':
+           name: "support-logging"
+           description:  "logging micro service"
+
+      - '{name}-docker':
+           name: "support-logging"
+           description:  "dockerize logging"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-library':
+           name: "support-logging-client"
+           description:  "support logging client library"
+ 
+      - '{name}-microservice':
+           name: "support-notifications"
+           description: "notifications micro service"
+
+      - '{name}-docker':
+           name: "support-notifications"
+           description: "dockerize notifications"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-library':
+           name: "support-notifications-client"
+           description:  "support notifications client library"
+
+      - '{name}-microservice':
+           name: "core-metadata"
+           description:  "core metadata micro service"
+ 
+      - '{name}-docker':
+           name: "core-metadata"
+           description: "dockerize core metadata"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-library':
+           name: "core-metadata-client"
+           description:  "core metadata client library"
+
+      - '{name}-microservice':
+           name: "core-data"
+           description:  "core data micro service"
+ 
+      - '{name}-docker':
+           name: "core-data"
+           description: "dockerize core data"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-microservice':
+           name: "support-scheduler"
+           description:  "support scheduler micro service"
+
+      - '{name}-docker':
+           name: "support-scheduler"
+           description: "dockerize support-scheduler"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-library':
+           name: "core-data-client"
+           description:  "core data client library"
+
+      - '{name}-microservice':
+           name: "core-command"
+           description:  "core command micro service"
+
+      - '{name}-docker':
+           name: "core-command"
+           description:  "dockerize core command"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-library':
+           name: "core-command-client"
+           description:  "core command client library"
+
+      - '{name}-library':
+           name: "export-domain"
+           description:  "export domain library"
+
+      - '{name}-library':
+           name: "export-test"
+           description:  "export test library"
+
+      - '{name}-microservice':
+           name: "export-client"
+           description:  "export client registration micro service"
+
+      - '{name}-docker':
+           name: "export-client"
+           description:  "dockerize export client registration"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-microservice':
+           name: "export-distro"
+           description:  "export distribution micro service"
+
+      - '{name}-docker':
+           name: "export-distro"
+           description:  "dockerize export distribution"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-microservice':
+           name: "support-rulesengine"
+           description:  "support rules engine micro service"
+
+      - '{name}-docker':
+           name: "support-rulesengine"
+           description:  "dockerize support rules engine"
+           extra-script: "echo 'no extra steps'"
+
+      - '{name}-microservice':
+           name: "device-virtual"
+           description:  "virtual device micro service"
+
+      - '{name}-docker':
+           name: "device-virtual"
+           description:  "dockerize virtual device"
+           extra-script: |
+             rm -Rf ./*profile
+             cp -r $WORKSPACE/../{name}-microservice/*profiles .
+
+
