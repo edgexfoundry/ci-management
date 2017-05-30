@@ -1,0 +1,8 @@
+The scripts in this directory are used by the Jenkins spin-up component
+for dynamic minions.
+
+The spinup script will be as follows (${system_type} will be replaced
+with the appropriate system_type script)
+
+git clone https://github.com/edgexfoundry/ci-management.git /ci-management
+/ci-management/jenkins-scripts/jenkins-init-script.sh
