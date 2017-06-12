@@ -1,0 +1,7 @@
+{
+  "base_image": "CentOS 7.1703 (2017-04-24) - LF upload",
+  "cloud_user": "centos",
+
+  "distro": "CentOS 7",
+  "cloud_user_data": "provision/rh-user_data.sh"
+}
