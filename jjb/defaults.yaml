@@ -20,4 +20,5 @@
     maven-version: 'mvn33'
 
     # GitHub configuration
+    git-url: https://github.com
     github-org: edgexfoundry
