@@ -1,0 +1,67 @@
+{
+  "variables": {
+    "public_base_image": null,
+    "public_network": null,
+    "public_cloud_user": null,
+    "public_auth_url": null,
+    "public_tenant": null,
+    "public_user": null,
+    "public_pass": null,
+    "private_base_image": null,
+    "private_network": null,
+    "private_cloud_user": null,
+    "private_auth_url": null,
+    "private_tenant": null,
+    "private_user": null,
+    "private_pass": null,
+    "distro": null,
+    "cloud_user_data": null
+  },
+  "builders": [
+    {
+      "type": "openstack",
+      "name": "public_cloud",
+      "identity_endpoint": "{{user `public_auth_url`}}",
+      "tenant_name": "{{user `public_tenant`}}",
+      "username": "{{user `public_user`}}",
+      "password": "{{user `public_pass`}}",
+      "region": "DFW",
+      "ssh_username": "{{user `public_cloud_user`}}",
+      "image_name": "{{user `distro`}} - docker - {{isotime \"20060102-1504\"}}",
+      "source_image": "{{user `public_base_image`}}",
+      "flavor": "general1-1",
+      "networks": [
+        "{{user `public_network`}}"
+      ],
+      "user_data_file": "{{user `cloud_user_data`}}"
+    },
+    {
+      "type": "openstack",
+      "name": "private_cloud",
+      "identity_endpoint": "{{user `private_auth_url`}}",
+      "tenant_name": "{{user `private_tenant`}}",
+      "username": "{{user `private_user`}}",
+      "password": "{{user `private_pass`}}",
+      "ssh_username": "{{user `private_cloud_user`}}",
+      "image_name": "{{user `distro`}} - docker - {{isotime \"20060102-1504\"}}",
+      "source_image_name": "{{user `private_base_image`}}",
+      "flavor": "general1-1",
+      "networks": [
+        "{{user `private_network`}}"
+      ],
+      "user_data_file": "{{user `cloud_user_data`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "provision/baseline.sh",
+        "provision/docker.sh",
+        "provision/system_reseal_local_env.sh",
+        "provision/system_reseal.sh"
+      ],
+      "execute_command": "chmod +x {{ .Path }}; if [ \"$UID\" == \"0\" ]; then {{ .Vars }} '{{ .Path }}'; else {{ .Vars }} sudo -E '{{ .Path }}'; fi"
+    }
+  ]
+}
