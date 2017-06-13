@@ -21,4 +21,5 @@
 
     # GitHub configuration
     git-url: https://github.com
+    git-clone-url: 'git@github.com:'
     github-org: edgexfoundry
