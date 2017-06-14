@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: core-domain
+    project-name: core-domain
+    project: core-domain
+    mvn-settings: core-domain-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

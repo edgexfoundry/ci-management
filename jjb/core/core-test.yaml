@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: core-test
+    project-name: core-test
+    project: core-test
+    mvn-settings: core-test-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

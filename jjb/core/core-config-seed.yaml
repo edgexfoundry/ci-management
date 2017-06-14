@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: core-config-seed
+    project-name: core-config-seed
+    project: core-config-seed
+    mvn-settings: core-config-seed-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

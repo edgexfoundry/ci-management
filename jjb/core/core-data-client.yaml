@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: core-data-client
+    project-name: core-data-client
+    project: core-data-client
+    mvn-settings: core-data-client-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: core-metadata-client
+    project-name: core-metadata-client
+    project: core-metadata-client
+    mvn-settings: core-metadata-client-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
