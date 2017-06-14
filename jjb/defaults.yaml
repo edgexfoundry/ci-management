@@ -17,9 +17,22 @@
     archive-artifacts: ''
 
     # Set default maven version used for everything
-    maven-version: 'mvn33'
+    mvn-version: 'mvn33'
+
+    # Default maven goals
+    mvn-goals: 'clean install'
+    mvn-opts: ''
 
     # GitHub configuration
     git-url: https://github.com
     git-clone-url: 'git@github.com:'
     github-org: edgexfoundry
+
+    # Maven / Java
+    edgex-infra-mvn-opts: |
+        --show-version
+        --batch-mode
+        -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+        -Djenkins
+        -Dmaven.repo.local=/tmp/r
+        -Dorg.ops4j.pax.url.mvn.localRepository=/tmp/r
