@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: device-virtual
+    project-name: device-virtual
+    project: device-virtual
+    mvn-settings: device-virtual-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
