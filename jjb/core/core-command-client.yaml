@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: core-command-client
+    project-name: core-command-client
+    project: core-command-client
+    mvn-settings: core-command-client-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

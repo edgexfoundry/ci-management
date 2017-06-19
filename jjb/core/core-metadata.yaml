@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: core-metadata
+    project-name: core-metadata
+    project: core-metadata
+    mvn-settings: core-metadata-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
