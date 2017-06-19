@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: support-rulesengine
+    project-name: support-rulesengine
+    project: support-rulesengine
+    mvn-settings: support-rulesengine-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

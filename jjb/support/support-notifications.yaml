@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: support-notifications
+    project-name: support-notifications
+    project: support-notifications
+    mvn-settings: support-notifications-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

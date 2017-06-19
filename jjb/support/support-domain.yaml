@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: support-domain
+    project-name: support-domain
+    project: support-domain
+    mvn-settings: support-domain-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
