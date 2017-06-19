@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: support-scheduler
+    project-name: support-scheduler
+    project: support-scheduler
+    mvn-settings: support-scheduler-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

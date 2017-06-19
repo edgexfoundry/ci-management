@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: support-logging-client
+    project-name: support-logging-client
+    project: support-logging-client
+    mvn-settings: support-logging-client-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
