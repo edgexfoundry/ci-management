@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: export-client
+    project-name: export-client
+    project: export-client
+    mvn-settings: export-client-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

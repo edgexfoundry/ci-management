@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: export-export-test
+    project-name: export-export-test
+    project: export-export-test
+    mvn-settings: export-export-test-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

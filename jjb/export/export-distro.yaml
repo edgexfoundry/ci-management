@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: export-distro
+    project-name: export-distro
+    project: export-distro
+    mvn-settings: export-distro-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
