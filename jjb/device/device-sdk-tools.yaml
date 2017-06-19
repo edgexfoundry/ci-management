@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: device-sdk-tools
+    project-name: device-sdk-tools
+    project: device-sdk-tools
+    mvn-settings: device-sdk-tools-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
