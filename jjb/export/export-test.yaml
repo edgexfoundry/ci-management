@@ -1,10 +1,10 @@
 ---
 
 - project:
-    name: export-export-test
-    project-name: export-export-test
-    project: export-export-test
-    mvn-settings: export-export-test-settings
+    name: export-test
+    project-name: export-test
+    project: export-test
+    mvn-settings: export-test-settings
     archive-artifacts: ''
     stream:
       - 'master'
