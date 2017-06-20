@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: export-domain
+    project-name: export-domain
+    project: export-domain
+    mvn-settings: export-domain-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
