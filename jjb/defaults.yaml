@@ -28,6 +28,15 @@
     git-clone-url: 'git@github.com:'
     github-org: edgexfoundry
 
+    # default pr_whitelist to some LF RelEng staff
+    github_pr_whitelist:
+      - jpwku
+      - tykeal
+      - zxiiro
+    # default pr_admin_list to LF RelEng lead
+    github_pr_admin_list:
+      - tykeal
+
     # Maven / Java
     edgex-infra-mvn-opts: |
         --show-version
