@@ -28,6 +28,7 @@
       - lf-infra-parameters:
           project: '{project}'
           branch: '{branch}'
+          stream: '{stream}'
 
     wrappers:
       - lf-infra-wrappers:
