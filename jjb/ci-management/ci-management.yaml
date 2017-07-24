@@ -1,10 +1,16 @@
 ---
 - project:
-    name: ci-management-jobs
-    project: 'ci-management'
+    build-node: centos7-basebuild-2c-1g
     jobs:
       - '{project-name}-github-ci-jobs'
+      - '{project-name}-github-packer-jobs':
+          templates:
+            - basebuild
+            - docker
+          os-cloud-file-id: 'packer-cloud-env'
+          platforms:
+            - centos
 
+    name: ci-management-jobs
     project: ci-management
     project-name: ci-management
-    build-node: centos7-basebuild-2c-1g
