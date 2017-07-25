@@ -9,7 +9,7 @@
             - docker
           os-cloud-file-id: 'packer-cloud-env'
           platforms:
-            - centos
+            - centos-7
 
     name: ci-management-jobs
     project: ci-management
