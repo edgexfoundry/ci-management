@@ -1,0 +1,167 @@
+---
+###########
+# ANCHORS #
+###########
+- docker_job_boiler_plate: &docker_job_boiler_plate
+    name: docker_job-boiler-plate
+
+    project-type: freestyle
+    node: '{build-node}'
+
+    ######################
+    # Default parameters #
+    ######################
+
+    branch: master
+    submodule-recursive: true
+
+    # default params for docker jobs
+    pre_build_script: ''
+    post_build_script: ''
+    docker_root: '$WORKSPACE'
+    docker_build_args: ''
+    docker_name: 'unnamed'
+    # Default to LF standard 'snapshots' docker registry
+    docker_registry: '$DOCKER_REGISTRY:10003'
+    docker_tag: 'latest'
+
+    #####################
+    # Job Configuration #
+    #####################
+
+    properties:
+      - lf-infra-properties:
+          build-days-to-keep: '{build-days-to-keep}'
+      - github:
+          url: '{git-url}/{github-org}/{project}'
+
+    parameters:
+      - lf-infra-parameters:
+          branch: '{branch}'
+          project: '{project}'
+          stream: '{stream}'
+
+    wrappers:
+      - lf-infra-wrappers:
+          build-timeout: '{build-timeout}'
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    publishers:
+      - lf-infra-publish
+
+- docker_verify_boiler_plate: &docker_verify_boiler_plate
+    name: docker_verify_boiler_plate
+
+    concurrent: true
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+          branch: '{branch}'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    triggers:
+      - github-pull-request:
+          trigger-phrase: '^recheck$'
+          only-trigger-phrase: false
+          status-context: '{project} Verify'
+          permit-all: true
+          github-hooks: true
+          auto-close-on-fail: false
+
+- docker_merge_boiler_plate: &docker_merge_boiler_plate
+    name: docker_merge_boiler_plate
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: ''
+          branch: '{branch}'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    triggers:
+      # no reason to add lf-infra-github-pr-trigger here since it doesn't
+      # currently work for merge / push
+      - github
+      - pollscm:
+          cron: ''
+
+#################
+# JOB TEMPLATES #
+#################
+- job-template:
+    name: '{project-name}-{stream}-merge-docker'
+    # Job template for Docker merge jobs
+    #
+    # The purpose of this job template is to run a docker build, and potentially
+    # test validation of the docker image
+
+    <<: *docker_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *docker_merge_boiler_plate
+
+    builders:
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - shell: '{pre_build_script}'
+      - inject:
+          # Docker registry is purposely not using an '_' so as to not conflict
+          # with the Jenkins global env var
+          properties-content: |
+            DOCKER_ARGS={docker_build_args}
+            DOCKER_NAME={docker_name}
+            DOCKER_ROOT={docker_root}
+            DOCKER_TAG={docker_tag}
+            DOCKERREGISTRY={docker_registry}
+      # Do the docker build
+      - shell: !include-raw: ../shell/docker-build.sh
+      - inject:
+          # Import the docker image information from the build step
+          properties-file: 'env_inject.txt'
+      # Execute any post build clean-up or testing
+      - shell: '{post_build_script}'
+      # Provided all steps have already passed, push the docker image
+      - shell: !include-raw: ../shell/docker-push.sh
+
+- job-template:
+    name: '{project-name}-{stream}-verify-docker'
+    # Job template for Docker verify jobs
+    #
+    # The purpose of this job template is to run a docker build, and potentially
+    # test validation of the docker image
+
+    ######################
+    # Default parameters #
+    ######################
+
+    <<: *docker_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *docker_verify_boiler_plate
+
+    builders:
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - shell: '{pre_build_script}'
+      - inject:
+          # Docker registry is purposely not using an '_' so as to not conflict
+          # with the Jenkins global env var
+          properties-content: |
+            DOCKER_ARGS={docker_build_args}
+            DOCKER_NAME={docker_name}
+            DOCKER_ROOT={docker_root}
+            DOCKER_TAG={docker_tag}
+            DOCKERREGISTRY={docker_registry}
+      # Do the docker build
+      - shell: !include-raw: ../shell/docker-build.sh
+      - inject:
+          # Import the docker image information from the build step
+          properties-file: 'env_inject.txt'
+      # Execute any post build clean-up or testing
+      - shell: '{post_build_script}'
