@@ -10,6 +10,12 @@
           os-cloud-file-id: 'packer-cloud-env'
           platforms:
             - centos-7
+      - '{project-name}-{stream}-verify-docker':
+          stream: master
+          mvn-settings: global-settings
+      - '{project-name}-{stream}-merge-docker':
+          stream: master
+          mvn-settings: global-settings
 
     name: ci-management-jobs
     project: ci-management
