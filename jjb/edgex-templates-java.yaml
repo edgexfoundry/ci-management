@@ -153,3 +153,84 @@
           settings-type: cfp
           global-settings: 'global-settings'
           global-settings-type: cfp
+
+- job-template:
+    name: '{project-name}-{stream}-generate-verify-java'
+
+    # Job template for Java verify jobs for Code Generation (Device SDK Tools)
+    #
+    # The purpose of this job templte is to run "maven clean install" for
+    # projects using this template.
+    #
+    # Required Variables:
+    #    branch:   git branch (eg. master)
+
+    <<: *job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *verify_boiler_plate
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - shell: 'cd $WORKSPACE;
+                find src -name "*.java" > sources.txt;
+                javac -d target -sourcepath src @sources.txt;
+                java -cp target {main-class} . {config-file}'
+      - maven-target:
+          maven-version: '{mvn-version}'
+          goals: |
+              {mvn-goals}
+              -Dstream={stream}
+              {edgex-infra-mvn-opts}
+          java-opts:
+            - '{mvn-opts}'
+          settings: '{mvn-settings}'
+          settings-type: cfp
+          global-settings: 'global-settings'
+          global-settings-type: cfp
+          pom: '{generated-project}/pom.xml'
+
+- job-template:
+    name: '{project-name}-{stream}-generate-merge-java'
+
+    # Job template for Java merge job for Code Generation (Device SDK Tools)
+    #
+    # The purpose of this job template is to run "maven clean deploy"
+    # for projects using this template
+    #
+    # Required Variables:
+    #    branch:   git branch (eg. master)
+
+    <<: *job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *merge_boiler_plate
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - shell: 'cd $WORKSPACE;
+                find src -name "*.java" > sources.txt;
+                javac -d target -sourcepath src @sources.txt;
+                java -cp target {main-class} . {config-file}'
+      - maven-target:
+          maven-version: '{mvn-version}'
+          goals: |
+              {mvn-goals}
+              -Dmerge
+              -Dstream={stream}
+              {edgex-infra-mvn-opts}
+          java-opts:
+            - '{mvn-opts}'
+          #properties:
+          #  - deployAtEnd=true
+          # No deployment at this time
+          # use to deploy device-sdk eventually
+          settings: '{mvn-settings}'
+          settings-type: cfp
+          global-settings: 'global-settings'
+          global-settings-type: cfp
+          pom: '{generated-project}/pom.xml'

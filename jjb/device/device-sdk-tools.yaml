@@ -5,10 +5,13 @@
     project-name: device-sdk-tools
     project: device-sdk-tools
     mvn-settings: device-sdk-tools-settings
+    main-class: org.edgexfoundry.devicesdk.tools.GenerateDeviceService
+    generated-project: device-sdk-generated
+    config-file: Demo
     archive-artifacts: ''
     stream:
       - 'master'
 
     jobs:
-      - '{project-name}-{stream}-verify-java'
-      - '{project-name}-{stream}-merge-java'
+      - '{project-name}-{stream}-generate-verify-java'
+      - '{project-name}-{stream}-generate-merge-java'
