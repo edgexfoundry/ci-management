@@ -29,6 +29,7 @@
           project: '{project}'
           branch: '{branch}'
           stream: '{stream}'
+          lftools-version: '{lftools-version}'
 
     wrappers:
       - lf-infra-wrappers:
