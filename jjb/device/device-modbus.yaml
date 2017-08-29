@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: device-modbus
+    project-name: device-modbus
+    project: device-modbus
+    mvn-settings: device-modbus-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

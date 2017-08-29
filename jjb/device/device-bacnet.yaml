@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: device-bacnet
+    project-name: device-bacnet
+    project: device-bacnet
+    mvn-settings: device-bacnet-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

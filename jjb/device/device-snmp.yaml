@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: device-snmp
+    project-name: device-snmp
+    project: device-snmp
+    mvn-settings: device-snmp-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

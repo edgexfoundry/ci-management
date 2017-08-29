@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: device-mqtt
+    project-name: device-mqtt
+    project: device-mqtt
+    mvn-settings: device-mqtt-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'

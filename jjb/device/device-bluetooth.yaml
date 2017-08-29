@@ -1,0 +1,14 @@
+---
+
+- project:
+    name: device-bluetooth
+    project-name: device-bluetooth
+    project: device-bluetooth
+    mvn-settings: device-bluetooth-settings
+    archive-artifacts: ''
+    stream:
+      - 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
