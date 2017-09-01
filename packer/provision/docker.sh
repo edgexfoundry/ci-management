@@ -7,9 +7,21 @@ set -xeu -o pipefail
 
 rh_changes() {
     echo "---> RH changes"
+    # Following directions from 
+    # https://docs.docker.com/engine/installation/linux/docker-ce/centos/
+
+    # remove old docker
+    yum remove -y docker docker-common docker-selinux docker-engine
+
+    # set up the repository
+    yum install -y yum-utils device-mapper-persistent-data lvm2
+    yum-config-manager --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+    yum clean -y metadata
+
     # install docker and enable it
     echo "---> Installing docker"
-    yum install -y docker supervisor bridge-utils
+    yum install -y docker-ce supervisor bridge-utils
     systemctl enable docker
 
     # configure docker networking so that it does not conflict with LF
@@ -18,12 +30,17 @@ rh_changes() {
 # /etc/sysconfig/docker-network
 DOCKER_NETWORK_OPTIONS='--bip=10.250.0.254/24'
 EOL
+
     # configure docker daemon to listen on port 5555 enabling remote
     # managment
-    sed -i -e "s#='--selinux-enabled'#='--selinux-enabled -H unix:///var/run/docker.sock -H tcp://0.0.0.0:5555'#g" /etc/sysconfig/docker
-
-    # docker group doesn't get created by default for some reason
-    groupadd docker
+    mkdir /etc/docker
+    touch /etc/docker/daemon.json
+    cat <<EOL > /etc/docker/daemon.json
+{
+"selinux-enabled": true,
+"hosts": ["unix:///var/run/docker.sock", "tcp://0.0.0.0:5555"]
+}
+EOL
 
     # Install python dependencies
     yum install -y python-{devel,virtualenv,setuptools,pip}
