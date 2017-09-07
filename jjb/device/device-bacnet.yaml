@@ -5,10 +5,19 @@
     project-name: device-bacnet
     project: device-bacnet
     mvn-settings: device-bacnet-settings
+    docker_name: docker-device-bacnet
+    docker_tag: latest
+    docker_registry: edgexfoundry
+    docker_root: ''
+    docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''
+    artifact-version: '1.0.0-SNAPSHOT'
+    build-node: centos7-docker-4c-2g
     stream:
       - 'master'
 
     jobs:
       - '{project-name}-{stream}-verify-java'
       - '{project-name}-{stream}-merge-java'
+      - '{project-name}-{stream}-verify-docker'
+      - '{project-name}-{stream}-merge-docker'
