@@ -5,7 +5,7 @@
     name: global
 
     # lftools
-    lftools-version: 0.7.0
+    lftools-version:  <1.0.0
 
     # lf-infra-defaults
     jenkins-ssh-credential: 'edgex-jenkins-ssh'
