@@ -6,8 +6,6 @@
     project: device-snmp
     mvn-settings: device-snmp-settings
     docker_name: docker-device-snmp
-    docker_tag: latest
-    docker_registry: edgexfoundry
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''

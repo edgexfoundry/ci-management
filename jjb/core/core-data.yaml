@@ -6,8 +6,6 @@
     project: core-data
     mvn-settings: core-data-settings
     docker_name: docker-core-data
-    docker_tag: latest
-    docker_registry: edgexfoundry
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''

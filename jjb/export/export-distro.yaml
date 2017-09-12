@@ -6,8 +6,6 @@
     project: export-distro
     mvn-settings: export-distro-settings
     docker_name: docker-export-distro
-    docker_tag: latest
-    docker_registry: edgexfoundry
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''

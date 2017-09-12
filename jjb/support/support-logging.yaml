@@ -6,8 +6,6 @@
     project: support-logging
     mvn-settings: support-logging-settings
     docker_name: docker-support-logging
-    docker_tag: latest
-    docker_registry: edgexfoundry
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''

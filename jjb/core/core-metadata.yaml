@@ -6,8 +6,6 @@
     project: core-metadata
     mvn-settings: core-metadata-settings
     docker_name: docker-core-metadata
-    docker_tag: latest
-    docker_registry: edgexfoundry
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''

@@ -6,8 +6,6 @@
     project: device-mqtt
     mvn-settings: device-mqtt-settings
     docker_name: docker-device-mqtt
-    docker_tag: latest
-    docker_registry: edgexfoundry
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''
