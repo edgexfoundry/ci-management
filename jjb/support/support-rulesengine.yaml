@@ -6,8 +6,6 @@
     project: support-rulesengine
     mvn-settings: support-rulesengine-settings
     docker_name: docker-support-rulesengine
-    docker_tag: latest
-    docker_registry: edgexfoundry
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''

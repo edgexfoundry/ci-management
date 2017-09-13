@@ -6,8 +6,6 @@
     project: support-notifications
     mvn-settings: support-notifications-settings
     docker_name: docker-support-notifications
-    docker_tag: latest
-    docker_registry: edgexfoundry
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''
