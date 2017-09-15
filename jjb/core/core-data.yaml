@@ -15,7 +15,7 @@
       - 'master'
 
     jobs:
-      - '{project-name}-{stream}-verify-java'
-      - '{project-name}-{stream}-merge-java'
-      - '{project-name}-{stream}-verify-docker'
-      - '{project-name}-{stream}-merge-docker'
+      - '{project-name}-{stream}-verify-docker':
+          trigger-job: '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-docker':
+          trigger-job: '{project-name}-{stream}-merge-java'
