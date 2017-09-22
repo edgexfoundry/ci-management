@@ -15,3 +15,4 @@
     jobs:
       - '{project-name}-{stream}-generate-verify-java'
       - '{project-name}-{stream}-generate-merge-java'
+      - '{project-name}-{stream}-release-version-java-daily-no-sonar'
