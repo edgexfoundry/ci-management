@@ -213,5 +213,5 @@
       # Provided all steps have already passed, push the docker image
       - shell: !include-raw: ../shell/docker-push.sh
 
-      - triggers:
-          - timed: 'H 11 * * *'
+    triggers:
+      - timed: 'H 11 * * *'

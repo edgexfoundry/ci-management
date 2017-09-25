@@ -19,3 +19,5 @@
       - '{project-name}-{stream}-merge-java'
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'
+      - '{project-name}-{stream}-release-version-java-daily-no-sonar'
+      - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
