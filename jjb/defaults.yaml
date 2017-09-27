@@ -48,3 +48,7 @@
         -Djenkins
         -Dmaven.repo.local=/tmp/r
         -Dorg.ops4j.pax.url.mvn.localRepository=/tmp/r
+
+    # Nexus
+    staging-profile-id: a004df83a6249
+    mvn-staging-id: staging
