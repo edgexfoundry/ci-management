@@ -91,6 +91,8 @@
       - github
       - pollscm:
           cron: ''
+      - reverse:
+          jobs: '{project-name}-{stream}-merge-java'
 
 #################
 # JOB TEMPLATES #
@@ -214,4 +216,5 @@
       - shell: !include-raw: ../shell/docker-push.sh
 
     triggers:
-      - timed: 'H 11 * * *'
+      - reverse:
+          jobs: '{project-name}-{stream}-release-version-java-daily-no-sonar'
