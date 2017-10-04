@@ -6,10 +6,11 @@
     project: core-config-watcher
     mvn-settings: core-config-watcher-settings
     archive-artifacts: ''
+    cron: 'H 11 * * *'
     stream:
       - 'master'
 
     jobs:
       - '{project-name}-{stream}-verify-java'
       - '{project-name}-{stream}-merge-java'
-      - '{project-name}-{stream}-release-version-java-daily-no-sonar'
+      - '{project-name}-github-maven-jobs'
