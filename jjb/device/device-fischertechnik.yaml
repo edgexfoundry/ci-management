@@ -11,6 +11,7 @@
     archive-artifacts: ''
     artifact-version: '1.0.0-SNAPSHOT'
     build-node: centos7-docker-4c-2g
+    cron: 'H 11 * * *'
     stream:
       - 'master'
 
@@ -19,5 +20,5 @@
       - '{project-name}-{stream}-merge-java'
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'
-      - '{project-name}-{stream}-release-version-java-daily-no-sonar'
+      - '{project-name}-github-maven-jobs'
       - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
