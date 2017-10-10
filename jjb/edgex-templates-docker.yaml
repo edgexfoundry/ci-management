@@ -215,6 +215,7 @@
       # Provided all steps have already passed, push the docker image
       - shell: !include-raw: ../shell/docker-push.sh
 
+    # Doesn't make sense to build unless there are new artifacts released
     triggers:
       - reverse:
-          jobs: '{project-name}-{stream}-release-version-java-daily-no-sonar'
+          jobs: '{project-name}-maven-release-master'
