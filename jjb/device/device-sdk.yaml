@@ -8,7 +8,10 @@
     archive-artifacts: ''
     cron: 'H 11 * * *'
     stream:
-      - 'master'
+      - 'master':
+          branch: 'master'
+      - 'barcelona':
+          branch: 'barcelona'
 
     jobs:
       - '{project-name}-{stream}-verify-java'
