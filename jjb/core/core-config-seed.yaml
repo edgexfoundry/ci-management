@@ -13,7 +13,10 @@
     build-node: centos7-docker-4c-2g
     cron: 'H 11 * * *'
     stream:
-      - 'master'
+      - 'master':
+          branch: 'master'
+      - 'barcelona':
+          branch: 'barcelona'
 
     jobs:
       - '{project-name}-{stream}-verify-java'
