@@ -1,0 +1,49 @@
+---
+
+- project:
+    name: blackbox-testing
+    project-name: blackbox-testing
+    project: blackbox-testing
+    archive-artifacts: ''
+    mvn-settings: blackbox-testing-settings
+    build-node: centos7-docker-4c-2g
+    stream:
+      - 'master':
+          branch: 'master'
+      - 'barcelona':
+          branch: 'barcelona'
+    jobs:
+      - 'blackbox-testing-{stream}'
+
+- job-template:
+    name: 'blackbox-testing-{stream}'
+    node: '{build-node}'
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: ''
+          branch: 'refs/heads/{branch}'
+          submodule-recursive: true
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-provide-maven-settings:
+          settings-file: '{mvn-settings}'
+          global-settings-file: 'global-settings'
+      - shell: |
+          #!/bin/bash
+          set +x
+          virtualenv venv
+          source venv/bin/activate
+          pip install --upgrade setuptools pip
+          pip install docker-compose
+          chmod u+x deploy-edgeX.sh
+          bash deploy-edgeX.sh
+          chmod u+x ./postman-test/bin/run.sh
+          cd ./postman-test/bin; bash ./run.sh -all postman-integration-test
+
+    triggers:
+      - timed: 'H 12 * * *'
