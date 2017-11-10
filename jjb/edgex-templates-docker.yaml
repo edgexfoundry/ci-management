@@ -132,6 +132,11 @@
       # Provided all steps have already passed, push the docker image
       - shell: !include-raw: ../shell/docker-push.sh
 
+    # Doesn't make sense to build unless there are new artifacts released
+    triggers:
+      - reverse:
+          jobs: '{project-name}-{stream}-merge-java'
+
 - job-template:
     name: '{project-name}-{stream}-verify-docker'
     # Job template for Docker verify jobs
