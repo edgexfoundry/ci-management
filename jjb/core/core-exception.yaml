@@ -6,6 +6,7 @@
     project: core-exception
     mvn-settings: core-exception-settings
     archive-artifacts: ''
+    artifact-version: '0.2.0-SNAPSHOT'
     cron: 'H 11 * * *'
     stream:
       - 'master':
