@@ -27,7 +27,7 @@
     parameters:
       - lf-infra-parameters:
           project: '{project}'
-          branch: '{branch}'
+          branch: '$GERRIT_BRANCH'
           stream: '{stream}'
           lftools-version: '{lftools-version}'
 
@@ -68,8 +68,8 @@
     scm:
       - lf-infra-github-scm:
           url: '{git-clone-url}{github-org}/{project}'
-          refspec: ''
-          branch: '{branch}'
+          refspec: '$GERRIT_REFSPEC'
+          branch: '$GERRIT_BRANCH'
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
