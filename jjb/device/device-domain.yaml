@@ -1,0 +1,17 @@
+---
+
+- project:
+    name: device-domain
+    project-name: device-domain
+    project: device-domain
+    mvn-settings: device-domain-settings
+    archive-artifacts: ''
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-{stream}-merge-java'
+      - '{project-name}-github-maven-jobs'
