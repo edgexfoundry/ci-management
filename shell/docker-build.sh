@@ -3,6 +3,10 @@
 # Do not set -u as DOCKER_ARGS may be unbound
 set -e -o pipefail
 
+if [[ -z "$DOCKER_TAG" ]]; then
+    DOCKER_TAG=$( xmlstarlet sel -N "x=http://maven.apache.org/POM/4.0.0" -t -v "/x:project/x:version" pom.xml )
+fi
+
 # Switch to the directory where the Dockerfile is
 cd "$DOCKER_ROOT"
 
