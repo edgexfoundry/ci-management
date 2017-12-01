@@ -223,4 +223,4 @@
     # Doesn't make sense to build unless there are new artifacts released
     triggers:
       - reverse:
-          jobs: '{project-name}-maven-release-master'
+          jobs: '{project-name}-maven-release-{stream}'
