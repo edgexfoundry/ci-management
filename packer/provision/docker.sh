@@ -48,6 +48,7 @@ EOL
     # Install docker-compose per https://docs.docker.com/compose/install/#install-compose
     sudo curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/1.17.1/docker-compose-$(uname -s)-$(uname -m)"
     sudo chmod +x /usr/local/bin/docker-compose
+    ls -l /usr/local/bin/
     docker-compose -v
 }
 
