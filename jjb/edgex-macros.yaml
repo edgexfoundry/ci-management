@@ -1,2 +1,17 @@
 ---
-# Project Global macros
+
+- property:
+    name: 'edgex-go-x86_64'
+    properties:
+      - inject:
+          properties-content: |
+            GOPATH=$WORKSPACE
+
+- property:
+    name: 'edgex-go-amd64'
+    properties:
+      - inject:
+          properties-content: |
+            GOPATH=$WORKSPACE
+            GOARCH=amd64
+
