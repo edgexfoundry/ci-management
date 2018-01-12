@@ -40,12 +40,12 @@
           source venv/bin/activate
           pip install --upgrade setuptools pip
           pip install docker-compose
-          chmod u+x ./blackbox-testing/bin/env.sh
-          bash ./blackbox-testing/bin/env.sh
+          chmod u+x bin/env.sh
+          bash bin/env.sh
           chmod u+x deploy-edgeX.sh
           bash deploy-edgeX.sh
-          chmod u+x ./blackbox-testing/bin/run.sh
-          cd ./blackbox-testing/bin; bash ./run.sh -all postman-integration-test
+          chmod u+x bin/run.sh
+          cd bin; bash ./run.sh -all postman-integration-test
 
     triggers:
       - timed: 'H 12 * * *'
