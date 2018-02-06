@@ -53,7 +53,7 @@ EOL
 
 
     echo "---> Installing golang 1.9.1 into /usr/local/bin"
-    wget https://storage.googleapis.com/golang/go1.9.r12.linux-amd64.tar.gz
+    wget https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz
     tar -xzf go1.9.2.linux-amd64.tar.gz
     mv go /usr/local/bin
 
