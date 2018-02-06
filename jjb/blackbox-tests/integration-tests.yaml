@@ -41,11 +41,8 @@
           source venv/bin/activate
           pip install --upgrade setuptools pip
           pip install docker-compose
-          chmod u+x bin/env.sh
-          bash bin/env.sh
-          chmod u+x deploy-edgeX.sh
+          source bin/env.sh
           bash deploy-edgeX.sh
-          chmod u+x bin/run.sh
           cd bin; bash ./run.sh -all postman-integration-test
     wrappers:
       - lf-infra-wrappers:
