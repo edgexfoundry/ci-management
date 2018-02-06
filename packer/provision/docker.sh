@@ -20,7 +20,7 @@ rh_changes() {
     yum clean -y metadata
 
     # install docker and enable it
-    echo "---> Installing docker"
+    echo "---> Installing latest docker"
     yum install -y docker-ce supervisor bridge-utils
     systemctl enable docker
 
@@ -46,9 +46,21 @@ EOL
     yum install -y python-{devel,virtualenv,setuptools,pip}
 
     # Install docker-compose per https://docs.docker.com/compose/install/#install-compose
+    echo "---> Installing docker-compose 1.17.1"
     sudo curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/1.17.1/docker-compose-$(uname -s)-$(uname -m)"
     sudo chmod +x /usr/local/bin/docker-compose
     ls -l /usr/local/bin/docker-compose
+
+
+    echo "---> Installing golang 1.9.1 into /usr/local/bin"
+    wget https://storage.googleapis.com/golang/go1.9.r12.linux-amd64.tar.gz
+    tar -xzf go1.9.2.linux-amd64.tar.gz
+    mv go /usr/local/bin
+
+    echo "---> Installing glide go depedency tool 0.13.1 into /usr/local/bin"
+    wget https://github.com/Masterminds/glide/releases/download/v0.13.1/glide-v0.13.1-linux-amd64.tar.gz
+    tar -xzf glide-v0.13.1-linux-amd64.tar.gz
+    mv glide /usr/local/bin
 }
 
 ubuntu_changes() {
