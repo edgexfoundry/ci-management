@@ -7,6 +7,7 @@
     archive-artifacts: ''
     mvn-settings: blackbox-testing-settings
     build-node: centos7-docker-4c-2g
+    build-timeout: 30
     stream:
       - 'master':
           branch: 'master'
@@ -46,6 +47,9 @@
           bash deploy-edgeX.sh
           chmod u+x bin/run.sh
           cd bin; bash ./run.sh -all postman-integration-test
-
+    wrappers:
+      - lf-infra-wrappers:
+          build-timeout: '{build-timeout}'
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
     triggers:
       - timed: 'H 12 * * *'
