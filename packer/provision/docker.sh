@@ -53,12 +53,12 @@ EOL
 
 
     echo "---> Installing golang 1.9.1 into /usr/local/bin"
-    wget https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz
+    wget -nv https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz
     tar -xzf go1.9.2.linux-amd64.tar.gz
     mv go /usr/local/bin
 
     echo "---> Installing glide go depedency tool 0.13.1 into /usr/local/bin"
-    wget https://github.com/Masterminds/glide/releases/download/v0.13.1/glide-v0.13.1-linux-amd64.tar.gz
+    wget -nv https://github.com/Masterminds/glide/releases/download/v0.13.1/glide-v0.13.1-linux-amd64.tar.gz
     tar -xzf glide-v0.13.1-linux-amd64.tar.gz
     mv glide /usr/local/bin
 }
