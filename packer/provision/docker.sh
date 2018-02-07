@@ -50,17 +50,19 @@ EOL
     sudo curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/1.17.1/docker-compose-$(uname -s)-$(uname -m)"
     sudo chmod +x /usr/local/bin/docker-compose
     ls -l /usr/local/bin/docker-compose
-
+    docker-compose --version
 
     echo "---> Installing golang 1.9.1 into /usr/local/bin"
-    wget -nv https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz
-    tar -xzf go1.9.2.linux-amd64.tar.gz
-    mv go /usr/local/bin
+    curl -o go1.9.1.linux-amd64.tar.gz -L "https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz"
+    tar -xzf go1.9.1.linux-amd64.tar.gz
+    sudo mv go/bin/* /usr/local/bin
+    go version
 
     echo "---> Installing glide go depedency tool 0.13.1 into /usr/local/bin"
-    wget -nv https://github.com/Masterminds/glide/releases/download/v0.13.1/glide-v0.13.1-linux-amd64.tar.gz
+    curl -o glide-v0.13.1-linux-amd64.tar.gz -L "https://github.com/Masterminds/glide/releases/download/v0.13.1/glide-v0.13.1-linux-amd64.tar.gz"
     tar -xzf glide-v0.13.1-linux-amd64.tar.gz
-    mv glide /usr/local/bin
+    sudo mv linux-amd64/glide /usr/local/bin
+    glide --version
 }
 
 ubuntu_changes() {
