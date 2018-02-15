@@ -1,0 +1,17 @@
+---
+
+- project:
+    name: edgex-go
+    project-name: edgex-go
+    project: edgex-go
+    mvn-settings: edgex-go-settings
+    build-node: centos7-docker-4c-2g
+    stream:
+      - 'master':
+          branch: 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-go'
+      - '{project-name}-{stream}-merge-go'
+      - '{project-name}-{stream}-verify-go-amd'
+      - '{project-name}-{stream}-merge-go-amd'

@@ -15,7 +15,7 @@
     pre_build_script: ''
     build_script: ''
     post_build_script: ''
-
+    workspace: '$HOME/gopath/src/github.com/edgexfoundry/edgex-go/'
     #####################
     # Job Configuration #
     #####################
@@ -60,7 +60,7 @@
       - github-pull-request:
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
-          status-context: '{project}-Golang-Verify'
+          status-context: '{status-context}'
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
@@ -101,17 +101,19 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_verify_boiler_plate
 
+    status-context: 'edgex-go-verify'
     builders:
       - lf-jacoco-nojava-workaround
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      # Set Env
-      - shell: '{pre_build_script}'
+      - inject:
+          properties-content: |
+            PATH=$PATH:/usr/local/go/bin
+            GOPATH=$HOME/gopath
+      - shell: !include-raw: ../shell/edgex-go-pre-build.sh
       # Go build commands
-      - shell: '{build_script}'
-      # Cleanup and push to nexus
-      - shell: '{post_build_script}'
+      - shell: !include-raw: ../shell/edgex-go-build.sh
 
 - job-template:
     name: '{project-name}-{stream}-merge-go'
@@ -156,17 +158,20 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_verify_boiler_plate
 
+    status-context: 'edgex-go-amd-verify'
     builders:
       - lf-jacoco-nojava-workaround
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      # Set Env
-      - shell: '{pre_build_script}'
-      # Go build commands
-      - shell: '{build_script}'
-      # Cleanup and push to nexus
-      - shell: '{post_build_script}'
+      - inject:
+          properties-content: |
+            GOOS=linux
+            GOARCH=arm
+            PATH=$PATH:/usr/local/go/bin
+            GOPATH=$HOME/gopath/
+      - shell: !include-raw: ../shell/edgex-go-pre-build.sh
+      - shell: !include-raw: ../shell/edgex-go-build.sh
 
 - job-template:
     name: '{project-name}-{stream}-merge-go-amd'
