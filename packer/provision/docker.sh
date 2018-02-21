@@ -53,8 +53,8 @@ EOL
 
     echo "---> Installing golang 1.9.1 into /usr/local/bin"
     curl -o go1.9.1.linux-amd64.tar.gz -L "https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz"
-    tar -xzf go1.9.1.linux-amd64.tar.gz
-    sudo mv go/bin/* /usr/local/bin
+    tar -C /usr/local -xzf go1.9.1.linux-amd64.tar.gz
+    echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
 
     echo "---> Installing glide go depedency tool 0.13.1 into /usr/local/bin"
     curl -o glide-v0.13.1-linux-amd64.tar.gz -L "https://github.com/Masterminds/glide/releases/download/v0.13.1/glide-v0.13.1-linux-amd64.tar.gz"
