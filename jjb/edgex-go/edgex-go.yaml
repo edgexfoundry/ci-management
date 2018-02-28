@@ -13,5 +13,5 @@
     jobs:
       - '{project-name}-{stream}-verify-go'
       - '{project-name}-{stream}-merge-go'
-      - '{project-name}-{stream}-verify-go-amd'
-      - '{project-name}-{stream}-merge-go-amd'
+      - '{project-name}-{stream}-verify-go-arm64'
+      - '{project-name}-{stream}-merge-go-arm64'

@@ -144,7 +144,7 @@
       - shell: '{post_build_script}'
 
 - job-template:
-    name: '{project-name}-{stream}-verify-go-amd'
+    name: '{project-name}-{stream}-verify-go-arm64'
 
     # Job template for Golang verify jobs
     #
@@ -158,7 +158,7 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_verify_boiler_plate
 
-    status-context: 'edgex-go-amd-verify'
+    status-context: 'edgex-go-arm64-verify'
     builders:
       - lf-jacoco-nojava-workaround
       - lf-provide-maven-settings:
@@ -167,14 +167,14 @@
       - inject:
           properties-content: |
             GOOS=linux
-            GOARCH=arm
+            GOARCH=arm64
             PATH=$PATH:/usr/local/go/bin
             GOPATH=$HOME/gopath/
       - shell: !include-raw: ../shell/edgex-go-pre-build.sh
       - shell: !include-raw: ../shell/edgex-go-build.sh
 
 - job-template:
-    name: '{project-name}-{stream}-merge-go-amd'
+    name: '{project-name}-{stream}-merge-go-arm64'
 
     # Job template for Golang merge jobs
     #
