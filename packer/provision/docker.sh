@@ -61,8 +61,9 @@ EOL
     tar -xzf glide-v0.13.1-linux-amd64.tar.gz
     sudo mv linux-amd64/glide /usr/local/bin
 
-    echo "---> Installing libzmq-dev from yum"
-    yum install -y libzmq-dev
+    echo "---> Installing zeromq and zeromq-devel from yum"
+    yum install -y zeromq
+    yum install -y zeromq-devel
 }
 
 ubuntu_changes() {
