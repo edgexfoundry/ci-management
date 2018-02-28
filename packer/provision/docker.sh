@@ -60,6 +60,9 @@ EOL
     curl -o glide-v0.13.1-linux-amd64.tar.gz -L "https://github.com/Masterminds/glide/releases/download/v0.13.1/glide-v0.13.1-linux-amd64.tar.gz"
     tar -xzf glide-v0.13.1-linux-amd64.tar.gz
     sudo mv linux-amd64/glide /usr/local/bin
+
+    echo "---> Installing libzmq-dev from yum"
+    yum install -y libzmq-dev
 }
 
 ubuntu_changes() {
