@@ -101,7 +101,9 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_verify_boiler_plate
 
+    build-node: centos7-docker-4c-2g
     status-context: 'edgex-go-verify'
+
     builders:
       - lf-jacoco-nojava-workaround
       - lf-provide-maven-settings:
@@ -130,6 +132,7 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_merge_boiler_plate
 
+    build-node: centos7-docker-4c-2g
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -159,6 +162,8 @@
     <<: *go_verify_boiler_plate
 
     status-context: 'edgex-go-arm-verify'
+    build-node: cavium-arm64
+
     builders:
       - lf-jacoco-nojava-workaround
       - lf-provide-maven-settings:
@@ -188,6 +193,7 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_merge_boiler_plate
 
+    build-node: cavium-arm64
 
     builders:
       - lf-jacoco-nojava-workaround

@@ -5,7 +5,6 @@
     project-name: edgex-go
     project: edgex-go
     mvn-settings: edgex-go-settings
-    build-node: centos7-docker-4c-2g
     stream:
       - 'master':
           branch: 'master'
