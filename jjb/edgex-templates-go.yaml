@@ -15,7 +15,7 @@
     pre_build_script: ''
     build_script: ''
     post_build_script: ''
-    workspace: '$HOME/gopath/src/github.com/edgexfoundry/edgex-go/'
+    workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/edgex-go/'
     #####################
     # Job Configuration #
     #####################
@@ -112,7 +112,7 @@
       - inject:
           properties-content: |
             PATH=$PATH:/usr/local/go/bin
-            GOPATH=$HOME/gopath
+            GOPATH=$HOME/$BUILD_ID/gopath
       - shell: !include-raw: ../shell/edgex-go-pre-build.sh
       # Go build commands
       - shell: !include-raw: ../shell/edgex-go-build.sh
@@ -174,7 +174,7 @@
             GOOS=linux
             GOARCH=arm64
             PATH=$PATH:/usr/local/go/bin
-            GOPATH=$HOME/gopath/
+            GOPATH=$HOME/$BUILD_ID/gopath/
       - shell: !include-raw: ../shell/edgex-go-pre-build.sh
       - shell: !include-raw: ../shell/edgex-go-build.sh
 
