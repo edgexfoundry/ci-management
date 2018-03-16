@@ -19,12 +19,11 @@
 
     archive-artifacts: ''
 
-    # Set default maven version used for everything
-    mvn-version: 'mvn33'
-
-    # Default maven goals
+    # Maven configuration
     mvn-goals: 'clean install'
     mvn-opts: ''
+    mvn-snapshot-id: snapshots
+    mvn-version: 'mvn33'
 
     # GitHub configuration
     git-url: https://github.com
@@ -52,3 +51,4 @@
     # Nexus
     staging-profile-id: a004df83a6249
     mvn-staging-id: staging
+    nexus-snapshot-repo: snapshots
