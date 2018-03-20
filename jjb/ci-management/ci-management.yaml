@@ -6,7 +6,6 @@
       - '{project-name}-github-packer-jobs':
           templates:
             - basebuild
-            - docker
           os-cloud-file-id: 'packer-cloud-env'
           platforms:
             - centos-7
