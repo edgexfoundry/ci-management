@@ -1,2 +1,64 @@
 ---
 - import_playbook: ../common-packer/provision/docker.yaml
+
+- hosts: all
+  become_user: root
+  become_method: sudo
+  vars:
+    docker_compose_version: 1.17.1
+    glide_checksum: sha256:c403933503ea40308ecfadcff581ff0dc3190c57958808bb9eed016f13f6f32c
+    glide_version: v0.13.1
+    golang_checksum: sha256:07d81c6b6b4c2dcf1b5ef7c27aaebd3691cdb40548500941f92b221147c5d9c7
+    golang_version: 1.9.1
+
+  tasks:
+    - name: 'Install Docker Compose {{docker_compose_version}}'
+      command: curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-$(uname -s)-$(uname -m)"
+      become: true
+
+    - name: 'Install GoLang {{golang_version}}'
+      block:
+        - name: 'Fetch golang {{golang_version}} to /tmp/go{{golang_version}}.linux-amd64.tar.gz'
+          get_url:
+            url: 'https://storage.googleapis.com/golang/go{{golang_version}}.linux-amd64.tar.gz'
+            dest: '/tmp/go{{golang_version}}.linux-amd64.tar.gz'
+            checksum: '{{golang_checksum}}'
+        - name: 'Install golang {{golang_version}} to /usr/local'
+          unarchive:
+            src: '/tmp/go{{golang_version}}.linux-amd64.tar.gz'
+            dest: /usr/local
+            remote_src: true
+          become: true
+        - name: 'Add golang to PATH'
+          command: 'echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile'
+          become: true
+
+    - name: 'Install Glide {{glide_version}}'
+      block:
+        - name: 'Fetch Glide {{glide_version}} to /tmp/glide-{{glide_version}}-linux-amd64.tar.gz'
+          get_url:
+            url: 'https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-amd64.tar.gz'
+            dest: '/tmp/glide-{{glide_version}}-linux-amd64.tar.gz'
+            checksum: '{{glide_checksum}}'
+        - name: 'Unarchive Glide'
+          unarchive:
+            src: '/tmp/glide-{{glide_version}}-linux-amd64.tar.gz'
+            dest: /tmp
+            remote_src: true
+        - name: 'Install Glide to /usr/local/bin/glide'
+          copy:
+            src: /tmp/linux-amd64/glide
+            dest: /usr/local/bin/glide
+            owner: root
+            group: root
+            mode: 0755
+            remote_src: true
+          become: true
+
+    - name: 'Install zeromq'
+      yum:
+        name:
+          - zeromq
+          - zeromq-devel
+        state: present
+      become: true
