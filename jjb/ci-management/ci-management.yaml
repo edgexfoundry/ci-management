@@ -3,6 +3,7 @@
     build-node: centos7-basebuild-2c-1g
     jobs:
       - '{project-name}-github-ci-jobs'
+      - github-packer-verify
 
     name: ci-management-jobs
     project: ci-management
