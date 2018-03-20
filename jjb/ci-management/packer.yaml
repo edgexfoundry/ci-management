@@ -14,3 +14,19 @@
 
     platforms: centos-7
     templates: builder
+
+- project:
+    name: packer-docker-jobs
+    jobs:
+      - github-packer-merge
+
+    project: ci-management
+    project-name: ci-management
+    branch: master
+    archive-artifacts: '**/*.log'
+
+    build-node: centos7-builder-2c-1g
+    build-timeout: 90
+
+    platforms: centos-7
+    templates: docker
