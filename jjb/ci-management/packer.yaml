@@ -11,6 +11,7 @@
 
     build-node: centos7-builder-2c-1g
     build-timeout: 90
+    jjb-version: 2.0.3
 
     platforms:
       - centos-7
@@ -29,6 +30,7 @@
 
     build-node: centos7-builder-2c-1g
     build-timeout: 90
+    jjb-version: 2.0.3
 
     platforms:
       - centos-7
