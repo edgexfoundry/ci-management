@@ -1,9 +1,9 @@
 ---
 - project:
-    name: edgex-go
-    project-name: edgex-go
-    project: edgex-go
-    mvn-settings: edgex-go-settings
+    name: core-config-seed-go
+    project-name: core-config-seed-go
+    project: core-config-seed-go
+    mvn-settings: core-config-seed-go-settings
     stream:
       - 'master':
           branch: 'master'
@@ -15,5 +15,3 @@
       - '{project-name}-{stream}-verify-go-arm':
           pre_build_script: 'make prepare && make test'
           build_script: 'make build && make docker'
-      - '{project-name}-{stream}-merge-go'
-      - '{project-name}-{stream}-merge-go-arm'
