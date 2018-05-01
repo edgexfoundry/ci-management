@@ -4,6 +4,7 @@
     project-name: core-config-seed-go
     project: core-config-seed-go
     mvn-settings: core-config-seed-go-settings
+    workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/core-config-seed-go/'
     stream:
       - 'master':
           branch: 'master'
@@ -11,7 +12,9 @@
     jobs:
       - '{project-name}-{stream}-verify-go':
           pre_build_script: 'make prepare && make test'
-          build_script: 'make build && make docker'
+          build_script: 'make build && make docker_core_config_seed_go'
+          status-context: '{project-name}-verify'
       - '{project-name}-{stream}-verify-go-arm':
           pre_build_script: 'make prepare && make test'
-          build_script: 'make build && make docker'
+          build_script: 'make build && make docker_core_config_seed_go_arm'
+          status-context: '{project-name}-verify-arm'

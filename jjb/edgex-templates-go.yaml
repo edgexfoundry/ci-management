@@ -15,6 +15,7 @@
     pre_build_script: ''
     build_script: ''
     post_build_script: ''
+    status-context: ''
     workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/edgex-go/'
     #####################
     # Job Configuration #
@@ -102,7 +103,6 @@
     <<: *go_verify_boiler_plate
 
     build-node: centos7-docker-4c-2g
-    status-context: 'edgex-go-verify'
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -158,7 +158,6 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_verify_boiler_plate
 
-    status-context: 'edgex-go-arm-verify'
     build-node: cavium-arm64
 
     builders:
