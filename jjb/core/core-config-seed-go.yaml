@@ -4,7 +4,6 @@
     project-name: core-config-seed-go
     project: core-config-seed-go
     mvn-settings: core-config-seed-go-settings
-    workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/core-config-seed-go/'
     stream:
       - 'master':
           branch: 'master'
