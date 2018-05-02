@@ -12,8 +12,10 @@
       - '{project-name}-{stream}-verify-go':
           pre_build_script: 'make prepare && make test'
           build_script: 'make build && make docker'
+          status-context: '{project-name}-verify'
       - '{project-name}-{stream}-verify-go-arm':
           pre_build_script: 'make prepare && make test'
           build_script: 'make build && make docker'
+          status-context: '{project-name}-verify-arm'
       - '{project-name}-{stream}-merge-go'
       - '{project-name}-{stream}-merge-go-arm'
