@@ -16,7 +16,7 @@
     build_script: ''
     post_build_script: ''
     status-context: ''
-    workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/edgex-go/'
+    workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
     #####################
     # Job Configuration #
     #####################
