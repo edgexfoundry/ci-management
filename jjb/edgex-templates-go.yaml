@@ -151,8 +151,6 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
-            GOOS=linux
-            GOARCH=arm64
             PATH=$PATH:/usr/local/go/bin
             GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=snapshot
