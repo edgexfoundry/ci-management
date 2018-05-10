@@ -39,6 +39,10 @@
       - lf-infra-wrappers:
           build-timeout: '{build-timeout}'
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+      - config-file-provider:
+          files:
+            - file-id: netrc
+              target: '$HOME/.netrc'
 
     publishers:
       - lf-infra-publish
@@ -106,6 +110,9 @@
 
     builders:
       - lf-jacoco-nojava-workaround
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
@@ -113,9 +120,9 @@
           properties-content: |
             PATH=$PATH:/usr/local/go/bin
             GOPATH=$HOME/$BUILD_ID/gopath
-      - shell: '{pre_build_script}'
-      - shell: '{build_script}'
-      - shell: '{post_build_script}'
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'
 
 - job-template:
     name: '{project-name}-{stream}-merge-go'
@@ -136,12 +143,22 @@
 
     builders:
       - lf-jacoco-nojava-workaround
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - shell: '{pre_build_script}'
-      - shell: '{build_script}'
-      - shell: '{post_build_script}'
+      - inject:
+          properties-content: |
+            GOOS=linux
+            GOARCH=arm64
+            PATH=$PATH:/usr/local/go/bin
+            GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=snapshot
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'
 
 - job-template:
     name: '{project-name}-{stream}-verify-go-arm'
@@ -162,6 +179,9 @@
 
     builders:
       - lf-jacoco-nojava-workaround
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
@@ -171,9 +191,9 @@
             GOARCH=arm64
             PATH=$PATH:/usr/local/go/bin
             GOPATH=$HOME/$BUILD_ID/gopath/
-      - shell: '{pre_build_script}'
-      - shell: '{build_script}'
-      - shell: '{post_build_script}'
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'
 
 - job-template:
     name: '{project-name}-{stream}-merge-go-arm'
@@ -194,9 +214,170 @@
 
     builders:
       - lf-jacoco-nojava-workaround
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - shell: '{pre_build_script}'
-      - shell: '{build_script}'
-      - shell: '{post_build_script}'
+      - inject:
+          properties-content: |
+            GOOS=linux
+            GOARCH=arm64
+            PATH=$PATH:/usr/local/go/bin
+            GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=snapshot
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'
+
+- job-template:
+    name: '{project-name}-{stream}-stage-go-arm'
+
+    # Job template for Golang merge jobs
+    #
+    # The purpose of this job template is to run "go build"
+    # for projects using this template
+    #
+    # Required Variables:
+    #    branch:   git branch (eg. master)
+
+    <<: *go_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *go_merge_boiler_plate
+
+    build-node: cavium-arm64
+
+    triggers:
+      - timed: '@daily'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - inject:
+          properties-content: |
+            GOOS=linux
+            GOARCH=arm64
+            PATH=$PATH:/usr/local/go/bin
+            GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=staging
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'
+
+- job-template:
+    name: '{project-name}-{stream}-stage-go'
+
+    # Job template for Golang merge jobs
+    #
+    # The purpose of this job template is to run "go build"
+    # for projects using this template
+    #
+    # Required Variables:
+    #    branch:   git branch (eg. master)
+
+    <<: *go_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *go_merge_boiler_plate
+
+    build-node: centos7-docker-4c-2g
+    
+    triggers:
+      - timed: '@daily'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - inject:
+          properties-content: |
+            GOOS=linux
+            PATH=$PATH:/usr/local/go/bin
+            GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=staging
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'
+
+- job-template:
+    name: '{project-name}-{stream}-release-go-arm'
+
+    # Job template for Golang merge jobs
+    #
+    # The purpose of this job template is to run "go build"
+    # for projects using this template
+    #
+    # Required Variables:
+    #    branch:   git branch (eg. master)
+
+    <<: *go_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *go_merge_boiler_plate
+
+    build-node: cavium-arm64
+
+    triggers:
+      - timed: '@daily'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - inject:
+          properties-content: |
+            GOOS=linux
+            GOARCH=arm64
+            PATH=$PATH:/usr/local/go/bin
+            GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=release
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'
+
+- job-template:
+    name: '{project-name}-{stream}-release-go'
+
+    # Job template for Golang merge jobs
+    #
+    # The purpose of this job template is to run "go build"
+    # for projects using this template
+    #
+    # Required Variables:
+    #    branch:   git branch (eg. master)
+
+    <<: *go_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *go_merge_boiler_plate
+
+    build-node: centos7-docker-4c-2g
+    
+    triggers:
+      - timed: '@daily'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - inject:
+          properties-content: |
+            GOOS=linux
+            PATH=$PATH:/usr/local/go/bin
+            GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=release
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'

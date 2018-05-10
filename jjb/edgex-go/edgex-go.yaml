@@ -4,18 +4,22 @@
     project-name: edgex-go
     project: edgex-go
     mvn-settings: edgex-go-settings
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make build && make docker'
     stream:
       - 'master':
           branch: 'master'
 
     jobs:
       - '{project-name}-{stream}-verify-go':
-          pre_build_script: 'make prepare && make test'
-          build_script: 'make build && make docker'
           status-context: '{project-name}-verify'
       - '{project-name}-{stream}-verify-go-arm':
-          pre_build_script: 'make prepare && make test'
-          build_script: 'make build && make docker'
           status-context: '{project-name}-verify-arm'
-      - '{project-name}-{stream}-merge-go'
-      - '{project-name}-{stream}-merge-go-arm'
+      - '{project-name}-{stream}-merge-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
+      - '{project-name}-{stream}-merge-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
