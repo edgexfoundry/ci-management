@@ -15,7 +15,7 @@ set -e -o pipefail
 #       1) nexus3.edgexfoundry.org:10002 with the `latest` tag and `VERSION` tag
 #       2) edgexfoundry dockerhub with the `latest` tag and `VERSION` tag
 #
-if [[ "X$NODE_NAME" == "Xcavium-arm64"]]; then
+if [ "X$NODE_NAME" == "Xcavium-arm64"]; then
   ARCH=-arm64
 else
   ARCH=''
