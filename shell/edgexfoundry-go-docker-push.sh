@@ -15,41 +15,43 @@ set -e -o pipefail
 #       1) nexus3.edgexfoundry.org:10002 with the `latest` tag and `VERSION` tag
 #       2) edgexfoundry dockerhub with the `latest` tag and `VERSION` tag
 #
-if [[ "X$NODE_NAME" == "Xcavium-arm64"]]; then
+if [[ "X$NODE_NAME" == "Xcavium-arm64" ]]; then
   ARCH=-arm64
 else
   ARCH=''
 fi
 
-GIT_SHA=$( git rev-parse --short HEAD )
-
+GIT_SHA=$(git rev-parse --short HEAD)
+VERSION=$(cat VERSION)
 ## Query build docker images, retag and push to respective repos based on DEPLOY_TYPE
-images=( $( docker images --format "{{.Repository}}-{{.Tag}}:{{.ID}}" | grep 'edgexfoundry.*-go' | grep $GIT_SHA | sort -u ) )
+images=( $(docker images --format "{{.Repository}}:{{.ID}}" --filter "label=git_sha=$GIT_SHA" | grep 'edgexfoundry.*-go' | sort -u))
 for image in "${images[@]}"; do
-  image_id=$(docker images --format "{{.Repository}}:{{.ID}}" --filter "label=git_sha=$GIT_SHA" | grep $image | awk -F ':' '{print $2}' | sort -u)
+  image_id=$(echo $image | awk -F ':' '{print $2}')
+  image_repo=$(echo $image | awk -F ':' '{print $1}')
   case $DEPLOY_TYPE in
     'snapshot' )
-      docker tag $image_id "${image/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION
-      docker push "${image/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION
+      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION
+      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION
       ;;
     'staging' )
-      docker tag $image_id "${image/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:latest
-      docker push "${image/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:latest
+      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:latest
+      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:latest
       ;;
     'release' )
-      docker tag $image_id "${image/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:latest
-      docker push "${image/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:latest
-      docker tag $image_id "${image/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:$VERSION
-      docker push "${image/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:$VERSION
+      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:latest
+      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:latest
+      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:$VERSION
+      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:$VERSION
       export DOCKER_CONTENT_TRUST=1
-      docker tag $image_id $image$ARCH:$VERSION
-      docker tag $image_id $image$ARCH:latest
-      docker push $image$ARCH:$VERSION
-      docker push $image$ARCH:latest
+      docker tag $image_id $image_repo$ARCH:$VERSION
+      docker tag $image_id $image_repo$ARCH:latest
+      docker push $image_repo$ARCH:$VERSION
+      docker push $image_repo$ARCH:latest
       ;;
     * )
       echo "You must set DEPLOY_TYPE to one of (snapshot, staging, release)."
       exit 1
+  esac
 done
 
 ## Copy generated go binaries, copy to folder and tar up before pushing to nexus raw repos
@@ -70,18 +72,23 @@ for bin in "${go_bins[@]}"; do
 done
 
 case $DEPLOY_TYPE in
-  'snapshot' )
+  'snapshot')
     filename=edgex-go$ARCH-$GIT_SHA-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    lftools deploy nexus-zip https://nexus3.edgexfoundry.org/ edgex-go snapshots/ edgex-go$ARCH-$GIT_SHA-$VERSION.zip
     curl -v -n --upload-file $filename https://nexus3.edgexfoundry.org/repository/edgex-go/snapshots/$filename
-  'staging' )
+    ;;
+  'staging')
     filename=edgex-go$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    lftools deploy nexus-zip https://nexus3.edgexfoundry.org/ edgex-go staging/ edgex-go$ARCH-$VERSION.zip
     curl -v -n --upload-file $filename https://nexus3.edgexfoundry.org/repository/edgex-go/staging/$filename
-  'release' )
+    ;;
+  'release')
     filename=edgex-go$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    lftools deploy nexus-zip https://nexus3.edgexfoundry.org/ edgex-go release/ edgex-go$ARCH-$VERSION.zip
-    curl -v -n --upload-file $filename https://nexus3.edgexfoundry.org/repository/edgex-go/release/$filename
+    #curl -v -n --upload-file $filename https://nexus3.edgexfoundry.org/repository/edgex-go/release/$filename
+    ;;
+  *)
+    echo "You must set DEPLOY_TYPE to one of (snapshot, staging, release)."
+    exit 1
+    ;;
+esac
