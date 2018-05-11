@@ -1,17 +1,9 @@
 ---
 
-- property:
-    name: 'edgex-go-x86_64'
-    properties:
-      - inject:
-          properties-content: |
-            GOPATH=$WORKSPACE
-
-- property:
-    name: 'edgex-go-amd64'
-    properties:
-      - inject:
-          properties-content: |
-            GOPATH=$WORKSPACE
-            GOARCH=amd64
-
+- publisher:
+    name: edgex-jenkins-alerts
+    publishers:
+      - email:
+          recipients: EdgeX-Jenkins-Alerts@lists.edgexfoundry.org
+          notify-every-unstable-build: true
+          send-to-individuals: true

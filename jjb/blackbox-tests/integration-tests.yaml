@@ -44,9 +44,14 @@
           source bin/env.sh
           bash deploy-edgeX.sh
           cd bin; bash ./run.sh -all postman-integration-test
+
     wrappers:
       - lf-infra-wrappers:
           build-timeout: '{build-timeout}'
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    publishers:
+      - edgex-jenkins-alerts
+
     triggers:
       - timed: 'H 12 * * *'
