@@ -156,6 +156,8 @@
             DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-infra-create-netrc:
+          server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
 
 - job-template:
@@ -227,6 +229,8 @@
             DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-infra-create-netrc:
+          server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
 
 - job-template:
@@ -266,6 +270,8 @@
             DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-infra-create-netrc:
+          server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
 
 - job-template:
@@ -304,6 +310,8 @@
             DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-infra-create-netrc:
+          server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
 
 - job-template:
@@ -343,6 +351,8 @@
             DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-infra-create-netrc:
+          server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
 
 - job-template:
@@ -378,4 +388,6 @@
             DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-infra-create-netrc:
+          server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
