@@ -7,3 +7,13 @@
           recipients: EdgeX-Jenkins-Alerts@lists.edgexfoundry.org
           notify-every-unstable-build: true
           send-to-individuals: true
+
+- builder:
+    name: edgex-provide-docker-cleanup
+    builders:
+      - shell: |
+          #!/bin/bash
+          set +e  # DO NOT cause build failure if docker rmi fails
+          docker rmi -f $(docker images -a -q)
+          exit 0
+

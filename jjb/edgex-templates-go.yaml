@@ -195,6 +195,7 @@
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-merge-go-arm'
@@ -234,6 +235,7 @@
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-stage-go-arm'
@@ -276,6 +278,7 @@
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-stage-go'
@@ -359,6 +362,7 @@
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-release-go'
