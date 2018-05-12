@@ -15,6 +15,7 @@
           branch: 'barcelona'
     jobs:
       - 'blackbox-testing-{stream}'
+      - 'blackbox-verify-{stream}'
 
 - job-template:
     name: 'blackbox-testing-{stream}'
@@ -25,7 +26,7 @@
           url: '{git-clone-url}{github-org}/{project}'
           refspec: ''
           branch: 'refs/heads/{branch}'
-          submodule-recursive: true
+          submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
 
@@ -55,3 +56,46 @@
 
     triggers:
       - timed: 'H 12 * * *'
+
+- job-template:
+    name: 'blackbox-verify-{stream}'
+    node: '{build-node}'
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+          branch: '$sha1'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-provide-maven-settings:
+          settings-file: '{mvn-settings}'
+          global-settings-file: 'global-settings'
+      - shell: |
+          #!/bin/bash
+          set +x
+          virtualenv venv
+          source venv/bin/activate
+          pip install --upgrade setuptools pip
+          pip install docker-compose
+          source bin/env.sh
+          bash deploy-edgeX.sh
+
+    triggers:
+      - github-pull-request:
+          trigger-phrase: '^recheck$'
+          only-trigger-phrase: false
+          status-context: '{project-name}-Verify'
+          permit-all: true
+          github-hooks: true
+          auto-close-on-fail: false
+
+    wrappers:
+      - lf-infra-wrappers:
+          build-timeout: '{build-timeout}'
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+ 

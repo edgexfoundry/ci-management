@@ -30,6 +30,7 @@
     git-url: https://github.com
     git-clone-url: 'git@github.com:'
     github-org: edgexfoundry
+    submodule-recursive: true
 
     # default pr_whitelist to some LF RelEng staff
     github_pr_whitelist:
