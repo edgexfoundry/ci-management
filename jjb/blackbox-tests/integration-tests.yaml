@@ -6,112 +6,18 @@
     project: blackbox-testing
     archive-artifacts: ''
     mvn-settings: blackbox-testing-settings
-    build-node: centos7-docker-4c-2g
     build-timeout: 30
     stream:
       - 'master':
           branch: 'master'
       - 'barcelona':
           branch: 'barcelona'
+    build-machine:
+      - 'cavium-arm64':
+          build-node: 'cavium-arm64'
+      - 'centos7-docker-4c-2g':
+          build-node: 'centos7-docker-4c-2g'
+
     jobs:
-      - 'blackbox-testing-{stream}'
-      - 'blackbox-verify-{stream}'
-
-- job-template:
-    name: 'blackbox-testing-{stream}'
-    node: '{build-node}'
-
-    properties:
-      - lf-infra-properties:
-          project: '{project}'
-          build-days-to-keep: '{build-days-to-keep}'
-      - github:
-          url: '{git-url}/{github-org}/{project}'
-
-
-    scm:
-      - lf-infra-github-scm:
-          url: '{git-clone-url}{github-org}/{project}'
-          refspec: ''
-          branch: 'refs/heads/{branch}'
-          submodule-recursive: '{submodule-recursive}'
-          choosing-strategy: default
-          jenkins-ssh-credential: '{jenkins-ssh-credential}'
-
-    builders:
-      - lf-jacoco-nojava-workaround
-      - lf-provide-maven-settings:
-          settings-file: '{mvn-settings}'
-          global-settings-file: 'global-settings'
-      - shell: |
-          #!/bin/bash
-          set +x
-          virtualenv venv
-          source venv/bin/activate
-          pip install --upgrade setuptools pip
-          pip install docker-compose
-          source bin/env.sh
-          bash deploy-edgeX.sh
-          cd bin; bash ./run.sh -all postman-integration-test
-
-    wrappers:
-      - lf-infra-wrappers:
-          build-timeout: '{build-timeout}'
-          jenkins-ssh-credential: '{jenkins-ssh-credential}'
-
-    publishers:
-      - edgex-jenkins-alerts
-
-    triggers:
-      - timed: 'H 12 * * *'
-
-- job-template:
-    name: 'blackbox-verify-{stream}'
-    node: '{build-node}'
-
-    properties:
-      - lf-infra-properties:
-          project: '{project}'
-          build-days-to-keep: '{build-days-to-keep}'
-      - github:
-          url: '{git-url}/{github-org}/{project}'
-
-
-    scm:
-      - lf-infra-github-scm:
-          url: '{git-clone-url}{github-org}/{project}'
-          refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
-          branch: '$sha1'
-          submodule-recursive: '{submodule-recursive}'
-          choosing-strategy: default
-          jenkins-ssh-credential: '{jenkins-ssh-credential}'
-
-    builders:
-      - lf-jacoco-nojava-workaround
-      - lf-provide-maven-settings:
-          settings-file: '{mvn-settings}'
-          global-settings-file: 'global-settings'
-      - shell: |
-          #!/bin/bash
-          set +x
-          virtualenv venv
-          source venv/bin/activate
-          pip install --upgrade setuptools pip
-          pip install docker-compose
-          source bin/env.sh
-          bash deploy-edgeX.sh
-
-    triggers:
-      - github-pull-request:
-          trigger-phrase: '^recheck$'
-          only-trigger-phrase: false
-          status-context: '{project-name}-Verify'
-          permit-all: true
-          github-hooks: true
-          auto-close-on-fail: false
-
-    wrappers:
-      - lf-infra-wrappers:
-          build-timeout: '{build-timeout}'
-          jenkins-ssh-credential: '{jenkins-ssh-credential}'
- 
+      - 'blackbox-testing-{build-machine}-{stream}'
+      - 'blackbox-verify-{build-machine}-{stream}'
