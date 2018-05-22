@@ -17,3 +17,20 @@
           docker rmi -f $(docker images -a -q)
           exit 0
 
+- builder:
+    name: edgex-publish-docs
+    builders:
+      - config-file-provider:
+          files:
+            - file-id: 'edgex-docs-settings'
+              variable: 'SETTINGS_FILE'
+      - lf-infra-create-netrc:
+          server-id: docs
+      - inject:
+          properties-content: |
+            NEXUS_PATH={nexus-path}
+            NEXUS_REPO={nexus-repo}
+            DOC_DIRECTORY={doc-directory}
+      - shell: !include-raw-escape:
+          - global-jjb/shell/lftools-install.sh
+          - shell/edgex-publish-docs.sh
