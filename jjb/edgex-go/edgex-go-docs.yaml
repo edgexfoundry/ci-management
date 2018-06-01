@@ -1,0 +1,15 @@
+---
+- project:
+    name: edgex-go-docs
+    project-name: edgex-go-docs
+    project: edgex-go
+    mvn-settings: edgex-go-settings
+    stream:
+      - 'master':
+          branch: 'master'
+
+    jobs:
+      - '{project-name}-{stream}-verify-docs':
+          status-context: '{project-name}-verify'
+      - '{project-name}-{stream}-merge-docs'
+      - '{project-name}-{stream}-stage-docs'
