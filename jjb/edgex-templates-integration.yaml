@@ -42,6 +42,7 @@
 
     publishers:
       - lf-infra-publish
+      - edgex-jenkins-alerts
 
 - integration_verify_boiler_plate: &integration_verify_boiler_plate
     name: integration_verify_boiler_plate
