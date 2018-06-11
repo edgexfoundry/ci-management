@@ -1,4 +1,5 @@
 DOCKER_REGISTRY=nexus3.edgexfoundry.org
+DOCKERHUB_REGISTRY=docker.io
 GIT_BASE=https://github.com/edgexfoundry/$PROJECT
 GIT_CLONE_URL=git@github.com:
 GIT_URL=https://github.com
