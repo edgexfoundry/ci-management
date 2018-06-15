@@ -12,6 +12,8 @@
           branch: 'master'
       - 'barcelona':
           branch: 'barcelona'
+      - 'california':
+          branch: 'california'
     build-machine:
       - 'cavium-arm64':
           build-node: 'cavium-arm64'
