@@ -44,6 +44,10 @@
           files:
             - file-id: netrc
               target: '$HOME/.netrc'
+      - credentials-binding:
+          - file:
+              credential-id: edgex-snap-login
+              variable: EdgeX
 
     publishers:
       - lf-infra-publish
@@ -120,7 +124,6 @@
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
-      - edgex-jenkins-alerts
 
 - job-template:
     name: '{project-name}-{stream}-merge-snap'
@@ -150,7 +153,6 @@
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
-      - edgex-jenkins-alerts
 
 - job-template:
     name: '{project-name}-{stream}-verify-snap-arm'
@@ -176,7 +178,6 @@
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
-      - edgex-jenkins-alerts
 
 - job-template:
     name: '{project-name}-{stream}-merge-snap-arm'
@@ -206,7 +207,6 @@
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
-      - edgex-jenkins-alerts
 
 - job-template:
     name: '{project-name}-{stream}-stage-snap-arm'
@@ -239,7 +239,6 @@
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
-      - edgex-jenkins-alerts
 
 - job-template:
     name: '{project-name}-{stream}-stage-snap'
@@ -272,7 +271,6 @@
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
-      - edgex-jenkins-alerts
 
 - job-template:
     name: '{project-name}-{stream}-release-snap-arm'
@@ -305,7 +303,6 @@
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
-      - edgex-jenkins-alerts
 
 - job-template:
     name: '{project-name}-{stream}-release-snap'
@@ -338,4 +335,3 @@
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
-      - edgex-jenkins-alerts
