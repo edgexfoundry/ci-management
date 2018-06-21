@@ -10,7 +10,8 @@
     stream:
       - 'master':
           branch: 'master'
-
+      - 'california':
+          branch: 'california'
     jobs:
       - '{project-name}-{stream}-verify-go':
           build_script: '{x86_build_script}'

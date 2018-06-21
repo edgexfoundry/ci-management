@@ -15,7 +15,8 @@
           branch: 'master'
       - 'barcelona':
           branch: 'barcelona'
-
+      - 'california':
+          branch: 'california'
     jobs:
       - '{project-name}-{stream}-generate-verify-java'
       - '{project-name}-{stream}-generate-merge-java'
