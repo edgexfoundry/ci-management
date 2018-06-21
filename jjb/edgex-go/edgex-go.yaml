@@ -9,7 +9,8 @@
     stream:
       - 'master':
           branch: 'master'
-
+      - 'california':
+          branch: 'california'
     jobs:
       - '{project-name}-{stream}-verify-go':
           status-context: '{project-name}-verify'
