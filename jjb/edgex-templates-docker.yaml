@@ -68,7 +68,7 @@
       - github-pull-request:
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
-          status-context: '{project}-Docker-Verify'
+          status-context: '{project}-{branch}-Docker-Verify'
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false

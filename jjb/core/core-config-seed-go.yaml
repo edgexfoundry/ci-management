@@ -15,10 +15,10 @@
     jobs:
       - '{project-name}-{stream}-verify-go':
           build_script: '{x86_build_script}'
-          status-context: '{project-name}-verify'
+          status-context: '{project-name}-{stream}-verify'
       - '{project-name}-{stream}-verify-go-arm':
           build_script: '{arm_build_script}'
-          status-context: '{project-name}-verify-arm'
+          status-context: '{project-name}-{stream}-verify-arm'
       - '{project-name}-{stream}-merge-go':
           build_script: '{x86_build_script}'
           post_build_script: !include-raw-escape: shell/core-config-seed-go-docker-push.sh
