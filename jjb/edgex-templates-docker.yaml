@@ -72,6 +72,9 @@
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
+
 
 - docker_merge_boiler_plate: &docker_merge_boiler_plate
     name: docker_merge_boiler_plate

@@ -64,6 +64,8 @@
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
 
 - integration_testing_boiler_plate: &integration_testing_boiler_plate
     name: integration_testing_boiler_plate
