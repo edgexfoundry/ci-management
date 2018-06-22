@@ -60,7 +60,7 @@
       - github-pull-request:
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
-          status-context: '{project-name}-Verify'
+          status-context: '{status-context}'
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false

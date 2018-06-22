@@ -22,4 +22,5 @@
 
     jobs:
       - 'blackbox-testing-{build-machine}-{stream}'
-      - 'blackbox-verify-{build-machine}-{stream}'
+      - 'blackbox-verify-{build-machine}-{stream}':
+          status-context: '{project-name}-{stream}-{build-machine}-verify'

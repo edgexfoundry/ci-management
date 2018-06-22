@@ -13,9 +13,9 @@
           branch: 'california'
     jobs:
       - '{project-name}-{stream}-verify-go':
-          status-context: '{project-name}-verify'
+          status-context: '{project-name}-{stream}-verify'
       - '{project-name}-{stream}-verify-go-arm':
-          status-context: '{project-name}-verify-arm'
+          status-context: '{project-name}-{stream}-verify-arm'
       - '{project-name}-{stream}-merge-go':
           post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
       - '{project-name}-{stream}-merge-go-arm':
