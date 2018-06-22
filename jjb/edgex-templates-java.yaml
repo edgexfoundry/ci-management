@@ -61,6 +61,9 @@
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
+
 
 - merge_boiler_plate: &merge_boiler_plate
     name: merge_boiler_plate

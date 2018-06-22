@@ -71,6 +71,9 @@
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
+
 
 - snap_merge_boiler_plate: &snap_merge_boiler_plate
     name: snap_merge_boiler_plate

@@ -70,6 +70,9 @@
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
+
 
 - go_merge_boiler_plate: &go_merge_boiler_plate
     name: go_merge_boiler_plate
