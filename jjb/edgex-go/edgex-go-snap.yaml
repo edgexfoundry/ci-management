@@ -1,0 +1,18 @@
+---
+- project:
+    name: edgex-go-snap
+    project-name: edgex-go-snap
+    project: edgex-go
+    mvn-settings: edgex-go-settings
+    pre_build_script: 'snapcraft login --with EdgeX'
+    build_script: 'snapcraft'
+    post_build_script: ''
+    stream:
+      - 'master':
+          branch: 'master'
+      - 'california':
+          branch: 'california'
+
+    jobs:
+     - '{project-name}-{stream}-stage-snap-arm'
+     - '{project-name}-{stream}-stage-snap'
