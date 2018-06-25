@@ -4,7 +4,7 @@
     project-name: edgex-go-snap
     project: edgex-go
     mvn-settings: edgex-go-settings
-    pre_build_script: 'snapcraft login --with EdgeX'
+    pre_build_script: snapcraft login --with "$HOME/EdgeX"
     build_script: 'snapcraft'
     post_build_script: ''
     stream:

@@ -34,3 +34,18 @@
       - shell: !include-raw-escape:
           - global-jjb/shell/lftools-install.sh
           - shell/edgex-publish-docs.sh
+
+- builder:
+    name: edgex-provide-snap-cleanup
+    builders:
+      - shell: !include-raw: ../shell/cleanup-snap.sh
+
+- wrapper:
+    # This macro requires that there be a managed file of type
+    # "Custom file" with the contents of the output of "snapcraft export-login EdgeX"
+    name: edgex-snap-wrapper
+    wrappers:
+      - config-file-provider:
+          files:
+            - file-id: EdgeX
+              target: '$HOME/EdgeX'
