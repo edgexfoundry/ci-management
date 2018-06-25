@@ -66,21 +66,22 @@ for bin in "${go_bins[@]}"; do
   cp $bin $bin_dir
 done
 
+set +x
 case $DEPLOY_TYPE in
   'snapshot')
     filename=core-config-seed-go$ARCH-$GIT_SHA-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    curl -v -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go/snapshots/$filename
+    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go/snapshots/$filename
     ;;
   'staging')
     filename=core-config-seed-go$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    curl -v -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go/staging/$filename
+    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go/staging/$filename
     ;;
   'release')
     filename=core-config-seed-go$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    #curl -v -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go-release/$filename
+    #curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go-release/$filename
     ;;
   *)
     echo "You must set DEPLOY_TYPE to one of (snapshot, staging, release)."
