@@ -34,8 +34,10 @@ for image in "${images[@]}"; do
       docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION
       ;;
     'staging' )
-      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:latest
-      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:latest
+      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$GIT_SHA-$VERSION
+      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$GIT_SHA-$VERSION
+      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$VERSION
+      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$VERSION
       ;;
     'release' )
       docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:latest
