@@ -1,7 +1,7 @@
 ---
 # Job definition Anchors
 - integration_job_boiler_plate: &integration_job_boiler_plate
-    name: inegration_job-boiler-plate
+    name: integration_job-boiler-plate
 
     project-type: freestyle
     node: '{build-node}'
