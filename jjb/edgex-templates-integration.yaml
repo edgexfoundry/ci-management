@@ -110,7 +110,7 @@
           settings-file: '{mvn-settings}'
           global-settings-file: 'global-settings'
       - shell: !include-raw-escape: shell/integration-test-setup.sh
-      - shell: cd bin; bash ./run.sh -all postman-integration-test
+      - shell: !include-raw-escape: shell/integration-test-run.sh
       - edgex-provide-docker-cleanup
 
 - job-template:
