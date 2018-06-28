@@ -109,8 +109,9 @@
       - lf-provide-maven-settings:
           settings-file: '{mvn-settings}'
           global-settings-file: 'global-settings'
-      - shell: !include-raw-escape: shell/integration-test-setup.sh
-      - shell: !include-raw-escape: shell/integration-test-run.sh
+      - shell: !include-raw:
+          - ../shell/integration-test-setup.sh
+          - ../shell/integration-test-run.sh
       - edgex-provide-docker-cleanup
 
 - job-template:
