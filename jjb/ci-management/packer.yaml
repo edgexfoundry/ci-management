@@ -54,3 +54,39 @@
     platforms:
       - ubuntu-16.04
     templates: snapcraft
+
+- project:
+    name: packer-docker-arm64-jobs
+    jobs:
+      - github-packer-merge
+
+    project: ci-management
+    project-name: ci-management
+    branch: master
+    archive-artifacts: '**/*.log'
+
+    build-node: centos7-builder-2c-1g
+    build-timeout: 90
+    jjb-version: 2.0.3
+
+    platforms:
+      - ubuntu-16.04
+    templates: docker-arm
+
+- project:
+    name: packer-snapcraft-arm64-jobs
+    jobs:
+      - github-packer-merge
+
+    project: ci-management
+    project-name: ci-management
+    branch: master
+    archive-artifacts: '**/*.log'
+
+    build-node: centos7-builder-2c-1g
+    build-timeout: 90
+    jjb-version: 2.0.3
+
+    platforms:
+      - ubuntu-16.04
+    templates: snapcraft-arm
