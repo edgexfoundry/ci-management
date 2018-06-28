@@ -4,7 +4,7 @@
     name: snap_job-boiler-plate
 
     project-type: freestyle
-    node: ubuntu16.04-snap-4c-2g
+    node: '{build-node}'
 
     ######################
     # Default parameters #
