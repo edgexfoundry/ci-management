@@ -117,9 +117,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             PATH=$PATH:/usr/local/go/bin
@@ -148,9 +145,6 @@
     builders:
       - lf-jacoco-nojava-workaround
       - lf-infra-docker-login:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - inject:
@@ -187,9 +181,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             GOOS=linux
@@ -221,9 +212,6 @@
     builders:
       - lf-jacoco-nojava-workaround
       - lf-infra-docker-login:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - inject:
@@ -266,9 +254,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             GOOS=linux
@@ -309,9 +294,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             GOOS=linux
@@ -348,9 +330,6 @@
     builders:
       - lf-jacoco-nojava-workaround
       - lf-infra-docker-login:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - inject:
@@ -390,7 +369,7 @@
 
     builders:
       - lf-jacoco-nojava-workaround
-      - lf-provide-maven-settings:
+      - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - inject:
