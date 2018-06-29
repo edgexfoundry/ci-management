@@ -194,8 +194,7 @@
           properties-content: |
             GOOS=linux
             GOARCH=arm64
-            GOROOT='/usr/local/go'
-            PATH=$GOROOT/bin:$PATH
+            PATH=/usr/local/go/bin:$PATH
             GOPATH=$HOME/$BUILD_ID/gopath/
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -231,10 +230,9 @@
           properties-content: |
             GOOS=linux
             GOARCH=arm64
-            DEPLOY_TYPE=snapshot
-            GOROOT='/usr/local/go'
-            PATH=$GOROOT/bin:$PATH
+            PATH=/usr/local/go/bin:$PATH
             GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
@@ -275,10 +273,9 @@
           properties-content: |
             GOOS=linux
             GOARCH=arm64
-            DEPLOY_TYPE=staging
-            GOROOT='/usr/local/go'
-            PATH=$GOROOT/bin:$PATH
+            PATH=/usr/local/go/bin:$PATH
             GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
@@ -360,10 +357,9 @@
           properties-content: |
             GOOS=linux
             GOARCH=arm64
-            DEPLOY_TYPE=release
-            GOROOT='/usr/local/go'
-            PATH=$GOROOT/bin:$PATH
+            PATH=/usr/local/go/bin:$PATH
             GOPATH=$HOME/$BUILD_ID/gopath/
+            DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
