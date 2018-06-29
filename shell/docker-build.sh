@@ -10,9 +10,16 @@ fi
 # Switch to the directory where the Dockerfile is
 cd "$DOCKER_ROOT"
 
+if [[ "$NODE_NAME" == "cavium-arm64" ]]
+then
+  ARCH=arm64
+else
+  ARCH=''
+fi
+
 # DOCKERREGISTRY is purposely not using an '_' so as to not conflict with the
 # Jenkins global env var of the DOCKER_REGISTRY which the docker-login step uses
-IMAGE_NAME="$DOCKERREGISTRY/$DOCKER_NAME:$DOCKER_TAG"
+IMAGE_NAME="$DOCKERREGISTRY/$DOCKER_NAME-$ARCH:$DOCKER_TAG"
 
 # Build the docker image
 

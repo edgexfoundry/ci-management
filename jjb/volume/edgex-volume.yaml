@@ -1,15 +1,14 @@
 ---
 
 - project:
-    name: support-rulesengine
-    project-name: support-rulesengine
-    project: support-rulesengine
-    mvn-settings: support-rulesengine-settings
-    docker_name: docker-support-rulesengine
+    name: docker-edgex-volume
+    project-name: docker-edgex-volume
+    project: docker-edgex-volume
+    mvn-settings: docker-edgex-volume-settings
+    docker_name: docker-edgex-volume
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
     archive-artifacts: ''
-    artifact-version: '0.2.0-SNAPSHOT'
     build-node: centos7-docker-4c-2g
     cron: 'H 11 * * *'
     stream:
@@ -20,21 +19,18 @@
       - 'california':
           branch: 'california'
     jobs:
-      - '{project-name}-{stream}-verify-java'
-      - '{project-name}-{stream}-merge-java'
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'
-      - '{project-name}-github-maven-jobs'
       - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
       - '{project-name}-{stream}-verify-docker-arm':
           build-node: cavium-arm64
           docker_build_args: '-f docker-files/Dockerfile.aarch64'
-          docker_name: docker-support-rulesengine-arm64
+          docker_name: docker-edgex-volume-arm64
       - '{project-name}-{stream}-merge-docker-arm':
           build-node: cavium-arm64
           docker_build_args: '-f docker-files/Dockerfile.aarch64'
-          docker_name: docker-support-rulesengine-arm64
+          docker_name: docker-edgex-volume-arm64
       - '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar':
           build-node: cavium-arm64
           docker_build_args: '-f docker-files/Dockerfile.aarch64'
-          docker_name: docker-support-rulesengine-arm64
+          docker_name: docker-edgex-volume-arm64
