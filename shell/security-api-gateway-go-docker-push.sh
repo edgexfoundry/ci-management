@@ -72,19 +72,19 @@ done
 set +x
 case $DEPLOY_TYPE in
   'snapshot')
-    filename=edgex-go$ARCH-$GIT_SHA-$VERSION.tar.gz
+    filename=security-api-gateway$ARCH-$GIT_SHA-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go/snapshots/$filename
+    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/security-reverse-proxy/snapshots/$filename
     ;;
   'staging')
-    filename=edgex-go$ARCH-$VERSION.tar.gz
+    filename=security-api-gateway$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go/staging/$filename
+    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/security-reverse-proxy/staging/$filename
     ;;
   'release')
-    filename=edgex-go$ARCH-$VERSION.tar.gz
+    filename=security-api-gateway$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    #curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go-release/$filename
+    #curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/security-reverse-proxy/release/$filename
     ;;
   *)
     echo "You must set DEPLOY_TYPE to one of (snapshot, staging, release)."
