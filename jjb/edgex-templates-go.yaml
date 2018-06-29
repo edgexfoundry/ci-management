@@ -117,9 +117,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             PATH=$PATH:/usr/local/go/bin
@@ -150,9 +147,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             PATH=$PATH:/usr/local/go/bin
@@ -160,6 +154,9 @@
             DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-infra-create-netrc:
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
@@ -185,9 +182,6 @@
     builders:
       - lf-jacoco-nojava-workaround
       - lf-infra-docker-login:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - inject:
@@ -223,9 +217,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             GOOS=linux
@@ -235,6 +226,9 @@
             DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-infra-create-netrc:
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
@@ -266,9 +260,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             GOOS=linux
@@ -278,6 +269,9 @@
             DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-infra-create-netrc:
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
@@ -309,9 +303,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             GOOS=linux
@@ -320,6 +311,9 @@
             DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-infra-create-netrc:
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
@@ -350,9 +344,6 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - lf-provide-maven-settings:
-          global-settings-file: 'global-settings'
-          settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
             GOOS=linux
@@ -362,6 +353,9 @@
             DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-infra-create-netrc:
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
@@ -390,7 +384,7 @@
 
     builders:
       - lf-jacoco-nojava-workaround
-      - lf-provide-maven-settings:
+      - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - inject:
@@ -401,6 +395,9 @@
             DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
       - lf-infra-create-netrc:
           server-id: nexus3.edgexfoundry.org
       - shell: '{obj:post_build_script}'
