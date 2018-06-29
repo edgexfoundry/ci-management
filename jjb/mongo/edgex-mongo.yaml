@@ -7,7 +7,7 @@
     mvn-settings: docker-edgex-mongo-settings
     docker_name: docker-edgex-mongo
     docker_root: ''
-    docker_build_args: '-f docker-files/Dockerfile'
+    docker_build_args: '-f Dockerfile'
     archive-artifacts: ''
     build-node: centos7-docker-4c-2g
     cron: 'H 11 * * *'
@@ -27,13 +27,13 @@
       - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
       - '{project-name}-{stream}-verify-docker-arm':
           build-node: cavium-arm64
-          docker_build_args: '-f docker-files/Dockerfile.aarch64'
+          docker_build_args: '-f Dockerfile.aarch64'
           docker_name: docker-edgex-mongo-arm64
       - '{project-name}-{stream}-merge-docker-arm':
           build-node: cavium-arm64
-          docker_build_args: '-f docker-files/Dockerfile.aarch64'
+          docker_build_args: '-f Dockerfile.aarch64'
           docker_name: docker-edgex-mongo-arm64
       - '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar':
           build-node: cavium-arm64
-          docker_build_args: '-f docker-files/Dockerfile.aarch64'
+          docker_build_args: '-f Dockerfile.aarch64'
           docker_name: docker-edgex-mongo-arm64
