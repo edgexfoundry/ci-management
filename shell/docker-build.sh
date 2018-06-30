@@ -10,7 +10,6 @@ fi
 # Switch to the directory where the Dockerfile is
 cd "$DOCKER_ROOT"
 
-# DOCKERREGISTRY is purposely not using an '_' so as to not conflict with the
 # Jenkins global env var of the DOCKER_REGISTRY which the docker-login step uses
 IMAGE_NAME="$DOCKERREGISTRY/$DOCKER_NAME:$DOCKER_TAG"
 

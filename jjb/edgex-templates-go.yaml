@@ -70,6 +70,9 @@
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
+
 
 - go_merge_boiler_plate: &go_merge_boiler_plate
     name: go_merge_boiler_plate
@@ -191,7 +194,7 @@
           properties-content: |
             GOOS=linux
             GOARCH=arm64
-            PATH=$PATH:/usr/local/go/bin
+            PATH=/usr/local/go/bin:$PATH
             GOPATH=$HOME/$BUILD_ID/gopath/
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -227,7 +230,7 @@
           properties-content: |
             GOOS=linux
             GOARCH=arm64
-            PATH=$PATH:/usr/local/go/bin
+            PATH=/usr/local/go/bin:$PATH
             GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
@@ -270,7 +273,7 @@
           properties-content: |
             GOOS=linux
             GOARCH=arm64
-            PATH=$PATH:/usr/local/go/bin
+            PATH=/usr/local/go/bin:$PATH
             GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
@@ -354,7 +357,7 @@
           properties-content: |
             GOOS=linux
             GOARCH=arm64
-            PATH=$PATH:/usr/local/go/bin
+            PATH=/usr/local/go/bin:$PATH
             GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'

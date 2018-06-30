@@ -1,7 +1,7 @@
 ---
 # Job definition Anchors
 - integration_job_boiler_plate: &integration_job_boiler_plate
-    name: inegration_job-boiler-plate
+    name: integration_job-boiler-plate
 
     project-type: freestyle
     node: '{build-node}'
@@ -60,10 +60,12 @@
       - github-pull-request:
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
-          status-context: '{project-name}-Verify'
+          status-context: '{status-context}'
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
 
 - integration_testing_boiler_plate: &integration_testing_boiler_plate
     name: integration_testing_boiler_plate
@@ -107,8 +109,9 @@
       - lf-provide-maven-settings:
           settings-file: '{mvn-settings}'
           global-settings-file: 'global-settings'
-      - shell: !include-raw-escape: shell/integration-test-setup.sh
-      - shell: cd bin; bash ./run.sh -all postman-integration-test
+      - shell: !include-raw:
+          - ../shell/integration-test-setup.sh
+          - ../shell/integration-test-run.sh
       - edgex-provide-docker-cleanup
 
 - job-template:

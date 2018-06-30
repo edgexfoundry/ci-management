@@ -34,8 +34,11 @@ for image in "${images[@]}"; do
       docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION
       ;;
     'staging' )
-      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:latest
-      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:latest
+      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$GIT_SHA-$VERSION
+      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$GIT_SHA-$VERSION
+      docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$VERSION
+      docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$VERSION
+
       ;;
     'release' )
       docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:latest
@@ -71,21 +74,22 @@ for bin in "${go_bins[@]}"; do
   cp $bin $bin_dir
 done
 
+set +x
 case $DEPLOY_TYPE in
   'snapshot')
     filename=edgex-go$ARCH-$GIT_SHA-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    curl -v -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go/snapshots/$filename
+    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go/snapshots/$filename
     ;;
   'staging')
     filename=edgex-go$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    curl -v -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go/staging/$filename
+    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go/staging/$filename
     ;;
   'release')
     filename=edgex-go$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    #curl -v -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go-release/$filename
+    #curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/edgex-go-release/$filename
     ;;
   *)
     echo "You must set DEPLOY_TYPE to one of (snapshot, staging, release)."

@@ -23,7 +23,7 @@
     docker_name: 'unnamed'
     # Default to LF standard 'snapshots' docker registry
     docker_registry: '$DOCKER_REGISTRY:10003'
-    docker_tag: 'latest'
+    docker_tag: ''
 
     #####################
     # Job Configuration #
@@ -68,10 +68,13 @@
       - github-pull-request:
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
-          status-context: '{project}-Docker-Verify'
+          status-context: '{project}-{branch}-Docker-Verify'
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
+
 
 - docker_merge_boiler_plate: &docker_merge_boiler_plate
     name: docker_merge_boiler_plate
@@ -112,6 +115,10 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+
       - shell: '{pre_build_script}'
       - inject:
           # Docker registry is purposely not using an '_' so as to not conflict
@@ -121,6 +128,7 @@
             DOCKER_NAME={docker_name}
             DOCKER_ROOT={docker_root}
             DOCKERREGISTRY={docker_registry}
+            DOCKER_TAG={docker_tag}
       # Do the docker build
       - shell: !include-raw: ../shell/docker-build.sh
       - inject:
@@ -155,6 +163,10 @@
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+
       - shell: '{pre_build_script}'
       - inject:
           # Docker registry is purposely not using an '_' so as to not conflict
@@ -199,6 +211,10 @@
       - lf-infra-docker-login: 
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+
       - shell: '{pre_build_script}'
       - inject:
           # Docker registry is purposely not using an '_' so as to not conflict
@@ -208,7 +224,148 @@
             DOCKER_NAME={docker_name}
             DOCKER_ROOT={docker_root}
             DOCKERREGISTRY={docker_registry}
+            DOCKER_TAG={docker_tag}
+      # Do the docker build
+      - shell: !include-raw: ../shell/snapshot-strip.sh
+      - shell: !include-raw: ../shell/docker-build.sh
+      - inject:
+          # Import the docker image information from the build step
+          properties-file: 'env_inject.txt'
+      # Execute any post build clean-up or testing
+      - shell: '{post_build_script}'
+      # Provided all steps have already passed, push the docker image
+      - shell: !include-raw: ../shell/docker-push.sh
 
+    # Doesn't make sense to build unless there are new artifacts released
+    triggers:
+      - reverse:
+          jobs: '{project-name}-maven-release-{stream}'
+
+- job-template:
+    name: '{project-name}-{stream}-merge-docker-arm'
+    # Job template for Docker merge jobs
+    #
+    # The purpose of this job template is to run a docker build, and potentially
+    # test validation of the docker image
+
+    <<: *docker_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *docker_merge_boiler_plate
+
+    builders:
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+
+      - shell: '{pre_build_script}'
+      - inject:
+          # Docker registry is purposely not using an '_' so as to not conflict
+          # with the Jenkins global env var
+          properties-content: |
+            DOCKER_ARGS={docker_build_args}
+            DOCKER_NAME={docker_name}
+            DOCKER_ROOT={docker_root}
+            DOCKERREGISTRY={docker_registry}
+            DOCKER_TAG={docker_tag}
+      # Do the docker build
+      - shell: !include-raw: ../shell/docker-build.sh
+      - inject:
+          # Import the docker image information from the build step
+          properties-file: 'env_inject.txt'
+      # Execute any post build clean-up or testing
+      - shell: '{post_build_script}'
+      # Provided all steps have already passed, push the docker image
+      - shell: !include-raw: ../shell/docker-push.sh
+
+    # Doesn't make sense to build unless there are new artifacts released
+    triggers:
+      - reverse:
+          jobs: '{project-name}-{stream}-merge-java'
+
+- job-template:
+    name: '{project-name}-{stream}-verify-docker-arm'
+    # Job template for Docker verify jobs
+    #
+    # The purpose of this job template is to run a docker build, and potentially
+    # test validation of the docker image
+
+    ######################
+    # Default parameters #
+    ######################
+
+    <<: *docker_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *docker_verify_boiler_plate
+
+    builders:
+      - lf-infra-docker-login:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+
+      - shell: '{pre_build_script}'
+      - inject:
+          # Docker registry is purposely not using an '_' so as to not conflict
+          # with the Jenkins global env var
+          properties-content: |
+            DOCKER_ARGS={docker_build_args}
+            DOCKER_NAME={docker_name}
+            DOCKER_ROOT={docker_root}
+            DOCKER_TAG={docker_tag}
+            DOCKERREGISTRY={docker_registry}
+      # Do the docker build
+      - shell: !include-raw: ../shell/docker-build.sh
+      - inject:
+          # Import the docker image information from the build step
+          properties-file: 'env_inject.txt'
+      # Execute any post build clean-up or testing
+      - shell: '{post_build_script}'
+
+- job-template:
+    name: '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar'
+    # Job template for Docker daily release jobs
+    #
+    # The purpose of this job template is to run "docker build and docker push"
+    # for projects using this template.
+    #
+    # Required Variables:
+    #     branch:    git branch (eg. stable/lithium or master)
+    <<: *docker_job_boiler_plate
+
+    docker_registry: '$DOCKER_REGISTRY:10004'
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: ''
+          branch: '{branch}'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    builders:
+      - lf-infra-docker-login: 
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+
+      - shell: '{pre_build_script}'
+      - inject:
+          # Docker registry is purposely not using an '_' so as to not conflict
+          # with the Jenkins global env var
+          properties-content: |
+            DOCKER_ARGS={docker_build_args}
+            DOCKER_NAME={docker_name}
+            DOCKER_ROOT={docker_root}
+            DOCKERREGISTRY={docker_registry}
+            DOCKER_TAG={docker_tag}
       # Do the docker build
       - shell: !include-raw: ../shell/snapshot-strip.sh
       - shell: !include-raw: ../shell/docker-build.sh

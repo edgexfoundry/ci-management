@@ -12,12 +12,15 @@
           branch: 'master'
       - 'barcelona':
           branch: 'barcelona'
+      - 'california':
+          branch: 'california'
     build-machine:
       - 'cavium-arm64':
           build-node: 'cavium-arm64'
-      - 'centos7-docker-4c-2g':
-          build-node: 'centos7-docker-4c-2g'
+      - 'centos7-blackbox-4c-2g':
+          build-node: 'centos7-blackbox-4c-2g'
 
     jobs:
       - 'blackbox-testing-{build-machine}-{stream}'
-      - 'blackbox-verify-{build-machine}-{stream}'
+      - 'blackbox-verify-{build-machine}-{stream}':
+          status-context: '{project-name}-{stream}-{build-machine}-verify'

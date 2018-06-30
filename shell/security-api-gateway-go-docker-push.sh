@@ -38,6 +38,7 @@ for image in "${images[@]}"; do
       docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$GIT_SHA-$VERSION
       docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$VERSION
       docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$VERSION
+
       ;;
     'release' )
       docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10002}"$ARCH:latest
@@ -59,10 +60,10 @@ done
 ## Copy generated go binaries, copy to folder and tar up before pushing to nexus raw repos
 ## Note the the release case is on hold until the sigul work is completed as there is no way
 ## currently to do this in an automated fasion.
-mkdir -p core-config-seed-go-$VERSION
-bin_dir=core-config-seed-go-$VERSION/
+mkdir -p security-api-gateway-go-$VERSION
+bin_dir=security-api-gateway-go-$VERSION/
 
-go_bins=(core-config-seed-go)
+go_bins=(core/edgexproxy)
 
 for bin in "${go_bins[@]}"; do
   cp $bin $bin_dir
@@ -71,19 +72,19 @@ done
 set +x
 case $DEPLOY_TYPE in
   'snapshot')
-    filename=core-config-seed-go$ARCH-$GIT_SHA-$VERSION.tar.gz
+    filename=security-api-gateway$ARCH-$GIT_SHA-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go/snapshots/$filename
+    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/security-reverse-proxy/snapshots/$filename
     ;;
   'staging')
-    filename=core-config-seed-go$ARCH-$VERSION.tar.gz
+    filename=security-api-gateway$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go/staging/$filename
+    curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/security-reverse-proxy/staging/$filename
     ;;
   'release')
-    filename=core-config-seed-go$ARCH-$VERSION.tar.gz
+    filename=security-api-gateway$ARCH-$VERSION.tar.gz
     tar cvzf $filename $bin_dir
-    #curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/core-config-seed-go-release/$filename
+    #curl -n --upload-file $filename https://nexus.edgexfoundry.org/content/sites/security-reverse-proxy/release/$filename
     ;;
   *)
     echo "You must set DEPLOY_TYPE to one of (snapshot, staging, release)."

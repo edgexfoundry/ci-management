@@ -1,0 +1,20 @@
+---
+- project:
+    name: edgex-go-snap
+    project-name: edgex-go-snap
+    project: edgex-go
+    mvn-settings: edgex-go-settings
+    build_script: !include-raw-escape: shell/edgex-publish-snap.sh
+    stream:
+      - 'master':
+          branch: 'master'
+          snap-channel: latest/edge
+      - 'california':
+          branch: 'california'
+          snap-channel: california/candidate
+
+    jobs:
+     - '{project-name}-{stream}-stage-snap-arm':
+         build-node: cavium-arm64
+     - '{project-name}-{stream}-stage-snap':
+         build-node: ubuntu16.04-snap-4c-2g
