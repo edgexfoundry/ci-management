@@ -10,4 +10,7 @@
       command: apt-get install -y snapcraft
       become: true
 
+    - name: 'Remove unattended-upgrades'
+      command: apt-get remove -y unattended-upgrades
+      become: true
 
