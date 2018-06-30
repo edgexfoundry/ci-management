@@ -6,7 +6,7 @@
     project: blackbox-testing
     archive-artifacts: ''
     mvn-settings: blackbox-testing-settings
-    build-timeout: 30
+    build-timeout: 60
     stream:
       - 'master':
           branch: 'master'
