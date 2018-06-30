@@ -14,7 +14,9 @@
       - shell: |
           #!/bin/bash
           set +e  # DO NOT cause build failure if docker rmi fails
-          docker rmi -f $(docker images -a -q)
+          docker kill $(docker ps -aq)
+          docker rmi -f $(docker images -aq)
+          docker system prune -f -a
           exit 0
 
 - builder:
