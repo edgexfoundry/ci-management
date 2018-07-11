@@ -1,0 +1,6 @@
+{
+  "base_image": "Ubuntu 18.04 LTS (arm64) [2018-04-29]",
+  "distro": "Ubuntu 18.04",
+  "ssh_user": "ubuntu",
+  "cloud_user_data": null
+}
