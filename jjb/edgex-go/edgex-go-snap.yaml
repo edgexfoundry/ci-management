@@ -22,6 +22,8 @@
      - '{project-name}-{stream}-verify-snap-arm':
          build-node: cavium-arm64
          build_script: 'snapcraft'
+         status-context: '{project-name}-snap-{stream}-verify-arm'
      - '{project-name}-{stream}-verify-snap':
+         status-context: '{project-name}-snap-{stream}-verify'
          build-node: ubuntu16.04-snap-4c-2g
          build_script: 'snapcraft'
