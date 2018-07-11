@@ -4,7 +4,6 @@
     project-name: edgex-go-snap
     project: edgex-go
     mvn-settings: edgex-go-settings
-    build_script: !include-raw-escape: shell/edgex-publish-snap.sh
     stream:
       - 'master':
           branch: 'master'
@@ -16,5 +15,13 @@
     jobs:
      - '{project-name}-{stream}-stage-snap-arm':
          build-node: cavium-arm64
+         build_script: !include-raw-escape: shell/edgex-publish-snap.sh
      - '{project-name}-{stream}-stage-snap':
          build-node: ubuntu16.04-snap-4c-2g
+         build_script: !include-raw-escape: shell/edgex-publish-snap.sh
+     - '{project-name}-{stream}-verify-snap-arm':
+         build-node: cavium-arm64
+         build_script: 'snapcraft'
+     - '{project-name}-{stream}-verify-snap':
+         build-node: ubuntu16.04-snap-4c-2g
+         build_script: 'snapcraft'
