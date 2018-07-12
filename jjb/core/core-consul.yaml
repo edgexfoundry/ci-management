@@ -1,0 +1,34 @@
+---
+
+- project:
+    name: core-consul
+    project-name: core-consul
+    project: docker-core-consul
+    mvn-settings: docker-core-consul-settings
+    docker_name: docker-core-consul
+    docker_root: ''
+    docker_build_args: '-f Dockerfile'
+    archive-artifacts: ''
+    artifact-version: '0.2.0-SNAPSHOT'
+    build-node: centos7-docker-4c-2g
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+          docker_tag: 'master'
+    jobs:
+      - '{project-name}-{stream}-verify-docker'
+      - '{project-name}-{stream}-merge-docker'
+      - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
+      - '{project-name}-{stream}-verify-docker-arm':
+          build-node: cavium-arm64
+          docker_build_args: '-f Dockerfile.aarch64'
+          docker_name: docker-core-consul-arm64
+      - '{project-name}-{stream}-merge-docker-arm':
+          build-node: cavium-arm64
+          docker_build_args: '-f Dockerfile.aarch64'
+          docker_name: docker-core-consul-arm64
+      - '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar':
+          build-node: cavium-arm64
+          docker_build_args: '-f Dockerfile.aarch64'
+          docker_name: docker-core-consul-arm64
