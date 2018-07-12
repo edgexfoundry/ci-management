@@ -15,7 +15,8 @@
   "builders": [
     {
       "name": "vexxhost",
-      "image_name": "ZZCI - {{user `distro`}} - snapcraft - {{isotime \"20060102-1504\"}}",
+      "image_name": "ZZCI - {{user `distro`}} - snapcraft - {{isotime \"20060102-150405.000\"}}",
+      "instance_name": "{{user `distro`}}-snapcraft-{{uuid}}",
       "source_image_name": "{{user `base_image`}}",
       "type": "openstack",
       "identity_endpoint": "{{user `cloud_auth_url`}}",
