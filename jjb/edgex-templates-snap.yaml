@@ -64,19 +64,6 @@
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
 
-    triggers:
-      - github-pull-request:
-          trigger-phrase: '^recheck$'
-          only-trigger-phrase: false
-          status-context: '{status-context}'
-          permit-all: true
-          github-hooks: true
-          auto-close-on-fail: false
-          white-list-target-branches:
-            - '{branch}'
-          included-regions:
-            - 'snap\/.*'
-
 - snap_merge_boiler_plate: &snap_merge_boiler_plate
     name: snap_merge_boiler_plate
 
@@ -88,13 +75,6 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
-
-    triggers:
-      - github
-      - pollscm:
-          cron: ''
-      # no reason to add github-pull-request here since it doesn't currently
-      # work for merge / push
 
 # Job Templates
 
@@ -113,6 +93,18 @@
     # yamllint disable-line rule:key-duplicates
     <<: *snap_verify_boiler_plate
 
+    triggers:
+      - github-pull-request:
+          trigger-phrase: '^recheck$'
+          only-trigger-phrase: false
+          status-context: '{status-context}'
+          permit-all: true
+          github-hooks: true
+          auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
+          included-regions:
+            - 'snap\/.*'
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -138,6 +130,13 @@
     <<: *snap_job_boiler_plate
     # yamllint disable-line rule:key-duplicates
     <<: *snap_merge_boiler_plate
+
+    triggers:
+      - github
+      - pollscm:
+          cron: ''
+      # no reason to add github-pull-request here since it doesn't currently
+      # work for merge / push
 
 
     builders:
@@ -169,6 +168,18 @@
     # yamllint disable-line rule:key-duplicates
     <<: *snap_verify_boiler_plate
 
+    triggers:
+      - github-pull-request:
+          trigger-phrase: '^recheck$'
+          only-trigger-phrase: false
+          status-context: '{status-context}'
+          permit-all: true
+          github-hooks: true
+          auto-close-on-fail: false
+          white-list-target-branches:
+            - '{branch}'
+          included-regions:
+            - 'snap\/.*'
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -194,6 +205,13 @@
     <<: *snap_job_boiler_plate
     # yamllint disable-line rule:key-duplicates
     <<: *snap_merge_boiler_plate
+
+    triggers:
+      - github
+      - pollscm:
+          cron: ''
+      # no reason to add github-pull-request here since it doesn't currently
+      # work for merge / push
 
 
     builders:
