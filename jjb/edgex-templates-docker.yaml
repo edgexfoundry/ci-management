@@ -227,7 +227,9 @@
             DOCKER_TAG={docker_tag}
       # Do the docker build
       - shell: !include-raw: ../shell/snapshot-strip.sh
-      - shell: !include-raw: ../shell/docker-build.sh
+      - shell: !include-raw-escape:
+          - ../shell/get-upstream-autorelease.sh
+          - ../shell/docker-build.sh
       - inject:
           # Import the docker image information from the build step
           properties-file: 'env_inject.txt'
@@ -368,7 +370,9 @@
             DOCKER_TAG={docker_tag}
       # Do the docker build
       - shell: !include-raw: ../shell/snapshot-strip.sh
-      - shell: !include-raw: ../shell/docker-build.sh
+      - shell: !include-raw-escape:
+          - ../shell/get-upstream-autorelease.sh
+          - ../shell/docker-build.sh
       - inject:
           # Import the docker image information from the build step
           properties-file: 'env_inject.txt'
