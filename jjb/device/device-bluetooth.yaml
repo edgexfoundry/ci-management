@@ -26,3 +26,15 @@
       - '{project-name}-{stream}-merge-docker'
       - '{project-name}-github-maven-jobs'
       - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
+      - '{project-name}-{stream}-verify-docker-arm':
+          build-node: cavium-arm64
+          docker_build_args: '-f docker-files/Dockerfile.aarch64'
+          docker_name: docker-device-bluetooth-arm64
+      - '{project-name}-{stream}-merge-docker-arm':
+          build-node: cavium-arm64
+          docker_build_args: '-f docker-files/Dockerfile.aarch64'
+          docker_name: docker-device-bluetooth-arm64
+      - '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar':
+          build-node: cavium-arm64
+          docker_build_args: '-f docker-files/Dockerfile.aarch64'
+          docker_name: docker-device-bluetooth-arm64
