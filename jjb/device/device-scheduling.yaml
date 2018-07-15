@@ -1,0 +1,20 @@
+---
+
+- project:
+    name: device-scheduling
+    project-name: device-scheduling
+    project: device-scheduling
+    mvn-settings: device-scheduling-settings
+    archive-artifacts: ''
+    build-node: centos7-docker-4c-2g
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+      - 'barcelona':
+          branch: 'barcelona'
+      - 'california':
+          branch: 'california'
+    jobs:
+      - '{project-name}-{stream}-verify-java'
+      - '{project-name}-github-maven-jobs'
