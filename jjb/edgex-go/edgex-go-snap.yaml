@@ -21,7 +21,7 @@
          build_script: !include-raw-escape: shell/edgex-publish-snap.sh
      - '{project-name}-{stream}-verify-snap-arm':
          build-node: cavium-arm64
-         build_script: 'snapcraft'
+         build_script: 'snapcraft clean && snapcraft'
          status-context: '{project-name}-snap-{stream}-verify-arm'
      - '{project-name}-{stream}-verify-snap':
          status-context: '{project-name}-snap-{stream}-verify'
