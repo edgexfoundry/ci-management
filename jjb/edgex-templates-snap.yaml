@@ -17,6 +17,7 @@
     post_build_script: ''
     status-context: ''
     snap-channel: ''
+    workspace: '$HOME/$BUILD_ID/{project-name}/'
 
     #####################
     # Job Configuration #
