@@ -13,6 +13,4 @@
       - 'california':
           branch: 'california'
     jobs:
-      - '{project-name}-{stream}-verify-java'
-      - '{project-name}-{stream}-merge-java'
       - '{project-name}-github-maven-jobs'
