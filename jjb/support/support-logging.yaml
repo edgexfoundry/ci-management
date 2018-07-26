@@ -8,6 +8,7 @@
     docker_name: docker-support-logging
     docker_root: ''
     docker_build_args: '-f docker-files/Dockerfile'
+    status-context: '{project-name}-{stream}-Docker-Verify'
     archive-artifacts: ''
     artifact-version: '0.2.0-SNAPSHOT'
     build-node: centos7-docker-4c-2g
@@ -20,8 +21,6 @@
       - 'california':
           branch: 'california'
     jobs:
-      - '{project-name}-{stream}-verify-java'
-      - '{project-name}-{stream}-merge-java'
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'
       - '{project-name}-github-maven-jobs'

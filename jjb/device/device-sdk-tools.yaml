@@ -20,4 +20,3 @@
     jobs:
       - '{project-name}-{stream}-generate-verify-java'
       - '{project-name}-{stream}-generate-merge-java'
-      - '{project-name}-github-maven-jobs'

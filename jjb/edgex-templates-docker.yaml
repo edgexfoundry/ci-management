@@ -24,6 +24,7 @@
     # Default to LF standard 'snapshots' docker registry
     docker_registry: '$DOCKER_REGISTRY:10003'
     docker_tag: ''
+    status-context: ''
 
     #####################
     # Job Configuration #
@@ -68,7 +69,7 @@
       - github-pull-request:
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
-          status-context: '{project}-{branch}-Docker-Verify'
+          status-context: '{status-context}'
           permit-all: true
           github-hooks: true
           auto-close-on-fail: false
@@ -301,7 +302,8 @@
     <<: *docker_job_boiler_plate
     # yamllint disable-line rule:key-duplicates
     <<: *docker_verify_boiler_plate
-
+    
+    
     builders:
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
