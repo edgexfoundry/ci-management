@@ -13,6 +13,7 @@ cd "$DOCKER_ROOT"
 # Jenkins global env var of the DOCKER_REGISTRY which the docker-login step uses
 IMAGE_NAME="$DOCKERREGISTRY/$DOCKER_NAME:$DOCKER_TAG"
 
+
 # Determine if there is an autorelease to point to and
 # Build the docker image
 

@@ -19,7 +19,7 @@
     pre_build_script: ''
     post_build_script: ''
     docker_root: '$WORKSPACE'
-    docker_build_args: ''
+    docker_build_args: '--label \"git_sha=$GIT_COMMIT\"'
     docker_name: 'unnamed'
     # Default to LF standard 'snapshots' docker registry
     docker_registry: '$DOCKER_REGISTRY:10003'
