@@ -6,7 +6,7 @@
     project: blackbox-testing
     archive-artifacts: ''
     mvn-settings: blackbox-testing-settings
-    build-timeout: 60
+    build-timeout: 30
     stream:
       - 'master':
           branch: 'master'
@@ -21,6 +21,7 @@
           build-node: 'centos7-blackbox-4c-2g'
 
     jobs:
-      - 'blackbox-testing-{build-machine}-{stream}'
+      - 'blackbox-testing-{build-machine}-{stream}':
+          build-timeout: 60
       - 'blackbox-verify-{build-machine}-{stream}':
           status-context: '{project-name}-{stream}-{build-machine}-verify'
