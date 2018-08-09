@@ -6,7 +6,7 @@
       - email:
           recipients: EdgeX-Jenkins-Alerts+int+444+7674852109629482390@lists.edgexfoundry.org
           notify-every-unstable-build: true
-          send-to-individuals: true
+          send-to-individuals: false
 
 - builder:
     name: edgex-provide-docker-cleanup
