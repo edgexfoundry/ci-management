@@ -7,7 +7,7 @@
     mvn-settings: device-bluetooth-settings
     docker_name: docker-device-bluetooth
     docker_root: ''
-    docker_build_args: '-f docker-files/Dockerfile --label \"git_sha=$GIT_COMMIT\"'
+    docker_build_args: '-f docker-files/Dockerfile'
     status-context: '{project-name}-{stream}-Docker-Verify'
     archive-artifacts: ''
     artifact-version: '0.2.0-SNAPSHOT'
@@ -27,14 +27,14 @@
       - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
       - '{project-name}-{stream}-verify-docker-arm':
           build-node: cavium-arm64
-          docker_build_args: '-f docker-files/Dockerfile.aarch64 --label \"git_sha=$GIT_COMMIT\"'
+          docker_build_args: '-f docker-files/Dockerfile.aarch64'
           docker_name: docker-device-bluetooth-arm64
           status-context: '{project-name}-{stream}-Docker-Verify-ARM'
       - '{project-name}-{stream}-merge-docker-arm':
           build-node: cavium-arm64
-          docker_build_args: '-f docker-files/Dockerfile.aarch64 --label \"git_sha=$GIT_COMMIT\"'
+          docker_build_args: '-f docker-files/Dockerfile.aarch64'
           docker_name: docker-device-bluetooth-arm64
       - '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar':
           build-node: cavium-arm64
-          docker_build_args: '-f docker-files/Dockerfile.aarch64 --label \"git_sha=$GIT_COMMIT\"'
+          docker_build_args: '-f docker-files/Dockerfile.aarch64'
           docker_name: docker-device-bluetooth-arm64
