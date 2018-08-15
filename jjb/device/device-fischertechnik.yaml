@@ -7,7 +7,7 @@
     mvn-settings: device-fischertechnik-settings
     docker_name: docker-device-fischertechnik
     docker_root: ''
-    docker_build_args: '-f docker-files/Dockerfile --label \"git_sha=$GIT_COMMIT\"'
+    docker_build_args: '-f docker-files/Dockerfile'
     status-context: '{project-name}-{stream}-Docker-Verify'
     archive-artifacts: ''
     artifact-version: '0.2.0-SNAPSHOT'
