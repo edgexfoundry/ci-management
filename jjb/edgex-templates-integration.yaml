@@ -112,7 +112,6 @@
       - shell: !include-raw-escape:
           - ../shell/integration-test-setup.sh
           - ../shell/integration-test-run.sh
-      - shell: !include-raw-escape: ../shell/integration-test-image-inspect.sh
       - edgex-provide-docker-cleanup
 
 - job-template:
@@ -139,5 +138,4 @@
           global-settings-file: 'global-settings'
       - shell: !include-raw-escape:
           - ../shell/integration-test-setup.sh
-      - shell: !include-raw-escape: ../shell/integration-test-image-inspect.sh
       - edgex-provide-docker-cleanup
