@@ -21,7 +21,7 @@ if [[ -z "$AUTORELEASE" ]]; then
   echo "There is no autorelease"
   # Allow word splitting
   # shellcheck disable=SC2086
-  docker build    --label "git_sha=$(GIT_COMMIT)" \
+  docker build    --label "git_sha=$GIT_COMMIT" \
                   $DOCKER_ARGS . \
                   -t $IMAGE_NAME | \
                   tee "$WORKSPACE/docker_build_log.txt"
@@ -29,7 +29,7 @@ if [[ -z "$AUTORELEASE" ]]; then
 else
   # Allow word splitting
   # shellcheck disable=SC2086
-  docker build    --label "git_sha=$(GIT_COMMIT)" \
+  docker build    --label "git_sha=$GIT_COMMIT" \
                   --build-arg MVN_COMMAND="mvn dependency:copy \
                   -Dstagingpath=autorelease-$AUTORELEASE" $DOCKER_ARGS . \
                   -t $IMAGE_NAME | \
