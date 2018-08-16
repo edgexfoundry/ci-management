@@ -11,4 +11,4 @@ snapcraft
 REVISION=$(snapcraft push edgexfoundry*.snap | awk '/Revision/ {print $2}')
 
 # Release the snap to channel
-snapcraft release edgexfoundry $REVISION --channel=$SNAP_CHANNEL
+snapcraft release edgexfoundry $REVISION $SNAP_CHANNEL
