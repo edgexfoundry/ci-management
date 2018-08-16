@@ -16,8 +16,6 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'barcelona':
-          branch: 'barcelona'
       - 'california':
           branch: 'california'
     jobs:

@@ -15,8 +15,6 @@
       - 'master':
           branch: 'master'
           docker_tag: 'master'
-      - 'barcelona':
-          branch: 'barcelona'
           docker_tag: '0.5.2'
       - 'california':
           branch: 'california'
