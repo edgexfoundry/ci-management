@@ -10,7 +10,7 @@
           snap-channel: latest/edge
       - 'california':
           branch: 'california'
-          snap-channel: california/beta
+          snap-channel: california/edge
 
     jobs:
      - '{project-name}-{stream}-stage-snap-arm':
