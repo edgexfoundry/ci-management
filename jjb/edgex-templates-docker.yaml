@@ -242,7 +242,7 @@
     # Doesn't make sense to build unless there are new artifacts released
     triggers:
       - reverse:
-          jobs: '{project-name}-maven-release-{stream}'
+          jobs: '{project-name}-maven-stage-{stream}'
 
 - job-template:
     name: '{project-name}-{stream}-merge-docker-arm'
@@ -386,4 +386,4 @@
     # Doesn't make sense to build unless there are new artifacts released
     triggers:
       - reverse:
-          jobs: '{project-name}-maven-release-{stream}'
+          jobs: '{project-name}-maven-stage-{stream}'
