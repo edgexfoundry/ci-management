@@ -51,3 +51,14 @@
           files:
             - file-id: EdgeX
               target: '$HOME/EdgeX'
+
+- wrapper:
+  name: edgex-docker-content-trust-passphrase
+  wrappers:
+    - credentials-binding:
+        - text:
+           credential-id: 'edgex_dockerhub_repo_key_passphrase'
+           variable: 'DOCKER_CONTENT_TRUST_REPOSITORY_PASSPHRASE'
+        - text:
+           credential-id: 'edgex_dockerhub_root_key_passphrase'
+           variable: 'DOCKER_CONTENT_TRUST_ROOT_PASSPHRASE'
