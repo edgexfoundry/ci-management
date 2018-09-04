@@ -8,8 +8,6 @@
     x86_build_script: 'make build && make docker_core_config_seed_go'
     arm_build_script: 'make build && make docker_core_config_seed_go_arm'
     stream:
-      - 'master':
-          branch: 'master'
       - 'california':
           branch: 'california'
     jobs:
