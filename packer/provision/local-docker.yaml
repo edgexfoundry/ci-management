@@ -55,10 +55,20 @@
             remote_src: true
           become: true
 
-    - name: 'Install zeromq'
+    - name: 'Install zeromq via yum'
       yum:
         name:
           - zeromq
           - zeromq-devel
         state: present
+      when: ansible_os_family == 'RedHat'
+      become: true
+
+    - name: 'Install zeromq via apt'
+      apt:
+        name:
+          - zeromq
+          - zeromq-devel
+        state: present
+      when: ansible_distribution == 'Ubuntu'
       become: true
