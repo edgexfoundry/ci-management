@@ -10,6 +10,18 @@
     glide_version: v0.13.1
     golang_checksum: sha256:07d81c6b6b4c2dcf1b5ef7c27aaebd3691cdb40548500941f92b221147c5d9c7
     golang_version: 1.9.1
+    golang_url: https://storage.googleapis.com/golang/go{{golang_version}}.linux-amd64.tar.gz
+    glide_url: https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-amd64.tar.gz
+
+- name: Set golang download url
+  set_fact:
+    golang_url: https://storage.googleapis.com/golang/go{{golang_version}}.linux-arm64.tar.gz
+  when: "'aarch64' in ansible_architecture"
+
+- name: Set glide download url
+  set_fact:
+    glide_url: https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-arm64.tar.gz
+  when: "'aarch64' in ansible_architecture"
 
   tasks:
     - name: 'Install Docker Compose {{docker_compose_version}}'
@@ -20,12 +32,12 @@
       block:
         - name: 'Fetch golang {{golang_version}} to /tmp/go{{golang_version}}.linux-amd64.tar.gz'
           get_url:
-            url: 'https://storage.googleapis.com/golang/go{{golang_version}}.linux-amd64.tar.gz'
-            dest: '/tmp/go{{golang_version}}.linux-amd64.tar.gz'
+            url: '{{golang_url}}'
+            dest: '/tmp/go{{golang_version}}.tar.gz'
             checksum: '{{golang_checksum}}'
         - name: 'Install golang {{golang_version}} to /usr/local'
           unarchive:
-            src: '/tmp/go{{golang_version}}.linux-amd64.tar.gz'
+            src: '/tmp/go{{golang_version}}.tar.gz'
             dest: /usr/local
             remote_src: true
           become: true
@@ -35,19 +47,20 @@
 
     - name: 'Install Glide {{glide_version}}'
       block:
-        - name: 'Fetch Glide {{glide_version}} to /tmp/glide-{{glide_version}}-linux-amd64.tar.gz'
+        - name: 'Fetch Glide {{glide_version}} to /tmp/glide-{{glide_version}}.tar.gz'
           get_url:
-            url: 'https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-amd64.tar.gz'
-            dest: '/tmp/glide-{{glide_version}}-linux-amd64.tar.gz'
+            url: '{{glide_url}}'
+            dest: '/tmp/glide-{{glide_version}}.tar.gz'
             checksum: '{{glide_checksum}}'
         - name: 'Unarchive Glide'
           unarchive:
-            src: '/tmp/glide-{{glide_version}}-linux-amd64.tar.gz'
+            src: '/tmp/glide-{{glide_version}}.tar.gz'
             dest: /tmp
+            extra_opts: [--strip-components=1]
             remote_src: true
         - name: 'Install Glide to /usr/local/bin/glide'
           copy:
-            src: /tmp/linux-amd64/glide
+            src: /tmp/glide
             dest: /usr/local/bin/glide
             owner: root
             group: root
