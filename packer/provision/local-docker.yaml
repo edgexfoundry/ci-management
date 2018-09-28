@@ -13,17 +13,17 @@
     golang_url: https://storage.googleapis.com/golang/go{{golang_version}}.linux-amd64.tar.gz
     glide_url: https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-amd64.tar.gz
 
-- name: Set golang download url
-  set_fact:
-    golang_url: https://storage.googleapis.com/golang/go{{golang_version}}.linux-arm64.tar.gz
-  when: "'aarch64' in ansible_architecture"
-
-- name: Set glide download url
-  set_fact:
-    glide_url: https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-arm64.tar.gz
-  when: "'aarch64' in ansible_architecture"
-
   tasks:
+    - name: Set golang download url
+      set_fact:
+        golang_url: https://storage.googleapis.com/golang/go{{golang_version}}.linux-arm64.tar.gz
+      when: "'aarch64' in ansible_architecture"
+
+    - name: Set glide download url
+      set_fact:
+        glide_url: https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-arm64.tar.gz
+      when: "'aarch64' in ansible_architecture"
+
     - name: 'Install Docker Compose {{docker_compose_version}}'
       command: curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-$(uname -s)-$(uname -m)"
       become: true
