@@ -80,8 +80,8 @@
     - name: 'Install zeromq via apt'
       apt:
         name:
-          - zeromq
-          - zeromq-devel
+          - libzmq5
+          - libzmq3-dev
         state: present
       when: ansible_distribution == 'Ubuntu'
       become: true
