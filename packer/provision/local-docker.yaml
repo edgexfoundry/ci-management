@@ -23,8 +23,9 @@
       when: "'aarch64' in ansible_architecture"
 
     - name: 'Install Docker Compose {{docker_compose_version}}'
-      command: curl -o /usr/local/bin/docker-compose -L "https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-$(uname -s)-$(uname -m)"
-      become: true
+      pip:
+        name: 'docker-compose=={{docker_compose_version}}'
+        extra-args: --user
 
     - name: 'Install GoLang {{golang_version}}'
       block:
