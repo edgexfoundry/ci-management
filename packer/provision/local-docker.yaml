@@ -25,7 +25,7 @@
     - name: 'Install Docker Compose {{docker_compose_version}}'
       pip:
         name: 'docker-compose=={{docker_compose_version}}'
-        extra-args: --user
+        extra_args: --user
 
     - name: 'Install GoLang {{golang_version}}'
       block:
