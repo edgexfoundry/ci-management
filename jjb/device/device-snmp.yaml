@@ -24,15 +24,15 @@
       - '{project-name}-github-maven-jobs'
       - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
       - '{project-name}-{stream}-verify-docker-arm':
-          build-node: cavium-arm64
+          build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_build_args: '-f docker-files/Dockerfile.aarch64'
           docker_name: docker-device-snmp-arm64
           status-context: '{project-name}-{stream}-Docker-Verify-ARM'
       - '{project-name}-{stream}-merge-docker-arm':
-          build-node: cavium-arm64
+          build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_build_args: '-f docker-files/Dockerfile.aarch64'
           docker_name: docker-device-snmp-arm64
       - '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar':
-          build-node: cavium-arm64
+          build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_build_args: '-f docker-files/Dockerfile.aarch64'
           docker_name: docker-device-snmp-arm64
