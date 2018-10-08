@@ -15,15 +15,9 @@
     jobs:
      - '{project-name}-{stream}-stage-snap-arm':
          build-node: cavium-arm64
-         build_script: !include-raw-escape: shell/edgex-publish-snap.sh
-     - '{project-name}-{stream}-stage-snap':
-         build-node: ubuntu16.04-snap-4c-2g
-         build_script: !include-raw-escape: shell/edgex-publish-snap.sh
+     - '{project-name}-{stream}-stage-snap'
      - '{project-name}-{stream}-verify-snap-arm':
          build-node: cavium-arm64
-         build_script: 'snapcraft clean && snapcraft'
-         status-context: '{project-name}-snap-{stream}-verify-arm'
+         status-context: '{project-name}-{stream}-verify-arm'
      - '{project-name}-{stream}-verify-snap':
-         status-context: '{project-name}-snap-{stream}-verify'
-         build-node: ubuntu16.04-snap-4c-2g
-         build_script: 'snapcraft'
+         status-context: '{project-name}-{stream}-verify'
