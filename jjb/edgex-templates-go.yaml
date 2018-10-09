@@ -180,7 +180,7 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_verify_boiler_plate
 
-    build-node: cavium-arm64
+    build-node: ubuntu18.04-docker-arm64-4c-2g
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -216,7 +216,7 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_merge_boiler_plate
 
-    build-node: cavium-arm64
+    build-node: ubuntu18.04-docker-arm64-4c-2g
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -256,7 +256,7 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_merge_boiler_plate
 
-    build-node: cavium-arm64
+    build-node: ubuntu18.04-docker-arm64-4c-2g
 
     triggers:
       - timed: '@daily'
@@ -340,7 +340,7 @@
     # yamllint disable-line rule:key-duplicates
     <<: *go_merge_boiler_plate
 
-    build-node: cavium-arm64
+    build-node: ubuntu18.04-docker-arm64-4c-2g
 
     triggers:
       - timed: '@daily'

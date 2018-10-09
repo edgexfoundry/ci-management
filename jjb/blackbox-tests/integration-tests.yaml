@@ -13,8 +13,8 @@
       - 'california':
           branch: 'california'
     build-machine:
-      - 'cavium-arm64':
-          build-node: 'cavium-arm64'
+      - 'ubuntu18.04-docker-arm64-4c-2g':
+          build-node: 'ubuntu18.04-docker-arm64-4c-2g'
       - 'centos7-blackbox-4c-2g':
           build-node: 'centos7-blackbox-4c-2g'
 
