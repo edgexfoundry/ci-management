@@ -116,6 +116,7 @@
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
       - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-merge-snap'
@@ -153,6 +154,7 @@
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
       - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-verify-snap-arm'
@@ -191,6 +193,7 @@
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
       - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-merge-snap-arm'
@@ -228,6 +231,7 @@
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
       - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-stage-snap-arm'
@@ -261,6 +265,7 @@
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
       - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-stage-snap'
@@ -294,6 +299,7 @@
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
       - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-release-snap-arm'
@@ -327,6 +333,7 @@
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
       - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
 
 - job-template:
     name: '{project-name}-{stream}-release-snap'
@@ -360,3 +367,4 @@
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
       - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
