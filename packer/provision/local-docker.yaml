@@ -43,6 +43,22 @@
           command: 'echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile'
           become: true
 
+    - name: 'Install GoLang 1.10.0'
+      set_fact:
+        golang_version: 1.10.0
+
+      block:
+        - name: 'Fetch golang {{golang_version}} to /tmp/go{{golang_version}}.tar.gz'
+          get_url:
+            url: '{{golang_url}}'
+            dest: '/tmp/go{{golang_version}}.tar.gz'
+        - name: 'Install golang {{golang_version}} to /usr/local'
+          unarchive:
+            src: '/tmp/go{{golang_version}}.tar.gz'
+            dest: /opt/golang/110
+            remote_src: true
+          become: true
+
     - name: 'Install Glide {{glide_version}}'
       block:
         - name: 'Fetch Glide {{glide_version}} to /tmp/glide-{{glide_version}}.tar.gz'
