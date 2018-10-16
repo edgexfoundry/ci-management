@@ -8,7 +8,9 @@
     docker_compose_version: 1.17.1
     glide_version: v0.13.1
     golang_version: 1.9.1
+    golang110_version: 1.10.0
     golang_url: https://storage.googleapis.com/golang/go{{golang_version}}.linux-amd64.tar.gz
+    golang110_url: https://storage.googleapis.com/golang/go{{golang110_version}}.linux-amd64.tar.gz
     glide_url: https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-amd64.tar.gz
 
   tasks:
@@ -44,17 +46,14 @@
           become: true
 
     - name: 'Install GoLang 1.10.0'
-      set_fact:
-        golang_version: 1.10.0
-
       block:
-        - name: 'Fetch golang {{golang_version}} to /tmp/go{{golang_version}}.tar.gz'
+        - name: 'Fetch golang {{golang110_version}} to /tmp/go{{golang110_version}}.tar.gz'
           get_url:
-            url: '{{golang_url}}'
-            dest: '/tmp/go{{golang_version}}.tar.gz'
-        - name: 'Install golang {{golang_version}} to /usr/local'
+            url: '{{golang110_url}}'
+            dest: '/tmp/go{{golang110_version}}.tar.gz'
+        - name: 'Install golang {{golang110_version}} to /opt/golang/110/bin/go'
           unarchive:
-            src: '/tmp/go{{golang_version}}.tar.gz'
+            src: '/tmp/go{{golang110_version}}.tar.gz'
             dest: /opt/golang/110
             remote_src: true
           become: true
