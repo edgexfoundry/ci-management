@@ -54,7 +54,8 @@
         - name: 'Install golang {{golang110_version}} to /opt/golang/110/bin/go'
           unarchive:
             src: '/tmp/go{{golang110_version}}.tar.gz'
-            dest: '/opt/golang/110'
+            dest: '/opt'
+            creates: '/opt/golang/110'
             remote_src: true
           become: true
 
