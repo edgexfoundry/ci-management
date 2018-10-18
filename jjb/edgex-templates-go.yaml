@@ -17,6 +17,9 @@
     post_build_script: ''
     status-context: ''
     workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
+    go-root: '/usr/local/go'
+    path: '$PATH:$GOROOT/bin'
+
     #####################
     # Job Configuration #
     #####################
@@ -122,7 +125,8 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
-            PATH=$PATH:/usr/local/go/bin
+            GOROOT='{go-root}'
+            PATH='{path}'
             GOPATH=$HOME/$BUILD_ID/gopath
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -155,9 +159,9 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
-            PATH=$PATH:/usr/local/go/bin
-            GOPATH=$HOME/$BUILD_ID/gopath/
-            DEPLOY_TYPE=snapshot
+            GOROOT='{go-root}'
+            PATH='{path}'
+            GOPATH=$HOME/$BUILD_ID/gopath
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
@@ -192,10 +196,11 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
+            GOROOT='{go-root}'
+            PATH='{path}'
+            GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
-            PATH=/usr/local/go/bin:$PATH
-            GOPATH=$HOME/$BUILD_ID/gopath/
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
@@ -228,10 +233,11 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
+            GOROOT='{go-root}'
+            PATH='{path}'
+            GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
-            PATH=/usr/local/go/bin:$PATH
-            GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -271,10 +277,11 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
+            GOROOT='{go-root}'
+            PATH='{path}'
+            GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
-            PATH=/usr/local/go/bin:$PATH
-            GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -314,9 +321,10 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
+            GOROOT='{go-root}'
+            PATH='{path}'
+            GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
-            PATH=$PATH:/usr/local/go/bin
-            GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -355,10 +363,11 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
+            GOROOT='{go-root}'
+            PATH='{path}'
+            GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
-            PATH=/usr/local/go/bin:$PATH
-            GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -395,9 +404,10 @@
           settings-file: '{mvn-settings}'
       - inject:
           properties-content: |
+            GOROOT='{go-root}'
+            PATH='{path}'
+            GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
-            PATH=$PATH:/usr/local/go/bin
-            GOPATH=$HOME/$BUILD_ID/gopath/
             DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
