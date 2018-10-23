@@ -11,6 +11,9 @@
           branch: 'master'
       - 'california':
           branch: 'california'
+      - 'delhi':
+          branch: 'delhi'
+
     jobs:
       - '{project-name}-{stream}-verify-go':
           status-context: '{project-name}-{stream}-verify'
