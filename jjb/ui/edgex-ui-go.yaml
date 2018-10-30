@@ -1,0 +1,26 @@
+---
+- project:
+    name: edgex-ui-go
+    project-name: edgex-ui-go
+    project: edgex-ui-go
+    mvn-settings: edgex-ui-go-settings
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make build'
+    stream:
+      - 'master':
+          branch: 'master'
+      - 'delhi':
+          branch: 'delhi'
+    jobs:
+      - '{project-name}-{stream}-verify-go':
+          status-context: '{project-name}-{stream}-verify'
+      - '{project-name}-{stream}-verify-go-arm':
+          status-context: '{project-name}-{stream}-verify-arm'
+      - '{project-name}-{stream}-merge-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-edgex-ui-go-push.sh
+      - '{project-name}-{stream}-merge-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-edgex-ui-go-push.sh
+      - '{project-name}-{stream}-stage-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-edgex-ui-go-push.sh
+      - '{project-name}-{stream}-stage-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-edgex-ui-go-push.sh
