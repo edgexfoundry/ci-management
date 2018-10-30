@@ -15,10 +15,13 @@
       - 'master':
           branch: 'master'
           docker_tag: 'master'
-          docker_tag: '0.5.2'
+          docker_tag: '0.7.0'
       - 'california':
           branch: 'california'
           docker_tag: '0.6.0'
+      - 'delhi':
+          branch: 'delhi'
+          docker_tag: '0.8.0'
     jobs:
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'

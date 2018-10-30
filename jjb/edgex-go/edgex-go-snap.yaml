@@ -11,6 +11,9 @@
       - 'california':
           branch: 'california'
           snap-channel: california/edge
+      - 'delhi':
+          branch: 'delhi'
+          snap-channel: delhi/edge
 
     jobs:
      - '{project-name}-{stream}-stage-snap-arm':

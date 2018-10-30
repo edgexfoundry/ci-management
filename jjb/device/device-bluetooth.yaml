@@ -18,6 +18,9 @@
           branch: 'master'
       - 'california':
           branch: 'california'
+      - 'delhi':
+          branch: 'delhi'
+
     jobs:
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'

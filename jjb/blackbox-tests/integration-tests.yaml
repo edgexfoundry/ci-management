@@ -12,6 +12,9 @@
           branch: 'master'
       - 'california':
           branch: 'california'
+      - 'delhi':
+          branch: 'delhi'
+
     build-machine:
       - 'ubuntu18.04-docker-arm64-4c-2g':
           build-node: 'ubuntu18.04-docker-arm64-4c-2g'

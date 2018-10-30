@@ -12,5 +12,8 @@
           branch: 'master'
       - 'california':
           branch: 'california'
+      - 'delhi':
+          branch: 'delhi'
+
     jobs:
       - '{project-name}-github-maven-jobs'
