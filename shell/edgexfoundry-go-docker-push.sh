@@ -63,15 +63,13 @@ done
 mkdir -p edgex-go-$VERSION
 bin_dir=edgex-go-$VERSION/
 
-go_bins=(cmd/export-client/export-client
-         cmd/export-distro/export-distro
-         cmd/core-metadata/core-metadata
-         cmd/core-data/core-data
-         cmd/core-command/core-command
-         cmd/support-logging/support-logging)
+go_bins=()
+while IFS= read -a line; do
+    go_bins+=( "$line" )
+done < <( ls cmd/ )
 
 for bin in "${go_bins[@]}"; do
-  cp $bin $bin_dir
+  cp "cmd/$bin" $bin_dir
 done
 
 set +x
