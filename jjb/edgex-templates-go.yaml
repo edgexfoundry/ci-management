@@ -162,6 +162,7 @@
             GOROOT={go-root}
             PATH={path}
             GOPATH=$HOME/$BUILD_ID/gopath
+            DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
