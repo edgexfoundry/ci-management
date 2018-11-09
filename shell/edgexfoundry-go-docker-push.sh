@@ -63,14 +63,7 @@ done
 mkdir -p edgex-go-$VERSION
 bin_dir=edgex-go-$VERSION/
 
-go_bins=()
-while IFS= read -a line; do
-    go_bins+=( "$line" )
-done < <( ls cmd/ )
-
-for bin in "${go_bins[@]}"; do
-  cp "cmd/$bin" $bin_dir
-done
+find cmd/ -type f -exec cp {} $bin_dir \;
 
 set +x
 case $DEPLOY_TYPE in
