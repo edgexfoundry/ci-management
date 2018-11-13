@@ -63,7 +63,7 @@ done
 mkdir -p security-api-gateway-go-$VERSION
 bin_dir=security-api-gateway-go-$VERSION/
 
-go_bins=(edgexproxy)
+go_bins=(core/edgexproxy)
 
 for bin in "${go_bins[@]}"; do
   cp $bin $bin_dir
