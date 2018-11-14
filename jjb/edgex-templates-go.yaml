@@ -12,6 +12,7 @@
 
     branch: master
     submodule-recursive: true
+    golang_arm_script: ''
     pre_build_script: ''
     build_script: ''
     post_build_script: ''
@@ -202,6 +203,7 @@
             GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
+      - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - shell: '{obj:post_build_script}'
@@ -240,6 +242,7 @@
             GOOS=linux
             GOARCH=arm64
             DEPLOY_TYPE=snapshot
+      - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
@@ -284,6 +287,7 @@
             GOOS=linux
             GOARCH=arm64
             DEPLOY_TYPE=staging
+      - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
@@ -370,6 +374,7 @@
             GOOS=linux
             GOARCH=arm64
             DEPLOY_TYPE=release
+      - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
