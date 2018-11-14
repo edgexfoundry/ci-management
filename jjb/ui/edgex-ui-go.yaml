@@ -5,7 +5,7 @@
     project: edgex-ui-go
     mvn-settings: edgex-ui-go-settings
     pre_build_script: 'make prepare && make test'
-    build_script: 'make build'
+    build_script: 'make build && make docker'
     stream:
       - 'master':
           branch: 'master'
