@@ -1,0 +1,31 @@
+---
+
+- project:
+    name: device-random-go
+    project-name: device-random
+    project: device-random
+    mvn-settings: device-random-go-settings
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make build && make docker'
+    build-node: centos7-docker-4c-2g
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+      - 'delhi':
+          branch: 'delhi'
+
+    jobs:
+      - '{project-name}-{stream}-verify-go':
+          status-context: '{project-name}-{stream}-verify'
+      - '{project-name}-{stream}-verify-go-arm':
+          status-context: '{project-name}-{stream}-verify-arm'
+      - '{project-name}-{stream}-merge-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-random-go-docker-push.sh
+      - '{project-name}-{stream}-merge-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-random-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-random-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-random-go-docker-push.sh
+
