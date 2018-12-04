@@ -7,7 +7,6 @@
     mvn-settings: device-random-go-settings
     pre_build_script: 'make prepare && make test'
     build_script: 'make build && make docker'
-    build-node: centos7-docker-4c-2g
     cron: 'H 11 * * *'
     stream:
       - 'master':
