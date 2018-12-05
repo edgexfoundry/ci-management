@@ -1,0 +1,30 @@
+---
+
+- project:
+    name: device-mqtt-go
+    project-name: device-mqtt-go
+    project: device-mqtt-go
+    mvn-settings: device-mqtt-go-settings
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make build && make docker'
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+      - 'delhi':
+          branch: 'delhi'
+
+    jobs:
+      - '{project-name}-{stream}-verify-go':
+          status-context: '{project-name}-{stream}-verify'
+      - '{project-name}-{stream}-verify-go-arm':
+          status-context: '{project-name}-{stream}-verify-arm'
+      - '{project-name}-{stream}-merge-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-mqtt-go-docker-push.sh
+      - '{project-name}-{stream}-merge-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-mqtt-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-mqtt-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-mqtt-go-docker-push.sh
+
