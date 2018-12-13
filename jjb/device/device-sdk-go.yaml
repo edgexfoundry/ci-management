@@ -1,0 +1,22 @@
+---
+
+- project:
+    name: device-sdk-go
+    project-name: device-sdk-go
+    project: device-sdk-go
+    mvn-settings: device-sdk-go-settings
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make build'
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+      - 'delhi':
+          branch: 'delhi'
+
+    jobs:
+      - '{project-name}-{stream}-verify-go':
+          status-context: '{project-name}-{stream}-verify'
+      - '{project-name}-{stream}-verify-go-arm':
+          status-context: '{project-name}-{stream}-verify-arm'
+
