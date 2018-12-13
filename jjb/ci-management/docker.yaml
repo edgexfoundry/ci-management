@@ -1,0 +1,26 @@
+---
+
+- project:
+    name: docker-builder-jobs
+    project-name: ci-management
+    project: ci-management
+    mvn-settings: ci-management-settings
+    docker_name: edgex-ci
+    docker_build_args: '-f docker/golang-base/Dockerfile'
+    status-context: '{project-name}-{stream}-Docker-Verify'
+    build-node: centos7-docker-4c-2g
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+          docker_tag: 'master'
+    jobs:
+      - '{project-name}-{stream}-verify-docker'
+      - '{project-name}-{stream}-merge-docker'
+      - '{project-name}-{stream}-verify-docker-arm':
+          build-node: ubuntu18.04-docker-arm64-4c-2g
+          status-context: '{project-name}-{stream}-Docker-Verify-ARM'
+      - '{project-name}-{stream}-merge-docker-arm':
+          build-node: ubuntu18.04-docker-arm64-4c-2g
+          docker_name: edgex-ci-arm64
+
