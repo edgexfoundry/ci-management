@@ -1,0 +1,18 @@
+---
+- project:
+    name: device-sdk-c
+    project-name: device-sdk-c
+    project: device-sdk-c
+    mvn-settings: device-sdk-c-settings
+    archive-artifacts: ''
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make stage && make verify'
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+      - 'edinburgh':
+          branch: 'edinburgh'            
+    jobs:
+      - '{project-name}-cmake-stage-{stream}'
+      - '{project-name}-cmake-verify-{stream}'
