@@ -1,0 +1,22 @@
+{
+  "Enable": [
+    "gas",
+    "megacheck",
+    "ineffassign",
+    "deadcode",
+    "goconst",
+    "misspell",
+    "unconvert",
+    "vet",
+    "vetshadow",
+    "errcheck",
+    "interfacer",
+    "unparam",
+    "varcheck",
+    "structcheck"
+  ],
+  "Deadline": "120s",
+  "Exclude": [
+    "doc.go"
+  ]
+}
