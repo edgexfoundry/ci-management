@@ -18,3 +18,8 @@
     jobs:
       - '{project-name}-github-cmake-verify'
       - '{project-name}-github-cmake-stage'
+    builders:
+      - shell: 'git clone -b master https://github.com/edgexfoundry/device-sdk-c.git'
+      - shell: 'apk add --update --no-cache build-base wget git gcc cmake make yaml-dev libcurl curl-dev libmicrohttpd-dev'
+      - shell: '$WORKSPACE/device-sdk-c/scripts/build.sh'
+      - shell: 'ls -hal $WORKSPACE/$project-dir/release'  
