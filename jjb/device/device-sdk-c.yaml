@@ -3,7 +3,7 @@
     name: device-sdk-c
     project-name: device-sdk-c
     project: device-sdk-c
-    build-node: ubuntu18.04-docker-arm64-4c-2g
+    build-node: 
     mvn-settings: device-sdk-c-settings
     archive-artifacts: ''
     pre_build_script: ''
