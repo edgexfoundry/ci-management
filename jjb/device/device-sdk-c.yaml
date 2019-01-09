@@ -7,7 +7,8 @@
     mvn-settings: device-sdk-c-settings
     archive-artifacts: ''
     pre_build_script: ''
-    build_script: './scripts/build.sh'
+    build_script: 'make build'
+    build_dir: ' $WORKSPACE/scripts/build.sh'
     cron: 'H 11 * * *'
     stream:
       - 'master':
