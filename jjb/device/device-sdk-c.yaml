@@ -16,6 +16,5 @@
       - 'master':
           branch: 'master'          
     jobs:
-      - 'github-cmake-verify'
-      - 'github-cmake-stage'
-      
+      - '{project-name}-github-cmake-verify'
+      - '{project-name}-github-cmake-stage'
