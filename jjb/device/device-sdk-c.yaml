@@ -1,15 +1,16 @@
 ---
+
 - project:
     name: device-sdk-c
     project-name: device-sdk-c
     project: device-sdk-c
-    build-node: 
+    build-node: ubuntu18.04-docker-arm64-4c-2g
     mvn-settings: device-sdk-c-settings
-    archive-artifacts: ''
+    archive-artifacts: '$WORKSPACE/device-sdk-c/build/release/*.gz'
     pre_build_script: ''
     git_url: '$GIT_URL/$PROJECT'
-    build_script: 'make build'
-    build_dir: '$WORKSPACE/device-sdk-c/scripts/build.sh'
+    build_script: '$WORKSPACE/device-sdk-c/scripts/build.sh'
+    build_dir: '$WORKSPACE/device-sdk-c/scripts/build'
     cron: 'H 11 * * *'
     stream:
       - 'master':
@@ -17,3 +18,4 @@
     jobs:
       - 'github-cmake-verify'
       - 'github-cmake-stage'
+      
