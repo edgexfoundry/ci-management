@@ -5,7 +5,7 @@
     project-name: device-sdk-c
     project: device-sdk-c
     build-node: centos7-builder-2c-1g
-    nexus-group-id: device-sdk-c
+    nexus-group-id: org.edgexfoundry.device-sdk-c
     mvn-settings: device-sdk-c-settings
     archive-artifacts: '$WORKSPACE/device-sdk-c/build/release/*.gz'
     pre_build_script: ''
