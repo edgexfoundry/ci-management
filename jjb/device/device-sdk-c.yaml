@@ -4,7 +4,7 @@
     name: device-sdk-c
     project-name: device-sdk-c
     project: device-sdk-c
-    build-node: ubuntu18.04-docker-arm64-4c-2g
+    build-node: 
     mvn-settings: device-sdk-c-settings
     archive-artifacts: '$WORKSPACE/device-sdk-c/build/release/*.gz'
     pre_build_script: ''
@@ -16,10 +16,5 @@
       - 'master':
           branch: 'master'          
     jobs:
-      - '{project-name}-github-cmake-verify'
-      - '{project-name}-github-cmake-stage'
-    builders:
-      - shell: 'git clone -b master https://github.com/edgexfoundry/device-sdk-c.git'
-      - shell: 'apk add --update --no-cache build-base wget git gcc cmake make yaml-dev libcurl curl-dev libmicrohttpd-dev'
-      - shell: '$WORKSPACE/device-sdk-c/scripts/build.sh'
-      - shell: 'ls -hal $WORKSPACE/$project-dir/release'  
+      - 'github-cmake-verify'
+      - 'github-cmake-stage'
