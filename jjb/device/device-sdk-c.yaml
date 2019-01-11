@@ -1,0 +1,20 @@
+---
+- project:
+    name: device-sdk-c
+    project-name: device-sdk-c
+    project: device-sdk-c
+    build-node: centos7-builder-2c-1g
+    nexus-group-id: device-sdk-c
+    mvn-settings: device-sdk-c-settings
+    archive-artifacts: '$WORKSPACE/device-sdk-c/build/release/*.gz'
+    pre_build_script: ''
+    git_url: '$GIT_URL/$PROJECT'
+    build_script: '$WORKSPACE/device-sdk-c/scripts/build.sh'
+    build_dir: '$WORKSPACE/device-sdk-c/scripts/build'
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'          
+    jobs:
+      - 'github-cmake-verify'
+      - 'github-cmake-stage'
