@@ -21,7 +21,9 @@
           docker_build_args: '-f scripts/Dockerfile.alpine-3.8'
           docker_name: docker-device-grove-c-arm64
           status-context: '{project-name}-{stream}-docker-verify-arm'
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-grove-c-docker-push.sh
       - '{project-name}-{stream}-merge-docker-arm':
           build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_build_args: '-f scripts/Dockerfile.alpine-3.8'
           docker_name: docker-device-grove-c-arm64
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-grove-c-docker-push.sh
