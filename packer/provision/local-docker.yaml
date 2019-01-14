@@ -98,3 +98,21 @@
         state: present
       when: ansible_distribution == 'Ubuntu'
       become: true
+
+    - name: 'Install cmake via yum'
+      yum:
+        name:
+          - cmake
+          - cmake-devel
+        state: present
+      when: ansible_os_family == 'RedHat'
+      become: true
+
+    - name: 'Install cmake via apt'
+      apt:
+        name:
+          - cmake
+          - cmake-dev
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+      become: true
