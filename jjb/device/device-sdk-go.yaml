@@ -5,8 +5,8 @@
     project-name: device-sdk-go
     project: device-sdk-go
     mvn-settings: device-sdk-go-settings
-    pre_build_script: 'make test'
-    build_script: 'make build && make docker'
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make build'
     cron: 'H 11 * * *'
     stream:
       - 'master':
