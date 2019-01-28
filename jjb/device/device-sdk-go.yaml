@@ -16,7 +16,11 @@
 
     jobs:
       - '{project-name}-{stream}-verify-go':
+          pre_build_script: !include-raw-escape: shell/install_device_sdk_go_deps.sh
           status-context: '{project-name}-{stream}-verify'
+          go-root: '/opt/go1.11.2/go'
       - '{project-name}-{stream}-verify-go-arm':
+          pre_build_script: !include-raw-escape: shell/install_device_sdk_go_deps.sh
           status-context: '{project-name}-{stream}-verify-arm'
+          go-root: '/opt/go1.11.2/go'
 
