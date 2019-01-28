@@ -9,8 +9,10 @@
     glide_version: v0.13.1
     golang_version: 1.9.1
     golang110_version: '1.10'
+    golang111_version: '1.11.2'
     golang_url: https://storage.googleapis.com/golang/go{{golang_version}}.linux-amd64.tar.gz
     golang110_url: https://storage.googleapis.com/golang/go{{golang110_version}}.linux-amd64.tar.gz
+    golang111_url: https://storage.googleapis.com/golang/go{{golang111_version}}.linux-amd64.tar.gz
     glide_url: https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-amd64.tar.gz
 
   tasks:
@@ -59,6 +61,20 @@
             remote_src: true
           become: true
 
+    - name: 'Install GoLang 1.11'
+      block:
+        - name: 'Fetch golang {{golang111_version}} to /tmp/go{{golang111_version}}.tar.gz'
+          get_url:
+            url: '{{golang111_url}}'
+            dest: '/tmp/go{{golang111_version}}.tar.gz'
+        - name: 'Install golang {{golang111_version}} to /opt/golang/111/bin/go'
+          unarchive:
+            src: '/tmp/go{{golang111_version}}.tar.gz'
+            dest: '/opt'
+            creates: '/opt/golang/111'
+            remote_src: true
+          become: true       
+
     - name: 'Install Glide {{glide_version}}'
       block:
         - name: 'Fetch Glide {{glide_version}} to /tmp/glide-{{glide_version}}.tar.gz'
@@ -95,6 +111,24 @@
         name:
           - libzmq5
           - libzmq3-dev
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+      become: true
+
+    - name: 'Install cmake via yum'
+      yum:
+        name:
+          - cmake
+          - cmake-devel
+        state: present
+      when: ansible_os_family == 'RedHat'
+      become: true
+
+    - name: 'Install cmake via apt'
+      apt:
+        name:
+          - cmake
+          - cmake-dev
         state: present
       when: ansible_distribution == 'Ubuntu'
       become: true
