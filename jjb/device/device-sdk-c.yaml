@@ -1,20 +1,27 @@
 ---
+
 - project:
     name: device-sdk-c
     project-name: device-sdk-c
     project: device-sdk-c
-    build-node: centos7-builder-2c-1g
-    nexus-group-id: device-sdk-c
     mvn-settings: device-sdk-c-settings
-    archive-artifacts: '$WORKSPACE/device-sdk-c/build/release/*.gz'
-    pre_build_script: ''
-    git_url: '$GIT_URL/$PROJECT'
-    build_script: '$WORKSPACE/device-sdk-c/scripts/build.sh'
-    build_dir: '$WORKSPACE/device-sdk-c/scripts/build'
+    docker_name: docker-device-sdk-c
+    docker_root: ''
+    docker_build_args: '-f scripts/Dockerfile.alpine-3.7'
+    archive-artifacts: '**/release/*.tar.gz'
+    post_build_script: !include-raw-escape: shell/device_sdk_c_build.sh
+    build-node: centos7-docker-4c-2g
     cron: 'H 11 * * *'
     stream:
       - 'master':
-          branch: 'master'          
+          branch: 'master'
+          docker_tag: 'master'
     jobs:
-      - 'github-cmake-verify'
-      - 'github-cmake-stage'
+      - '{project-name}-{stream}-verify-docker'
+      - '{project-name}-{stream}-merge-docker'
+      - '{project-name}-{stream}-verify-docker-arm':
+          build-node: ubuntu18.04-docker-arm64-4c-2g
+          docker_name: docker-device-sdk-c-arm64
+      - '{project-name}-{stream}-merge-docker-arm':
+          build-node: ubuntu18.04-docker-arm64-4c-2g
+          docker_name: docker-device-sdk-c-arm64
