@@ -4,7 +4,12 @@
 set -ex -o pipefail
 
 if [[ -z "$DOCKER_TAG" ]]; then
-    DOCKER_TAG=$( xmlstarlet sel -N "x=http://maven.apache.org/POM/4.0.0" -t -v "/x:project/x:version" pom.xml )
+    # Use pom.xml for legacy Java repos, otherwise use the VERSION file in the root of the repo 
+    if [ ! -f VERSION ]; then
+      DOCKER_TAG=$( xmlstarlet sel -N "x=http://maven.apache.org/POM/4.0.0" -t -v "/x:project/x:version" pom.xml )
+    else
+      DOCKER_TAG=$(cat VERSION)
+    fi
 fi
 
 # Switch to the directory where the Dockerfile is
@@ -14,6 +19,7 @@ cd "$DOCKER_ROOT"
 IMAGE_NAME="$DOCKERREGISTRY/$DOCKER_NAME:$DOCKER_TAG"
 
 
+### Autorelease is for legacy Java repos with maven
 # Determine if there is an autorelease to point to and
 # Build the docker image
 

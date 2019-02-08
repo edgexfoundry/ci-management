@@ -95,8 +95,6 @@
       - github
       - pollscm:
           cron: ''
-      - reverse:
-          jobs: '{project-name}-{stream}-merge-java'
 
 #################
 # JOB TEMPLATES #
@@ -140,10 +138,12 @@
       # Provided all steps have already passed, push the docker image
       - shell: !include-raw: ../shell/docker-push.sh
 
-    # Doesn't make sense to build unless there are new artifacts released
     triggers:
-      - reverse:
-          jobs: '{project-name}-{stream}-merge-java'
+      # no reason to add lf-infra-github-pr-trigger here since it doesn't
+      # currently work for merge / push
+      - github
+      - pollscm:
+          cron: ''
 
 - job-template:
     name: '{project-name}-{stream}-verify-docker'
@@ -239,10 +239,12 @@
       # Provided all steps have already passed, push the docker image
       - shell: !include-raw: ../shell/docker-push.sh
 
-    # Doesn't make sense to build unless there are new artifacts released
     triggers:
-      - reverse:
-          jobs: '{project-name}-maven-stage-{stream}'
+      # no reason to add lf-infra-github-pr-trigger here since it doesn't
+      # currently work for merge / push
+      - github
+      - pollscm:
+          cron: ''
 
 - job-template:
     name: '{project-name}-{stream}-merge-docker-arm'
@@ -283,10 +285,12 @@
       # Provided all steps have already passed, push the docker image
       - shell: !include-raw: ../shell/docker-push.sh
 
-    # Doesn't make sense to build unless there are new artifacts released
     triggers:
-      - reverse:
-          jobs: '{project-name}-{stream}-merge-java'
+      # no reason to add lf-infra-github-pr-trigger here since it doesn't
+      # currently work for merge / push
+      - github
+      - pollscm:
+          cron: ''
 
 - job-template:
     name: '{project-name}-{stream}-verify-docker-arm'
@@ -383,7 +387,9 @@
       # Provided all steps have already passed, push the docker image
       - shell: !include-raw: ../shell/docker-push.sh
 
-    # Doesn't make sense to build unless there are new artifacts released
     triggers:
-      - reverse:
-          jobs: '{project-name}-maven-stage-{stream}'
+      # no reason to add lf-infra-github-pr-trigger here since it doesn't
+      # currently work for merge / push
+      - github
+      - pollscm:
+          cron: ''
