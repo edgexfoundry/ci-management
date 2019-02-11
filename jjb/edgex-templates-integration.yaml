@@ -114,6 +114,11 @@
           - ../shell/integration-test-run.sh
       - edgex-provide-docker-cleanup
 
+    publishers:
+      - allure:
+          results-paths:
+            - path: 'build/allure-results'
+
 - job-template:
     name: 'blackbox-verify-{build-machine}-{stream}'
     node: '{build-node}'
