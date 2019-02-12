@@ -117,7 +117,7 @@
     publishers:
       - allure:
           results-paths:
-            - path: 'build/allure-results'
+            - path: 'bin/testResult'
 
 - job-template:
     name: 'blackbox-verify-{build-machine}-{stream}'
