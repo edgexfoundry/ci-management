@@ -23,4 +23,3 @@
       - '{project-name}-{stream}-merge-docker-arm':
           build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_name: edgex-ci-arm64
-
