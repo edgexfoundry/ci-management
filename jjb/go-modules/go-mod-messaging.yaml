@@ -1,0 +1,17 @@
+---
+
+- project:
+    name: go-mod-messaging
+    project-name: go-mod-messaging
+    project: go-mod-messaging
+    mvn-settings: go-mod-messaging-settings
+    build_script: 'make test'
+    stream:
+      - 'master':
+          branch: 'master'
+
+    jobs:
+    - '{project-name}-{stream}-verify-go':
+          status-context: '{project-name}-{stream}-verify'
+    - '{project-name}-{stream}-verify-go-arm':
+          status-context: '{project-name}-{stream}-verify-arm'
