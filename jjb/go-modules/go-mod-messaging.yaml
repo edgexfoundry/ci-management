@@ -13,5 +13,9 @@
     jobs:
     - '{project-name}-{stream}-verify-go':
           status-context: '{project-name}-{stream}-verify'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          go-root: '/opt/go1.11.2/go'
     - '{project-name}-{stream}-verify-go-arm':
           status-context: '{project-name}-{stream}-verify-arm'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          go-root: '/opt/go1.11.2/go'
