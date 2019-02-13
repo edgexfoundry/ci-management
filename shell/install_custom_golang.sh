@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "--> install_device_sdk_go_deps.sh"
+echo "--> install_custom_golang.sh"
 
 GO_VERSION=${GO_VERSION:-1.11.2}
 GOARCH=${GOARCH:-amd64}
