@@ -14,7 +14,6 @@
     stream:
       - 'master':
           branch: 'master'
-          docker_tag: 'master'
           docker_tag: '0.7.0'
       - 'california':
           branch: 'california'
@@ -25,6 +24,7 @@
     jobs:
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'
+      - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
       - '{project-name}-{stream}-verify-docker-arm':
           build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_build_args: '-f Dockerfile.aarch64'
@@ -33,3 +33,8 @@
           build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_build_args: '-f Dockerfile.aarch64'
           docker_name: docker-edgex-mongo-arm64
+      - '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar':
+          build-node: ubuntu18.04-docker-arm64-4c-2g
+          docker_build_args: '-f Dockerfile.aarch64'
+          docker_name: docker-edgex-mongo-arm64
+
