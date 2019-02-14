@@ -240,11 +240,12 @@
       - shell: !include-raw: ../shell/docker-push.sh
 
     triggers:
-      # no reason to add lf-infra-github-pr-trigger here since it doesn't
-      # currently work for merge / push
+      # daily job except for support-rulesengine
       - github
       - pollscm:
-          cron: ''
+          cron: '0 18 * * *'
+      - reverse:
+          jobs: '{project-name}-maven-stage-{stream}'
 
 - job-template:
     name: '{project-name}-{stream}-merge-docker-arm'
@@ -388,8 +389,9 @@
       - shell: !include-raw: ../shell/docker-push.sh
 
     triggers:
-      # no reason to add lf-infra-github-pr-trigger here since it doesn't
-      # currently work for merge / push
+      # daily job except for support-rulesengine
       - github
       - pollscm:
-          cron: ''
+          cron: '0 18 * * *'
+      - reverse:
+          jobs: '{project-name}-maven-stage-{stream}'
