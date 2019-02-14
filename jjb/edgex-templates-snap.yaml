@@ -368,3 +368,29 @@
       - lf-provide-maven-settings-cleanup
       - edgex-provide-snap-cleanup
       - edgex-provide-docker-cleanup
+- job-template:
+    name: '{project-name}-release-snap'
+
+    # Job template for Snap release job
+    #
+    # The purpose of this job template is to run snapcraft release
+
+    <<: *snap_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *snap_merge_boiler_plate
+
+    parameters:
+      - string:
+          name: SNAP_CHANNEL
+          description: 'Snap channel to release to.'
+      - string:
+          name: SNAP_REVISION
+          description: 'Snap revision to release.'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - shell: '{obj:pre_build_script}'
+      - shell: '{obj:build_script}'
+      - shell: '{obj:post_build_script}'
+      - edgex-provide-snap-cleanup
+      - edgex-provide-docker-cleanup
