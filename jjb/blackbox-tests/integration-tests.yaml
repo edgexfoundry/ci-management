@@ -26,3 +26,7 @@
           build-timeout: 60
       - 'blackbox-verify-{build-machine}-{stream}':
           status-context: '{project-name}-{stream}-{build-machine}-verify'
+      - 'blackbox-testing-security-{build-machine}-{stream}':
+          build-timeout: 60
+      - 'blackbox-verify-security-{build-machine}-{stream}':
+          status-context: '{project-name}-{stream}-{build-machine}-verify'
