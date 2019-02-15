@@ -144,3 +144,68 @@
       - shell: !include-raw-escape:
           - ../shell/integration-test-setup.sh
       - edgex-provide-docker-cleanup
+
+## Security enabled integration jobs
+- job-template:
+    name: 'blackbox-testing-security-{build-machine}-{stream}'
+    node: '{build-node}'
+
+    <<: *integration_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *integration_testing_boiler_plate
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: ''
+          branch: 'refs/heads/{branch}'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-provide-maven-settings:
+          settings-file: '{mvn-settings}'
+          global-settings-file: 'global-settings'
+      - inject:
+          properties-content: |
+            SECURITY_SERVICE_NEEDED=true
+      - shell: !include-raw-escape:
+          - ../shell/integration-test-setup.sh
+          - ../shell/integration-test-run.sh
+      - edgex-provide-docker-cleanup
+
+    publishers:
+      - allure:
+          results-paths:
+            - path: 'bin/testResult'
+
+- job-template:
+    name: 'blackbox-verify-security-{build-machine}-{stream}'
+    node: '{build-node}'
+
+    <<: *integration_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *integration_verify_boiler_plate
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+          branch: '$sha1'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+
+    builders:
+      - lf-jacoco-nojava-workaround
+      - lf-provide-maven-settings:
+          settings-file: '{mvn-settings}'
+          global-settings-file: 'global-settings'
+      - inject:
+          properties-content: |
+            SECURITY_SERVICE_NEEDED=true
+      - shell: !include-raw-escape:
+          - ../shell/integration-test-setup.sh
+      - edgex-provide-docker-cleanup
