@@ -30,3 +30,6 @@
           build-timeout: 60
       - 'blackbox-verify-security-{build-machine}-{stream}':
           status-context: '{project-name}-{stream}-{build-machine}-verify'
+
+    views:
+      - project-view

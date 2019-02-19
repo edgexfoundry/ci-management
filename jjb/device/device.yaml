@@ -1,0 +1,6 @@
+---
+- project:
+    name: device-project-view
+    project-name: device
+    views:
+      - project-view

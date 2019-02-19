@@ -34,7 +34,6 @@
             NEXUS_REPO={nexus-repo}
             DOC_DIRECTORY={doc-directory}
       - shell: !include-raw-escape:
-          - global-jjb/shell/lftools-install.sh
           - shell/edgex-publish-docs.sh
 
 - builder:

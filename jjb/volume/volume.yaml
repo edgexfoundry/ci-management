@@ -1,0 +1,6 @@
+---
+- project:
+    name: volume-project-view
+    project-name: volume
+    views:
+      - project-view

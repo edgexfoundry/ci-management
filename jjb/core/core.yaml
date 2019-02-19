@@ -1,0 +1,6 @@
+---
+- project:
+    name: core-project-view
+    project-name: core
+    views:
+      - project-view
