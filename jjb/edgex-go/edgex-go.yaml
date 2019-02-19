@@ -30,3 +30,6 @@
           post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
       - '{project-name}-{stream}-stage-go-arm':
           post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
+
+    views:
+      - project-view

@@ -55,6 +55,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     triggers:
       - github-pull-request:
@@ -78,6 +79,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     triggers:
       - github
@@ -103,6 +105,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -135,6 +138,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -162,6 +166,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     builders:
       - lf-jacoco-nojava-workaround
@@ -197,6 +202,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     builders:
       - lf-jacoco-nojava-workaround

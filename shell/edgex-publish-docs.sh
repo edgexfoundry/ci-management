@@ -12,5 +12,7 @@ set -ex -o pipefail
 #   <NEXUS_REPO>:     Name of the nexus repo to use
 #   <DOC_DIRECTORY>:  Absolute path of doc build step output directory.
 
+pip install --user lftools
+
 zip -r docs.zip ${DOC_DIRECTORY}
 lftools deploy nexus-zip ${NEXUS_URL} ${NEXUS_REPO} ${NEXUS_PATH} docs.zip

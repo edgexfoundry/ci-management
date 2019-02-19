@@ -1,0 +1,6 @@
+---
+- project:
+    name: mongo-project-view
+    project-name: mongo
+    views:
+      - project-view
