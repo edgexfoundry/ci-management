@@ -64,6 +64,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
 - snap_merge_boiler_plate: &snap_merge_boiler_plate
     name: snap_merge_boiler_plate
@@ -76,6 +77,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
 # Job Templates
 

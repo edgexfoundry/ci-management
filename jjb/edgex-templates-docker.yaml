@@ -64,6 +64,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     triggers:
       - github-pull-request:
@@ -88,6 +89,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     triggers:
       # no reason to add lf-infra-github-pr-trigger here since it doesn't
@@ -207,9 +209,10 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     builders:
-      - lf-infra-docker-login: 
+      - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - lf-provide-maven-settings:
@@ -307,8 +310,8 @@
     <<: *docker_job_boiler_plate
     # yamllint disable-line rule:key-duplicates
     <<: *docker_verify_boiler_plate
-    
-    
+
+
     builders:
       - lf-infra-docker-login:
           global-settings-file: 'global-settings'
@@ -356,9 +359,10 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
 
     builders:
-      - lf-infra-docker-login: 
+      - lf-infra-docker-login:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - lf-provide-maven-settings:
