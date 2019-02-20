@@ -1,5 +1,4 @@
 ---
-
 - project:
     name: device-modbus-go
     project-name: device-modbus-go
@@ -11,6 +10,9 @@
     stream:
       - 'master':
           branch: 'master'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make test && make build docker'
+          go-root: '/opt/go1.11.2/go'
       - 'delhi':
           branch: 'delhi'
 
