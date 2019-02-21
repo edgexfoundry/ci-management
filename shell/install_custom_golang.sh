@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "--> install_custom_golang.sh"
 
-GO_VERSION=${GO_VERSION:-1.11.5}
+GO_VERSION=${GO_VERSION:-1.11}
 GOARCH=${GOARCH:-amd64}
 
 # This is a temporary workaround for Go based services, which will depended on golang 1.11.X
