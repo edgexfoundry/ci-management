@@ -5,22 +5,21 @@
     project-name: device-sdk-go
     project: device-sdk-go
     mvn-settings: device-sdk-go-settings
-    pre_build_script: 'make test'
+    pre_build_script: 'make prepare && make test'
     build_script: 'make build && make docker'
     cron: 'H 11 * * *'
     stream:
       - 'master':
           branch: 'master'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make test && make build docker'
+          go-root: '/opt/go-custom/go'
       - 'delhi':
           branch: 'delhi'
 
     jobs:
       - '{project-name}-{stream}-verify-go':
-          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
           status-context: '{project-name}-{stream}-verify'
-          go-root: '/opt/go1.11.2/go'
       - '{project-name}-{stream}-verify-go-arm':
-          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
           status-context: '{project-name}-{stream}-verify-arm'
-          go-root: '/opt/go1.11.2/go'
 
