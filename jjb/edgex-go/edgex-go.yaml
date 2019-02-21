@@ -11,7 +11,7 @@
           branch: 'master'
           pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
           build_script: 'make test && make build docker'
-          go-root: '/opt/go1.11.2/go'
+          go-root: '/opt/go-custom/go'
       - 'california':
           branch: 'california'
       - 'delhi':
