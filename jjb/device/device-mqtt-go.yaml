@@ -12,7 +12,7 @@
       - 'master':
           branch: 'master'
           pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
-          build_script: 'make build test docker'
+          build_script: 'make test && make build docker'
           go-root: '/opt/go-custom/go'
       - 'delhi':
           branch: 'delhi'
