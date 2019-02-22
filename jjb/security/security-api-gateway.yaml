@@ -6,9 +6,13 @@
     mvn-settings: security-api-gateway-settings
     pre_build_script: 'make prepare && make test'
     build_script: 'make build && make docker'
+    go-root: '/opt/go'
     stream:
       - 'master':
           branch: 'master'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make build && make docker'
+          go-root: '/opt/go-custom/go'
       - 'california':
           branch: 'california'
       - 'delhi':
