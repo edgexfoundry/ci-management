@@ -69,6 +69,8 @@ for bin in "${go_bins[@]}"; do
   cp $bin $bin_dir
 done
 
+lftools sign sigul $bin_dir
+
 set +x
 case $DEPLOY_TYPE in
   'snapshot')

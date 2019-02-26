@@ -65,6 +65,8 @@ bin_dir=edgex-go-$VERSION/
 
 find cmd/ -type f -exec cp {} $bin_dir \;
 
+lftools sign sigul $bin_dir
+
 set +x
 case $DEPLOY_TYPE in
   'snapshot')

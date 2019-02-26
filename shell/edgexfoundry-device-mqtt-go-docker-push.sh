@@ -65,6 +65,8 @@ bin_dir=device-mqtt-go-$VERSION/
 
 find cmd/ -type f -exec cp {} $bin_dir \;
 
+lftools sign sigul $bin_dir
+
 set +x
 case $DEPLOY_TYPE in
   'snapshot')
