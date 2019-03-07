@@ -1,6 +1,7 @@
 #!/bin/bash
 # Ensure we fail the job if any steps fail
 set -ex -o pipefail
+echo "---> edgex-publish-docs.sh"
 
 # Required Parameters
 
@@ -12,6 +13,7 @@ set -ex -o pipefail
 #   <NEXUS_REPO>:     Name of the nexus repo to use
 #   <DOC_DIRECTORY>:  Absolute path of doc build step output directory.
 
+PATH=$PATH:~/.local/bin
 pip install --user lftools
 
 zip -r docs.zip ${DOC_DIRECTORY}
