@@ -1,0 +1,6 @@
+---
+- project:
+    name: app-project-view
+    project-name: app
+    views:
+      - project-view

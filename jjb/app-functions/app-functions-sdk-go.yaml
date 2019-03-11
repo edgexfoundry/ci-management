@@ -1,0 +1,21 @@
+---
+
+- project:
+    name: app-functions-sdk-go
+    project-name: app-functions-sdk-go
+    project: app-functions-sdk-go
+    mvn-settings: app-functions-sdk-go-settings
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make build && make docker'
+    stream:
+      - 'master':
+          branch: 'master'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make test && make build docker'
+          go-root: '/opt/go-custom/go'
+
+    jobs:
+      - '{project-name}-{stream}-verify-go':
+          status-context: '{project-name}-{stream}-verify'
+      - '{project-name}-{stream}-verify-go-arm':
+          status-context: '{project-name}-{stream}-verify-arm'
