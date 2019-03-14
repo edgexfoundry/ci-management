@@ -8,9 +8,6 @@
       - 'master':
           branch: 'master'
           snap-channel: latest/edge
-      - 'california':
-          branch: 'california'
-          snap-channel: california/edge
       - 'delhi':
           branch: 'delhi'
           snap-channel: delhi/edge
