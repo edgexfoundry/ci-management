@@ -172,6 +172,7 @@
       - timed: '@daily'
 
     builders:
+      - lf-infra-pre-build
       - lf-jacoco-nojava-workaround
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
