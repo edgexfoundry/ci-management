@@ -31,11 +31,15 @@
             BUILD_NODE='{build-node}'
 
     parameters:
-      - lf-infra-parameters:
-          project: '{project}'
-          branch: '{branch}'
-          stream: '{branch}'
-          lftools-version: '{lftools-version}'
+      - string:
+          name: sha1
+          default: 'origin/master'
+          description: |
+              GitHub PR Trigger provided parameter for specifying the commit
+              to checkout.
+
+              If using GitHub, in a manual build override with a branch path or
+              sha1 hash to a specific commit. For example: 'origin/master'
 
     wrappers: {}
 
