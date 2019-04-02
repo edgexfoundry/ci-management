@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 # Ensure we fail the job if any steps fail
 set -ex -o pipefail
 echo "---> edgex-publish-docs.sh"
@@ -12,9 +12,6 @@ echo "---> edgex-publish-docs.sh"
 #                     release/branch
 #   <NEXUS_REPO>:     Name of the nexus repo to use
 #   <DOC_DIRECTORY>:  Absolute path of doc build step output directory.
-
-PATH=$PATH:~/.local/bin
-pip install --user lftools
 
 zip -r docs.zip ${DOC_DIRECTORY}
 lftools deploy nexus-zip ${NEXUS_URL} ${NEXUS_REPO} ${NEXUS_PATH} docs.zip

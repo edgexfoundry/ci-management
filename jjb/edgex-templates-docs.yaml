@@ -140,6 +140,7 @@
     build-node: centos7-docker-4c-2g
 
     builders:
+      - lf-infra-pre-build
       - lf-jacoco-nojava-workaround
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
@@ -172,6 +173,7 @@
       - timed: '@daily'
 
     builders:
+      - lf-infra-pre-build
       - lf-jacoco-nojava-workaround
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
