@@ -1,0 +1,148 @@
+---
+# Job definition Anchors
+- performance_job_boiler_plate: &performance_job_boiler_plate
+    name: performance_job-boiler-plate
+
+    project-type: pipeline
+    node1: 'centos7-blackbox-4c-2g'
+    node2: 'centos7-blackbox-4c-2g'
+    node3: 'centos7-blackbox-4c-2g'
+    node4: 'centos7-blackbox-4c-2g'
+    
+    # InfluxDB
+    influxDBHost: stats.edgexfoundry.org
+
+    ######################
+    # Default parameters #
+    ######################
+
+    branch: master
+    submodule-recursive: true
+    pre_build_script: ''
+    build_script: ''
+    post_build_script: ''
+    status-context: ''
+    workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
+    #####################
+    # Job Configuration #
+    #####################
+
+    properties:
+      - lf-infra-properties:
+          project: '{project}'
+          build-days-to-keep: '{build-days-to-keep}'
+
+    parameters:
+      - string:
+          name: PROJECT
+          default: '{project}'
+          description: |
+              Parameter to identify a SCM project to build. This is typically
+              the project repo path. For example: ofextensions/circuitsw
+      - string:
+          name: STREAM
+          default: '{stream}'
+          description: |
+              Stream is often set to the same name as 'branch' but can
+              sometimes be used as a name representing a project's release code
+              name.
+      - string:
+          name: INFLUXDBHOST
+          default: '{influxDBHost}'
+          description: |
+              InfluxDB hostname or ip address, can't be empty
+      - string:
+          name: NODE_EDGEX_1
+          default: '{node1}'
+          description: |
+              EdgeX services run on this node, can't be empty
+      - string:
+          name: NODE_EDGEX_2
+          default: '{node2}'
+          description: |
+              EdgeX services run on this node, can't be empty
+      - string:
+          name: NODE_EDGEX_3
+          default: '{node3}'
+          description: |
+              EdgeX services run on this node, can't be empty
+      - string:
+          name: NODE_JMETER
+          default: '{node4}'
+          description: |
+              Trigger JMeter script, can't be empty
+
+- performance_verify_boiler_plate: &performance_verify_boiler_plate
+    name: performance_verify_boiler_plate
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+          branch: '$sha1'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
+
+- performance_testing_boiler_plate: &performance_testing_boiler_plate
+    name: performance_testing_boiler_plate
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: ''
+          branch: 'refs/heads/{branch}'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
+
+    #triggers:
+    #  - github
+    #  - pollscm:
+    #      cron: ''
+    #  - timed: 'H 12 * * *'
+
+# Job Templates
+
+- job-template:
+    name: 'performance-testing-{stream}'
+    node: '{build-node}'
+
+    <<: *performance_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *performance_testing_boiler_plate
+    
+    pipeline-scm:
+      script-path: '{jenkins_file}'
+      scm:
+        - lf-infra-github-scm:
+            url: '{git-clone-url}{github-org}/{project}'
+            refspec: ''
+            branch: 'refs/heads/{branch}'
+            submodule-recursive: '{submodule-recursive}'
+            choosing-strategy: default
+            jenkins-ssh-credential: '{jenkins-ssh-credential}'
+            submodule-timeout: 10
+
+    
+- job-template:
+    name: 'performance-verify-{stream}'
+    node: '{build-node}'
+
+    <<: *performance_job_boiler_plate
+    # yamllint disable-line rule:key-duplicates
+    <<: *performance_verify_boiler_plate
+
+    pipeline-scm:
+      script-path: '{jenkins_file}'
+      scm:
+        - lf-infra-github-scm:
+            url: '{git-clone-url}{github-org}/{project}'
+            refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+            branch: '$sha1'
+            submodule-recursive: '{submodule-recursive}'
+            choosing-strategy: default
+            jenkins-ssh-credential: '{jenkins-ssh-credential}'
+            submodule-timeout: 10
