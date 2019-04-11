@@ -1,0 +1,10 @@
+---
+- project:
+    name: git-semver
+    project-name: git-semver
+    project: git-semver
+    mvn-settings: git-semver-settings
+    jenkins_file: 'Jenkinsfile'
+    stream: {}
+    jobs:
+      - '{project-name}-merge-pipeline'
