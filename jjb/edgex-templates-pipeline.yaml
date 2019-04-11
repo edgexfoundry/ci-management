@@ -12,7 +12,7 @@
     # Default parameters #
     ######################
 
-    branch: master
+    branch: origin/master
     status-context: ''
     jenkins_file: 'Jenkinsfile'
 
@@ -29,17 +29,18 @@
       - inject:
           properties-content: |
             BUILD_NODE='{build-node}'
+            MVN_SETTINGS={mvn-settings}
 
     parameters:
       - string:
           name: sha1
-          default: 'origin/master'
+          default: '{branch}'
           description: |
               GitHub PR Trigger provided parameter for specifying the commit
               to checkout.
 
               If using GitHub, in a manual build override with a branch path or
-              sha1 hash to a specific commit. For example: 'origin/master'
+              sha1 hash to a specific commit. For example: '{branch}'
 
     wrappers: {}
 
