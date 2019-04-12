@@ -12,7 +12,7 @@
     # Default parameters #
     ######################
 
-    branch: origin/master
+    branch: master
     status-context: ''
     jenkins_file: 'Jenkinsfile'
 
@@ -34,7 +34,7 @@
     parameters:
       - string:
           name: sha1
-          default: '{branch}'
+          default: '*/{branch}'
           description: |
               GitHub PR Trigger provided parameter for specifying the commit
               to checkout.
