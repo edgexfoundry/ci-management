@@ -6,5 +6,6 @@
     mvn-settings: git-semver-settings
     jenkins_file: 'Jenkinsfile'
     stream: {}
+    branch: master
     jobs:
       - '{project-name}-merge-pipeline'
