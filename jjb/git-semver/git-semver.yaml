@@ -9,3 +9,4 @@
     branch: master
     jobs:
       - '{project-name}-merge-pipeline'
+      - '{project-name}-verify-pipeline'
