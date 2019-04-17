@@ -37,3 +37,12 @@
     filter-queue: false
     recurse: false
     regex: '.*docs.*'
+
+- view:
+    name: Ci-Build-Images
+    description: 'List of Jenkins build image jobs'
+    view-type: list
+    filter-executors: false
+    filter-queue: false
+    recurse: false
+    regex: '.*-ci-build-images-.*'
