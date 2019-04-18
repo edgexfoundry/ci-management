@@ -1,0 +1,12 @@
+---
+- project:
+    name: git-semver
+    project-name: git-semver
+    project: git-semver
+    mvn-settings: git-semver-settings
+    jenkins_file: 'Jenkinsfile'
+    stream: {}
+    branch: master
+    jobs:
+      - '{project-name}-merge-pipeline'
+      - '{project-name}-verify-pipeline'
