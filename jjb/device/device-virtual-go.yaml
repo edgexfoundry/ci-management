@@ -1,0 +1,30 @@
+---
+
+- project:
+    name: device-virtual-go
+    project-name: device-virtual-go
+    project: device-virtual-go
+    mvn-settings: device-virtual-go-settings
+    pre_build_script: 'make prepare && make test'
+    build_script: 'make build && make docker'
+    cron: 'H 11 * * *'
+    stream:
+      - 'master':
+          branch: 'master'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make test && make build docker'
+          go-root: '/opt/go-custom/go'
+
+    jobs:
+      - '{project-name}-{stream}-verify-go':
+          status-context: '{project-name}-{stream}-verify'
+      - '{project-name}-{stream}-verify-go-arm':
+          status-context: '{project-name}-{stream}-verify-arm'
+      - '{project-name}-{stream}-merge-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-virtual-go-docker-push.sh
+      - '{project-name}-{stream}-merge-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-virtual-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-virtual-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-virtual-go-docker-push.sh
