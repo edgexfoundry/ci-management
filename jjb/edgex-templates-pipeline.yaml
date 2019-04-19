@@ -48,9 +48,6 @@
 
 - pipeline_verify_boiler_plate: &pipeline_verify_boiler_plate
     name: pipeline_verify_boiler_plate
-
-    concurrent: true
-
     pipeline-scm:
       script-path: '{jenkins_file}'
       scm:
@@ -67,11 +64,12 @@
       - github-pull-request:
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
-          status-context: '{status-context}'
+          status-context: '{project-name}-verify-pipeline'
           permit-all: false
           github-hooks: true
           org-list:
             - '{github-org}'
+          allow-whitelist-orgs-as-admins: true
           auto-close-on-fail: false
           white-list-target-branches:
             - '{branch}'
@@ -79,7 +77,6 @@
 
 - pipeline_merge_boiler_plate: &pipeline_merge_boiler_plate
     name: pipeline_merge_boiler_plate
-
     pipeline-scm:
       script-path: '{jenkins_file}'
       scm:
@@ -87,6 +84,7 @@
             url: '{git-clone-url}{github-org}/{project}'
             refspec: ''
             branch: 'refs/heads/{branch}'
+            local-branch: '{branch}'
             submodule-recursive: '{submodule-recursive}'
             choosing-strategy: default
             jenkins-ssh-credential: '{jenkins-ssh-credential}'
@@ -98,6 +96,7 @@
           cron: ''
       # no reason to add github-pull-request here since it doesn't currently
       # work for merge / push
+
 
 # Job Templates
 
