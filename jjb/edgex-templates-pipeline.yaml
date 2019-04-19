@@ -68,7 +68,7 @@
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
           status-context: '{status-context}'
-          permit-all: true
+          permit-all: false
           github-hooks: true
           org-list:
             - '{github-org}'
