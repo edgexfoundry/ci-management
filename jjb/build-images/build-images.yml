@@ -1,0 +1,18 @@
+---
+- project:
+    name: ci-build-images
+    project-name: ci-build-images
+    project: ci-build-images
+    mvn-settings: ci-build-images-settings
+    branch: master
+    stream:
+      - 'golang':
+          jenkins_file: golang/Jenkinsfile
+      - 'gcc':
+          jenkins_file: gcc/Jenkinsfile
+      - 'kong':
+          jenkins_file: kong/Jenkinsfile
+
+    jobs:
+      - '{project-name}-{stream}-verify-pipeline'
+      - '{project-name}-{stream}-merge-pipeline'
