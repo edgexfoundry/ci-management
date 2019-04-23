@@ -4,7 +4,6 @@
     project-name: edgex-go
     project: edgex-go
     mvn-settings: edgex-go-settings
-    pre_build_script: 'make prepare && make test'
     build_script: 'make build && make docker'
     stream:
       - 'master':
@@ -14,8 +13,10 @@
           go-root: '/opt/go-custom/go'
       - 'california':
           branch: 'california'
+          pre_build_script: 'make prepare && make test'
       - 'delhi':
           branch: 'delhi'
+          pre_build_script: 'make prepare && make test'
 
     jobs:
       - '{project-name}-{stream}-verify-go':
