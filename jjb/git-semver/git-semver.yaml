@@ -10,3 +10,5 @@
     jobs:
       - '{project-name}-merge-pipeline'
       - '{project-name}-verify-pipeline'
+    views:
+      - project-view
