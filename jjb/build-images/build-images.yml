@@ -5,6 +5,7 @@
     project: ci-build-images
     mvn-settings: ci-build-images-settings
     branch: master
+    status-context: '{project-name}-{stream}-verify-pipeline'
     stream:
       - 'golang':
           jenkins_file: golang/Jenkinsfile

@@ -64,7 +64,7 @@
       - github-pull-request:
           trigger-phrase: '^recheck$'
           only-trigger-phrase: false
-          status-context: '{project-name}-verify-pipeline'
+          status-context: '{status-context}'
           permit-all: false
           github-hooks: true
           org-list:
