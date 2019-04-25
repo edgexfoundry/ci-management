@@ -13,6 +13,8 @@
           jenkins_file: gcc/Jenkinsfile
       - 'kong':
           jenkins_file: kong/Jenkinsfile
+      - 'lftools':
+          jenkins_file: lftools/Jenkinsfile
 
     jobs:
       - '{project-name}-{stream}-verify-pipeline'
