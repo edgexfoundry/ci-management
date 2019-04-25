@@ -93,7 +93,7 @@
 
     # Job template for Java verify jobs
     #
-    # The purpose of this job templte is to run "maven clean install" for
+    # The purpose of this job template is to run "maven clean install" for
     # projects using this template.
     #
     # Required Variables:
@@ -165,7 +165,7 @@
 
     # Job template for Java verify jobs for Code Generation (Device SDK Tools)
     #
-    # The purpose of this job templte is to run "maven clean install" for
+    # The purpose of this job template is to run "maven clean install" for
     # projects using this template.
     #
     # Required Variables:
