@@ -30,7 +30,7 @@
           properties-content: |
             BUILD_NODE='{build-node}'
             MVN_SETTINGS={mvn-settings}
-            GIT_BRANCH={branch}
+            SEMVER_BRANCH={branch}
 
     parameters:
       - string:
