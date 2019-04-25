@@ -21,7 +21,7 @@
          build-node: centos7-docker-4c-2g
      - '{project-name}-{stream}-verify-snap-arm':
          build-node: ubuntu18.04-docker-arm64-4c-2g
-         status-context: '{project-name}-snap-{stream}-verify-arm'
+         status-context: '{project-name}-{stream}-verify-arm'
      - '{project-name}-{stream}-verify-snap':
          build-node: centos7-docker-4c-2g
          status-context: '{project-name}-{stream}-verify'
