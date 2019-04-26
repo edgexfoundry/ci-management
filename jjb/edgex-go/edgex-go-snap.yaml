@@ -10,6 +10,7 @@
           snap-channel: latest/edge
       - 'delhi':
           branch: 'delhi'
+          build_script: 'cd snap && ./build.sh'
           snap-channel: delhi/edge
 
     jobs:
