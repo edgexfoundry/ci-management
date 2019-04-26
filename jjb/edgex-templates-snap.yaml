@@ -13,7 +13,7 @@
     branch: master
     submodule-recursive: true
     pre_build_script: ''
-    build_script: 'cd snap/ && ./build.sh'
+    build_script: !include-raw-escape: shell/edgexfoundry-snapcraft.sh
     post_build_script: ''
     status-context: ''
     snap-channel: ''
