@@ -97,6 +97,71 @@
       # no reason to add github-pull-request here since it doesn't currently
       # work for merge / push
 
+- pipeline_webhooks_boiler_plate: &pipeline_webhooks_boiler_plate
+    # Freestyle job to have jenkins create and maintain the github push 
+    # webhook. Currently the github jenkins plugin cannot create the push 
+    # webhook using the pipeline scm section of the job.
+    # This job is meant to be a no op.
+
+    name: pipeline_webhooks_boiler_plate
+
+    project-type: freestyle
+    node: '{build-node}'
+
+    ######################
+    # Default parameters #
+    ######################
+
+    branch: master
+    submodule-recursive: true
+    status-context: ''
+
+    #####################
+    # Job Configuration #
+    #####################
+
+    properties:
+      - lf-infra-properties:
+          project: '{project}'
+          build-days-to-keep: '{build-days-to-keep}'
+      - github:
+          url: '{git-url}/{github-org}/{project}'
+
+    parameters:
+      - lf-infra-parameters:
+          project: '{project}'
+          branch: '{branch}'
+          stream: ''
+          lftools-version: '{lftools-version}'
+
+    scm:
+      - lf-infra-github-scm:
+          url: '{git-clone-url}{github-org}/{project}'
+          refspec: ''
+          branch: 'refs/heads/{branch}'
+          submodule-recursive: '{submodule-recursive}'
+          choosing-strategy: default
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-timeout: 10
+
+    wrappers:
+      - lf-infra-wrappers:
+          build-timeout: '{build-timeout}'
+          jenkins-ssh-credential: '{jenkins-ssh-credential}'
+      - config-file-provider:
+          files:
+            - file-id: netrc
+              target: '$HOME/.netrc'
+
+    publishers:
+      - lf-infra-publish
+
+    triggers:
+      - github
+      - pollscm:
+          cron: ''
+      # no reason to add github-pull-request here since it doesn't currently
+      # work for merge / push
 
 # Job Templates
 
@@ -143,3 +208,16 @@
     <<: *pipeline_merge_boiler_plate
 
     build-node: centos7-docker-4c-2g
+
+- job-template:
+    name: '{project-name}-pipeline-webhooks'
+
+    <<: *pipeline_webhooks_boiler_plate
+
+    build-node: centos7-docker-4c-2g
+
+    builders:
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'
+      - shell: 'ls'
