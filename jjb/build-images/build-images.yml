@@ -19,3 +19,5 @@
     jobs:
       - '{project-name}-{stream}-verify-pipeline'
       - '{project-name}-{stream}-merge-pipeline'
+      - '{project-name}-pipeline-webhooks':
+        status-context: '{project-name}-pipeline-webhooks'
