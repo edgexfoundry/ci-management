@@ -136,10 +136,14 @@ RUN apt-get update && \
     apt-get dist-upgrade --yes && \
     apt-get install --yes \
     curl sudo jq squashfs-tools && \
-    curl -s -L $(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" 'https://api.snapcraft.io/api/v1/snaps/details/core' | jq '.download_url' -r) --output core.snap && \
-    mkdir -p /snap/core && unsquashfs -n -d /snap/core/current core.snap && rm core.snap && \
-    curl -s -L $(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" 'https://api.snapcraft.io/api/v1/snaps/details/snapcraft' | jq '.download_url' -r) --output snapcraft.snap && \
-    mkdir -p /snap/snapcraft && unsquashfs -n -d /snap/snapcraft/current snapcraft.snap && rm snapcraft.snap && \
+    for thesnap in core core18 snapcraft; do \
+        dlUrl=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_url' -r); \
+        dlSHA=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_sha512' -r); \
+        curl -s -L $dlUrl --output $thesnap.snap; \
+        echo "$dlSHA $thesnap.snap" > $thesnap.snap.sha512; \
+        sha512sum -c $thesnap.snap.sha512; \
+        mkdir -p /snap/$thesnap && unsquashfs -n -d /snap/$thesnap/current $thesnap.snap && rm $thesnap.snap; \
+    done && \
     apt remove --yes --purge curl jq squashfs-tools && \
     apt-get autoclean --yes && \
     apt-get clean --yes
