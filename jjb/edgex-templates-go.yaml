@@ -106,7 +106,7 @@
 
     # Job template for Golang verify jobs
     #
-    # The purpose of this job templte is to run "go build" for
+    # The purpose of this job template is to run "go build" for
     # projects using this template.
     #
     # Required Variables:
@@ -178,7 +178,7 @@
 
     # Job template for Golang verify jobs
     #
-    # The purpose of this job templte is to run "go build" for
+    # The purpose of this job template is to run "go build" for
     # projects using this template.
     #
     # Required Variables:
