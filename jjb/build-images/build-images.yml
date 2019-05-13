@@ -13,6 +13,8 @@
           jenkins_file: gcc/Jenkinsfile
       - 'kong':
           jenkins_file: kong/Jenkinsfile
+      - 'kong-arm-parent':
+          jenkins_file: kong-arm-parent/Jenkinsfile
       - 'lftools':
           jenkins_file: lftools/Jenkinsfile
 
