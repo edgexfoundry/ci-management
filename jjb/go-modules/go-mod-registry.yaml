@@ -5,15 +5,12 @@
     project-name: go-mod-registry
     project: go-mod-registry
     mvn-settings: go-mod-registry-settings
-    build_script: 'make test'
-    stream:
-      - 'master':
-          branch: 'master'
-          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
-          go-root: '/opt/go-custom/go'
+    jenkins_file: 'Jenkinsfile'
+    status-context: '{project-name}-verify-pipeline'
+    stream: {}
 
     jobs:
-    - '{project-name}-{stream}-verify-go':
-          status-context: '{project-name}-{stream}-verify'
-    - '{project-name}-{stream}-verify-go-arm':
-          status-context: '{project-name}-{stream}-verify-arm'
+      - '{project-name}-verify-pipeline'
+      - '{project-name}-merge-pipeline'
+      - '{project-name}-pipeline-webhooks':
+        status-context: '{project-name}-pipeline-webhooks'
