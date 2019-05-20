@@ -1,0 +1,22 @@
+---
+
+- project:
+    name: performance-test
+    project-name: performance-test
+    project: performance-test
+    archive-artifacts: ''
+    mvn-settings: performance-test-settings
+    build-timeout: 30
+    jenkins_file: 'Jenkinsfile'
+    stream:
+      - 'master':
+          branch: 'master'
+
+    jobs:
+      - 'performance-test-{stream}':
+          build-timeout: 60
+      - 'performance-verify-{stream}':
+          status-context: '{project-name}-{stream}-verify'
+
+    views:
+      - project-view
