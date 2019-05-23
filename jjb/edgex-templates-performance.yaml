@@ -97,8 +97,10 @@
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
           submodule-timeout: 10
+          
+    triggers:
+      - timed: 'H 4 * * 6'
 
-# Job Templates
 
 - job-template:
     name: 'performance-test-{stream}'
