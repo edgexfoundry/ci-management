@@ -8,6 +8,9 @@
       - 'master':
           branch: 'master'
           snap-channel: latest/edge
+      - 'edinburgh':
+          branch: 'edinburgh'
+          snap-channel: edinburgh/edge
 
     jobs:
      - '{project-name}-{stream}-stage-snap-arm':
