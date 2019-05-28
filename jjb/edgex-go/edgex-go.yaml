@@ -11,12 +11,14 @@
           pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
           build_script: 'make test && make build docker'
           go-root: '/opt/go-custom/go'
-      - 'california':
-          branch: 'california'
-          pre_build_script: 'make prepare && make test'
       - 'delhi':
           branch: 'delhi'
           pre_build_script: 'make prepare && make test'
+      - 'edinburgh':
+          branch: 'edinburgh'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make test && make build docker'
+          go-root: '/opt/go-custom/go'
 
     jobs:
       - '{project-name}-{stream}-verify-go':
