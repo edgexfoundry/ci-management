@@ -16,10 +16,10 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'california':
-          branch: 'california'
       - 'delhi':
           branch: 'delhi'
+      - 'edinburgh':
+          branch: 'edinburgh'
 
     jobs:
       - '{project-name}-{stream}-verify-docker'
