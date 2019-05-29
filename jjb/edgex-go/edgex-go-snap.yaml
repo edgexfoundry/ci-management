@@ -12,6 +12,9 @@
           branch: 'delhi'
           build_script: 'cd snap && ./build.sh'
           snap-channel: delhi/edge
+      - 'edinburgh':
+          branch: 'edinburgh'
+          snap-channel: edinburgh/edge
 
     jobs:
      - '{project-name}-{stream}-stage-snap-arm':
