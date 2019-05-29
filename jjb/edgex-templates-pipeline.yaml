@@ -106,6 +106,7 @@
     name: pipeline_webhooks_boiler_plate
 
     project-type: freestyle
+    description: 'This job is managed by Jenkins job builder. The webhooks job exists to make Jenkins create a webhook for {project-name}-merge-pipeline. The job {project-name}-merge-pipeline will need to be ran manually once to register the webhook.'
     node: '{build-node}'
 
     ######################
