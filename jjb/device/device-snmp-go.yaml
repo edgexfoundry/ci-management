@@ -1,0 +1,16 @@
+---
+
+- project:
+    name: device-snmp-go
+    project-name: device-snmp-go
+    project: device-snmp-go
+    mvn-settings: device-snmp-go-settings
+    jenkins_file: 'Jenkinsfile'
+    status-context: '{project-name}-verify-pipeline'
+    stream: {}
+
+    jobs:
+      - '{project-name}-verify-pipeline'
+      - '{project-name}-merge-pipeline'
+      - '{project-name}-pipeline-webhooks':
+        status-context: '{project-name}-pipeline-webhooks'
