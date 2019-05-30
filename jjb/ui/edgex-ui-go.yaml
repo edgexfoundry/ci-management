@@ -14,6 +14,8 @@
           go-root: '/opt/go-custom/go'
       - 'delhi':
           branch: 'delhi'
+      - 'edinburgh': 
+          branch: 'edinburgh'    
     jobs:
       - '{project-name}-{stream}-verify-go':
           status-context: '{project-name}-{stream}-verify'
