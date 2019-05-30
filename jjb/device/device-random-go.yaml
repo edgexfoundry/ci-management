@@ -16,6 +16,11 @@
           go-root: '/opt/go-custom/go'
       - 'delhi':
           branch: 'delhi'
+      - 'edinburgh':
+          branch: 'edinburgh'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make test && make build docker'
+          go-root: '/opt/go-custom/go'
 
     jobs:
       - '{project-name}-{stream}-verify-go':
