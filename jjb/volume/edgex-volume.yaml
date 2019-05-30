@@ -14,12 +14,12 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'california':
-          branch: 'california'
-          docker_tag: '0.6.0'
       - 'delhi':
           branch: 'delhi'
           docker_tag: '0.8.0'
+      - 'edinburgh':
+          branch: 'edinburgh'
+          docker_tag: '1.0.0'
 
     jobs:
       - '{project-name}-{stream}-verify-docker'
