@@ -75,10 +75,9 @@ case "$JOB_TYPE" in
         popd > /dev/null
         pushd /build > /dev/null
         snapcraft login --with /build/edgex-snap-store-login
-        # Push the snap up to the store and get the revision of the snap
-        REVISION=$(snapcraft push "$SNAP_NAME"*.snap | grep -Po 'Revision \K[0-9]+')
-        # Now release it on the provided revision and snap channel
-        snapcraft release "$SNAP_NAME" "$REVISION" "$SNAP_CHANNEL" 
+        # Push the snap up to the store and release it on the specified
+        # channel
+        snapcraft push "$SNAP_NAME"*.snap --release "$SNAP_CHANNEL" 
         # Also force an update of the meta-data
         snapcraft push-metadata "$SNAP_NAME"*.snap --force
         popd > /dev/null
