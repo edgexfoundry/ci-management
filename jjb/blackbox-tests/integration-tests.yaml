@@ -10,11 +10,10 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'california':
-          branch: 'california'
       - 'delhi':
           branch: 'delhi'
-
+      - 'edinburgh':
+          branch: 'edinburgh'
     build-machine:
       - 'ubuntu18.04-docker-arm64-4c-2g':
           build-node: 'ubuntu18.04-docker-arm64-4c-2g'
