@@ -1,0 +1,19 @@
+---
+- project:
+    name: edgex-ui-clojure
+    project-name: edgex-ui-clojure
+    project: edgex-ui-clojure
+    mvn-settings: edgex-ui-clojure-settings
+    jenkins_file: 'Jenkinsfile'
+    status-context: '{project-name}-{stream}-verify-pipeline'
+    stream:
+      - 'master':
+          branch: master
+      - 'edinburgh':
+          branch: edinburgh
+
+    jobs:
+      - '{project-name}-{stream}-verify-pipeline'
+      - '{project-name}-{stream}-merge-pipeline'
+      - '{project-name}-pipeline-webhooks':
+        status-context: '{project-name}-pipeline-webhooks'
