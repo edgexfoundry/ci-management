@@ -164,6 +164,10 @@
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
+      - config-file-provider:
+          files:
+            - file-id: '{project-name}-codecov-token'
+              variable: CODECOV_TOKEN
       - inject:
           properties-content: |
             GOROOT={go-root}
@@ -244,6 +248,10 @@
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
+      - config-file-provider:
+          files:
+            - file-id: '{project-name}-codecov-token'
+              variable: CODECOV_TOKEN
       - inject:
           properties-content: |
             GOROOT={go-root}
