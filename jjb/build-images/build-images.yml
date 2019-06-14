@@ -17,6 +17,8 @@
           jenkins_file: kong-arm-parent/Jenkinsfile
       - 'lftools':
           jenkins_file: lftools/Jenkinsfile
+      - 'klar':
+          jenkins_file: klar/Jenkinsfile
 
     jobs:
       - '{project-name}-{stream}-verify-pipeline'
