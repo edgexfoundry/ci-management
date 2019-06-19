@@ -41,6 +41,16 @@
     builders:
       - shell: !include-raw: ../shell/cleanup-snap.sh
 
+- builder:
+    name: edgex-codecov
+    builders:
+      - config-file-provider:
+          files:
+            - file-id: '{token-file}'
+              variable: 'CODECOV_TOKEN'
+      - shell: !include-raw-escape:
+          - shell/codecov-uploader.sh
+
 - wrapper:
     # This macro requires that there be a managed file of type
     # "Custom file" with the contents of the output of "snapcraft export-login EdgeX"
