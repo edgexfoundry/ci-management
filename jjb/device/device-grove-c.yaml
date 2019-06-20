@@ -7,7 +7,7 @@
     mvn-settings: device-grove-c-settings
     docker_name: docker-device-grove-c-arm
     docker_root: ''
-    docker_build_args: '-f scripts/Dockerfile.alpine-3.8'
+    docker_build_args: '-f scripts/Dockerfile.alpine-3.9'
     archive-artifacts: ''
     artifact-version: '0.1.0-SNAPSHOT'
     build-node: centos7-docker-4c-2g
@@ -18,15 +18,15 @@
           docker_tag: 'master'
       - 'edinburgh':
           branch: 'edinburgh'
-          docker_tag: '1.0.0'
+          docker_tag: '1.0.1'
 
     jobs:
       - '{project-name}-{stream}-verify-docker-arm':
           build-node: ubuntu18.04-docker-arm64-4c-2g
-          docker_build_args: '-f scripts/Dockerfile.alpine-3.8'
+          docker_build_args: '-f scripts/Dockerfile.alpine-3.9'
           docker_name: docker-device-grove-c-arm64
           status-context: '{project-name}-{stream}-docker-verify-arm'
       - '{project-name}-{stream}-merge-docker-arm':
           build-node: ubuntu18.04-docker-arm64-4c-2g
-          docker_build_args: '-f scripts/Dockerfile.alpine-3.8'
+          docker_build_args: '-f scripts/Dockerfile.alpine-3.9'
           docker_name: docker-device-grove-c-arm64
