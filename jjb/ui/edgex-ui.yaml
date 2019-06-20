@@ -1,0 +1,6 @@
+---
+- project:
+    name: edgex-ui-project-view
+    project-name: edgex-ui
+    views:
+      - project-view
