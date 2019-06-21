@@ -63,4 +63,4 @@
     filter-executors: false
     filter-queue: false
     recurse: false
-    regex: '*edinburgh-stage*'
+    regex: '.*edinburgh-stage.*'
