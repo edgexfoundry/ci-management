@@ -9,6 +9,8 @@
     stream:
       - 'golang':
           jenkins_file: golang/Jenkinsfile
+      - 'golang-1.12':
+          jenkins_file: golang-1.12/Jenkinsfile
       - 'gcc':
           jenkins_file: gcc/Jenkinsfile
       - 'kong':
