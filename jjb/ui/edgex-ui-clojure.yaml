@@ -3,7 +3,7 @@
     name: edgex-ui-clojure
     project-name: edgex-ui-clojure
     project: edgex-ui-clojure
-    mvn-settings: edgex-ui-go-settings
+    mvn-settings: edgex-ui-clojure-settings
     jenkins_file: 'Jenkinsfile'
     status-context: '{project-name}-{stream}-verify-pipeline'
     stream:
