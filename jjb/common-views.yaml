@@ -55,3 +55,12 @@
     filter-queue: false
     recurse: false
     regex: '.*pipeline.*'
+
+- view:
+    name: Edinburgh-Staging
+    description: 'List of edinburgh staging jobs'
+    view-type: list
+    filter-executors: false
+    filter-queue: false
+    recurse: false
+    regex: '*edinburgh-stage*'
