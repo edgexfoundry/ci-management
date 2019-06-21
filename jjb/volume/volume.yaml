@@ -1,6 +1,6 @@
 ---
 - project:
     name: volume-project-view
-    project-name: volume
+    project-name: edgex-volume
     views:
       - project-view
