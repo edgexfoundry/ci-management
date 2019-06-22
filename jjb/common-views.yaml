@@ -64,3 +64,12 @@
     filter-queue: false
     recurse: false
     regex: '.*edinburgh-stage.*'
+
+- view:
+    name: edgex-volume
+    description: 'List of edgex-volume jobs'
+    view-type: list
+    filter-executors: false
+    filter-queue: false
+    recurse: false
+    regex: 'edgex-volume-.*'
