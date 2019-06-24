@@ -63,7 +63,7 @@ done
 mkdir -p edgex-ui-go-$VERSION
 bin_dir=edgex-ui-go-$VERSION/
 
-go_bins=(cmd/edgex-ui-go/edgex-ui-go)
+go_bins=(cmd/edgex-ui-server/edgex-ui-server)
 
 for bin in "${go_bins[@]}"; do
   cp $bin $bin_dir
