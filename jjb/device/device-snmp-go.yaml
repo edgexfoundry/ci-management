@@ -18,3 +18,7 @@
       - '{project-name}-{stream}-merge-pipeline'
       - '{project-name}-pipeline-webhooks':
         status-context: '{project-name}-pipeline-webhooks'
+      - '{project-name}-{stream}-stage-go':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-snmp-go-docker-push.sh
+      - '{project-name}-{stream}-stage-go-arm':
+          post_build_script: !include-raw-escape: shell/edgexfoundry-device-snmp-go-docker-push.sh
