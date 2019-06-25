@@ -30,3 +30,7 @@
           build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_build_args: '-f scripts/Dockerfile.alpine-3.9'
           docker_name: docker-device-grove-c-arm64
+      - '{project-name}-{stream}-stage-docker-arm':
+          build-node: ubuntu18.04-docker-arm64-4c-2g
+          docker_build_args: '-f scripts/Dockerfile.alpine-3.9'
+          docker_name: docker-device-grove-c-arm64
