@@ -1,6 +1,8 @@
 ---
 - project:
-    name: volume-project-view
-    project-name: volume
+    name: edgex-volume
+    project-name: edgex-volume
+    view-name: edgex-volume
+    view-regex: '.*-volume-.*'
     views:
-      - project-view
+      - common-view
