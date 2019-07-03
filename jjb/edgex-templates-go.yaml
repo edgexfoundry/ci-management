@@ -126,10 +126,6 @@
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - config-file-provider:
-          files:
-            - file-id: '{project-name}-codecov-token'
-              variable: CODECOV_TOKEN
       - inject:
           properties-content: |
             GOROOT={go-root}
@@ -137,6 +133,8 @@
             GOPATH=$HOME/$BUILD_ID/gopath
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - edgex-codecov:
+          token-file: '{project-name}-codecov-token'
       - shell: '{obj:post_build_script}'
 
 - job-template:
@@ -164,10 +162,6 @@
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - config-file-provider:
-          files:
-            - file-id: '{project-name}-codecov-token'
-              variable: CODECOV_TOKEN
       - inject:
           properties-content: |
             GOROOT={go-root}
@@ -178,6 +172,8 @@
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
           server-id: nexus3.edgexfoundry.org
+      - edgex-codecov:
+          token-file: '{project-name}-codecov-token'
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
 
@@ -206,10 +202,6 @@
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - config-file-provider:
-          files:
-            - file-id: '{project-name}-codecov-token'
-              variable: CODECOV_TOKEN
       - inject:
           properties-content: |
             GOROOT={go-root}
@@ -220,6 +212,8 @@
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
+      - edgex-codecov:
+          token-file: '{project-name}-codecov-token'
       - shell: '{obj:post_build_script}'
       - edgex-provide-docker-cleanup
 
@@ -248,10 +242,6 @@
       - lf-provide-maven-settings:
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
-      - config-file-provider:
-          files:
-            - file-id: '{project-name}-codecov-token'
-              variable: CODECOV_TOKEN
       - inject:
           properties-content: |
             GOROOT={go-root}
@@ -265,6 +255,8 @@
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
           server-id: nexus3.edgexfoundry.org
+      - edgex-codecov:
+          token-file: '{project-name}-codecov-token'
       - shell: '{obj:post_build_script}'
       - lf-provide-maven-settings-cleanup
       - edgex-provide-docker-cleanup
