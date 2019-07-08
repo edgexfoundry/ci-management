@@ -13,7 +13,7 @@
     branch: master
     submodule-recursive: true
     pre_build_script: ''
-    build_script: 'cd docs/ && ./build.sh'
+    build_script: './build.sh'
     post_build_script: ''
     status-context: ''
     nexus-repo: docs
@@ -150,7 +150,7 @@
       - edgex-publish-docs:
           nexus-path: 'snapshots/$GERRIT_BRANCH/$BUILD_ID'
           nexus-repo: '{nexus-repo}'
-          doc-directory: 'docs/_build/'
+          doc-directory: '_build/'
 
 - job-template:
     name: '{project-name}-{stream}-stage-docs'
@@ -183,7 +183,7 @@
       - edgex-publish-docs:
           nexus-path: 'staging/$GERRIT_BRANCH'
           nexus-repo: '{nexus-repo}'
-          doc-directory: 'docs/_build/'
+          doc-directory: '_build/'
 
 - job-template:
     name: '{project-name}-{stream}-release-docs'
@@ -212,4 +212,4 @@
       - edgex-publish-docs:
           nexus-path: 'release/$GERRIT_BRANCH'
           nexus-repo: '{nexus-repo}'
-          doc-directory: 'docs/_build/'
+          doc-directory: '_build/'

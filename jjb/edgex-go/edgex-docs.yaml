@@ -1,14 +1,13 @@
 ---
 - project:
-    name: edgex-go-docs
-    project-name: edgex-go-docs
-    project: edgex-go
+    name: edgex-docs
+    project-name: edgex-docs
+    project: edgex-docs
     mvn-settings: edgex-go-settings
+    build_script: './build.sh {stream}'
     stream:
       - 'master':
           branch: 'master'
-      - 'delhi':
-          branch: 'delhi'
       - 'edinburgh':
           branch: 'edinburgh'
 
