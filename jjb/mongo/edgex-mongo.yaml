@@ -19,7 +19,7 @@
           docker_tag: '0.8.0'
       - 'edinburgh':
           branch: 'edinburgh'
-          docker_tag: '1.0.0'
+          docker_tag: '1.0.1'
     jobs:
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'
