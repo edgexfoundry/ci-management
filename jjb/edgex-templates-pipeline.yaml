@@ -155,7 +155,7 @@
               target: '$HOME/.netrc'
 
     publishers:
-      - lf-infra-publish
+      - edgex-infra-publish
 
     triggers:
       - github

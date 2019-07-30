@@ -48,7 +48,7 @@
       - edgex-snap-wrapper
 
     publishers:
-      - lf-infra-publish
+      - edgex-infra-publish
       - edgex-jenkins-alerts
 
 - snap_verify_boiler_plate: &snap_verify_boiler_plate
