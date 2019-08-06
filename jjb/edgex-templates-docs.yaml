@@ -46,7 +46,7 @@
               target: '$HOME/.netrc'
 
     publishers:
-      - lf-infra-publish
+      - edgex-infra-publish
       - edgex-jenkins-alerts
 
 - docs_verify_boiler_plate: &docs_verify_boiler_plate

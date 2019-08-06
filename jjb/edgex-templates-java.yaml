@@ -37,7 +37,7 @@
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
 
     publishers:
-      - lf-infra-publish
+      - edgex-infra-publish
 
 - verify_boiler_plate: &verify_boiler_plate
     name: verify_boiler_plate

@@ -8,6 +8,48 @@
           notify-every-unstable-build: true
           send-to-individuals: false
 
+- publisher:
+    name: edgex-infra-publish
+    # macro to finish up a build - copy of lfit lf-infra-publish macro but using
+    # edgex-infra-ship-logs builder to ship logs to nexus via python3-based docker image
+    #
+    # Handles the following:
+    #   - Shipping logs to Nexus logs site repository
+    #   - Cleanup workspace
+    publishers:
+      - postbuildscript:
+          builders:
+            - role: BOTH
+              build-on:
+                - ABORTED
+                - FAILURE
+                - NOT_BUILT
+                - SUCCESS
+                - UNSTABLE
+              build-steps:
+                - lf-infra-sysstat
+                - lf-infra-package-listing
+                - edgex-infra-ship-logs
+          mark-unstable-if-failed: true
+      - workspace-cleanup:
+          exclude:
+            # Do not clean up *.jenkins-trigger files for jobs that use a
+            # properties file as input for triggering another build.
+            - '**/*.jenkins-trigger'
+          fail-build: false
+
+- builder:
+    name: edgex-infra-ship-logs
+    builders:
+      - config-file-provider:
+          files:
+            - file-id: 'jenkins-log-archives-settings'
+              variable: 'SETTINGS_FILE'
+      - shell: !include-raw:
+          - ../shell/edgex-infra-ship-logs.sh
+      - description-setter:
+          regexp: '^Build logs: .*'
+
 - builder:
     name: edgex-provide-docker-cleanup
     builders:

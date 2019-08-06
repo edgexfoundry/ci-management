@@ -49,7 +49,7 @@
               target: '$HOME/.netrc'
 
     publishers:
-      - lf-infra-publish
+      - edgex-infra-publish
       - edgex-jenkins-alerts
 
 - go_verify_boiler_plate: &go_verify_boiler_plate

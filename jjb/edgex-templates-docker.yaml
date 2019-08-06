@@ -49,7 +49,7 @@
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
 
     publishers:
-      - lf-infra-publish
+      - edgex-infra-publish
 
 - docker_verify_boiler_plate: &docker_verify_boiler_plate
     name: docker_verify_boiler_plate
