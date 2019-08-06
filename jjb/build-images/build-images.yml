@@ -21,6 +21,10 @@
           jenkins_file: lftools/Jenkinsfile
       - 'klar':
           jenkins_file: klar/Jenkinsfile
+      - 'edgex-docs':
+          jenkins_file: edgex-docs/Jenkinsfile
+      - 'jq':
+          jenkins_file: jq/Jenkinsfile
 
     jobs:
       - '{project-name}-{stream}-verify-pipeline'
