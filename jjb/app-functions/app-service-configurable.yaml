@@ -7,7 +7,6 @@
     mvn-settings: app-service-configurable-settings
     pre_build_script: 'make test'
     build_script: 'make build && make docker'
-    cron: 'H 11 * * *'
     stream:
         - 'master':
               branch: 'master'
