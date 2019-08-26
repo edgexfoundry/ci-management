@@ -25,6 +25,8 @@
           jenkins_file: edgex-docs/Jenkinsfile
       - 'jq':
           jenkins_file: jq/Jenkinsfile
+      - 'snyk':
+          jenkins_file: snyk/Jenkinsfile
 
     jobs:
       - '{project-name}-{stream}-verify-pipeline'
