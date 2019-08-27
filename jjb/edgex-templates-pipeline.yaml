@@ -59,6 +59,7 @@
             submodule-recursive: '{submodule-recursive}'
             choosing-strategy: default
             jenkins-ssh-credential: '{jenkins-ssh-credential}'
+            submodule-disable: false
             submodule-timeout: 10
 
     triggers:
@@ -88,6 +89,7 @@
             submodule-recursive: '{submodule-recursive}'
             choosing-strategy: default
             jenkins-ssh-credential: '{jenkins-ssh-credential}'
+            submodule-disable: false
             submodule-timeout: 10
 
     triggers:
@@ -98,8 +100,8 @@
       # work for merge / push
 
 - pipeline_webhooks_boiler_plate: &pipeline_webhooks_boiler_plate
-    # Freestyle job to have jenkins create and maintain the github push 
-    # webhook. Currently the github jenkins plugin cannot create the push 
+    # Freestyle job to have jenkins create and maintain the github push
+    # webhook. Currently the github jenkins plugin cannot create the push
     # webhook using the pipeline scm section of the job.
     # This job is meant to be a no op.
 
@@ -143,6 +145,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-disable: false
           submodule-timeout: 10
 
     wrappers:
@@ -169,7 +172,7 @@
 - job-template:
     name: '{project-name}-verify-pipeline'
 
-    # Job template for pipeline verify jobs 
+    # Job template for pipeline verify jobs
 
     <<: *pipeline_job_boiler_plate
     # yamllint disable-line rule:key-duplicates
@@ -180,7 +183,7 @@
 - job-template:
     name: '{project-name}-{stream}-verify-pipeline'
 
-    # Job template for pipeline verify jobs 
+    # Job template for pipeline verify jobs
 
     <<: *pipeline_job_boiler_plate
     # yamllint disable-line rule:key-duplicates
