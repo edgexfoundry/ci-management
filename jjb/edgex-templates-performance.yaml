@@ -8,7 +8,7 @@
     node2: 'centos7-blackbox-4c-2g'
     node3: 'centos7-blackbox-4c-2g'
     node4: 'centos7-blackbox-4c-2g'
-    
+
     # InfluxDB
     influxDBHost: stats.edgexfoundry.org
 
@@ -83,6 +83,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-disable: false
           submodule-timeout: 10
 
 - performance_test_boiler_plate: &performance_test_boiler_plate
@@ -96,8 +97,9 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-disable: false
           submodule-timeout: 10
-          
+
     triggers:
       - timed: 'H 4 * * 6'
 
@@ -109,7 +111,7 @@
     <<: *performance_job_boiler_plate
     # yamllint disable-line rule:key-duplicates
     <<: *performance_test_boiler_plate
-    
+
     pipeline-scm:
       script-path: '{jenkins_file}'
       scm:
@@ -120,9 +122,10 @@
             submodule-recursive: '{submodule-recursive}'
             choosing-strategy: default
             jenkins-ssh-credential: '{jenkins-ssh-credential}'
+            submodule-disable: false
             submodule-timeout: 10
 
-    
+
 - job-template:
     name: 'performance-verify-{stream}'
     node: '{build-node}'
@@ -141,4 +144,5 @@
             submodule-recursive: '{submodule-recursive}'
             choosing-strategy: default
             jenkins-ssh-credential: '{jenkins-ssh-credential}'
+            submodule-disable: false
             submodule-timeout: 10

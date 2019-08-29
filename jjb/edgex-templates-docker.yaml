@@ -64,6 +64,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-disable: false
           submodule-timeout: 10
 
     triggers:
@@ -89,6 +90,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-disable: false
           submodule-timeout: 10
 
     triggers:
@@ -257,6 +259,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-disable: false
           submodule-timeout: 10
 
     builders:
@@ -455,6 +458,7 @@
           submodule-recursive: '{submodule-recursive}'
           choosing-strategy: default
           jenkins-ssh-credential: '{jenkins-ssh-credential}'
+          submodule-disable: false
           submodule-timeout: 10
 
     builders:
