@@ -13,8 +13,7 @@
           branch: 'master'
 
     jobs:
-      - 'performance-test-{stream}':
-          build-timeout: 60
+      - 'performance-test-{stream}'
       - 'performance-verify-{stream}':
           status-context: '{project-name}-{stream}-verify'
 
