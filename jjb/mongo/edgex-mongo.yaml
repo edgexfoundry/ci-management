@@ -5,15 +5,17 @@
     project-name: docker-edgex-mongo
     project: docker-edgex-mongo
     mvn-settings: docker-edgex-mongo-settings
+    dockerfile_location: ''
     docker_name: docker-edgex-mongo
     docker_root: ''
-    docker_build_args: '-f Dockerfile'
+    docker_build_args: '-f {dockerfile_location}Dockerfile'
     archive-artifacts: ''
     build-node: centos7-docker-4c-2g
     cron: 'H 11 * * *'
     stream:
       - 'master':
           branch: 'master'
+          dockerfile_location: 'cmd/'
       - 'delhi':
           branch: 'delhi'
           docker_tag: '0.8.0'
@@ -26,14 +28,14 @@
       - '{project-name}-{stream}-release-version-docker-daily-no-sonar'
       - '{project-name}-{stream}-verify-docker-arm':
           build-node: ubuntu18.04-docker-arm64-4c-2g
-          docker_build_args: '-f Dockerfile.aarch64'
+          docker_build_args: '-f {dockerfile_location}Dockerfile.aarch64'
           docker_name: docker-edgex-mongo-arm64
       - '{project-name}-{stream}-merge-docker-arm':
           build-node: ubuntu18.04-docker-arm64-4c-2g
-          docker_build_args: '-f Dockerfile.aarch64'
+          docker_build_args: '-f {dockerfile_location}Dockerfile.aarch64'
           docker_name: docker-edgex-mongo-arm64
       - '{project-name}-{stream}-release-version-docker-arm-daily-no-sonar':
           build-node: ubuntu18.04-docker-arm64-4c-2g
-          docker_build_args: '-f Dockerfile.aarch64'
+          docker_build_args: '-f {dockerfile_location}Dockerfile.aarch64'
           docker_name: docker-edgex-mongo-arm64
 

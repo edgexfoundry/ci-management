@@ -1,6 +1,7 @@
 ---
 - project:
     name: mongo-project-view
-    project-name: mongo
+    view-name: mongo
+    view-regex: '.*-mongo-.*'
     views:
-      - project-view
+      - common-view
