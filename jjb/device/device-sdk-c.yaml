@@ -7,7 +7,7 @@
     mvn-settings: device-sdk-c-settings
     docker_name: docker-device-sdk-c
     docker_root: ''
-    docker_build_args: '-f scripts/Dockerfile.alpine-3.7'
+    docker_build_args: '-f scripts/Dockerfile.alpine-3.9'
     archive-artifacts: '**/release/*.tar.gz'
     post_build_script: !include-raw-escape: shell/device_sdk_c_build.sh
     build-node: centos7-docker-4c-2g
@@ -18,7 +18,8 @@
           docker_tag: 'master'
       - 'edinburgh':
           branch: 'edinburgh'
-          docker_tag: '1.0.0'     
+          docker_tag: '1.0.0'
+          docker_build_args: '-f scripts/Dockerfile.alpine-3.7'
     jobs:
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'
