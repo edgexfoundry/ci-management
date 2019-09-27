@@ -8,10 +8,6 @@
       - 'master':
           branch: 'master'
           snap-channel: latest/edge
-      - 'delhi':
-          branch: 'delhi'
-          build_script: 'cd snap && ./build.sh'
-          snap-channel: delhi/edge
       - 'edinburgh':
           branch: 'edinburgh'
           snap-channel: edinburgh/edge
