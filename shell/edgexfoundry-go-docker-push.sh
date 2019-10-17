@@ -24,7 +24,7 @@ fi
 GIT_SHA=$(git rev-parse HEAD)
 VERSION=$(cat VERSION)
 ## Query build docker images, retag and push to respective repos based on DEPLOY_TYPE
-images=( $(docker images --format "{{.Repository}}:{{.ID}}" --filter "label=git_sha=$GIT_SHA" | grep 'edgexfoundry.*-go' | sort -u))
+images=( $(docker images --format "{{.Repository}}:{{.ID}}" --filter "label=git_sha=$GIT_SHA" | grep 'edgexfoundry.*' | sort -u))
 for image in "${images[@]}"; do
   image_id=$(echo $image | awk -F ':' '{print $2}')
   image_repo=$(echo $image | awk -F ':' '{print $1}')
