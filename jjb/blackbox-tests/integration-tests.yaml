@@ -10,8 +10,6 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'delhi':
-          branch: 'delhi'
       - 'edinburgh':
           branch: 'edinburgh'
     build-machine:
