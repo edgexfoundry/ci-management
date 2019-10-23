@@ -1,0 +1,15 @@
+---
+
+- project:
+    name: device-camera-go
+    project-name: device-camera-go
+    project: device-camera-go
+    mvn-settings: device-camera-go-settings
+    stream:
+      - 'master':
+          branch: 'master'
+    jobs:
+      - '{project-name}-verify-pipeline':
+          status-context: '{project-name}-verify-pipeline'
+      - '{project-name}-merge-pipeline'
+      - '{project-name}-pipeline-webhooks'
