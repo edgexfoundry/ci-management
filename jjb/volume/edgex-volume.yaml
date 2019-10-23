@@ -14,9 +14,6 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'delhi':
-          branch: 'delhi'
-          docker_tag: '0.8.0'
       - 'edinburgh':
           branch: 'edinburgh'
           docker_tag: '1.0.0'
