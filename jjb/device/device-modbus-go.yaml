@@ -1,4 +1,5 @@
 ---
+
 - project:
     name: device-modbus-go
     project-name: device-modbus-go
@@ -18,7 +19,11 @@
           pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
           build_script: 'make test && make build docker'
           go-root: '/opt/go-custom/go'
-
+      - 'fuji':
+          branch: 'fuji'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make test && make build docker'
+          go-root: '/opt/go-custom/go'
     jobs:
       - '{project-name}-{stream}-verify-go':
           status-context: '{project-name}-{stream}-verify'
@@ -32,4 +37,3 @@
           post_build_script: !include-raw-escape: shell/edgexfoundry-device-modbus-go-docker-push.sh
       - '{project-name}-{stream}-stage-go-arm':
           post_build_script: !include-raw-escape: shell/edgexfoundry-device-modbus-go-docker-push.sh
-
