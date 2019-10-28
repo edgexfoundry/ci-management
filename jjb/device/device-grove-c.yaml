@@ -19,7 +19,9 @@
       - 'edinburgh':
           branch: 'edinburgh'
           docker_tag: '1.0.1'
-
+      - 'fuji':
+          branch: 'fuji'
+          docker_tag: '1.1.0'
     jobs:
       - '{project-name}-{stream}-verify-docker-arm':
           build-node: ubuntu18.04-docker-arm64-4c-2g
