@@ -16,6 +16,11 @@
           pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
           build_script: 'make test && make build docker'
           go-root: '/opt/go-custom/go'
+      - 'fuji':
+          branch: 'fuji'
+          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
+          build_script: 'make test && make build docker'
+          go-root: '/opt/go-custom/go'
 
     jobs:
       - '{project-name}-{stream}-verify-go':
@@ -23,10 +28,10 @@
       - '{project-name}-{stream}-verify-go-arm':
           status-context: '{project-name}-{stream}-verify-arm'
       - '{project-name}-{stream}-merge-go':
-          post_build_script: !include-raw-escape: 
+          post_build_script: !include-raw-escape:
             - shell/edgexfoundry-go-docker-push.sh
       - '{project-name}-{stream}-merge-go-arm':
-          post_build_script: !include-raw-escape: 
+          post_build_script: !include-raw-escape:
             - shell/edgexfoundry-go-docker-push.sh
       - '{project-name}-{stream}-stage-go':
           post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
