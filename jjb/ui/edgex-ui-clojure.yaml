@@ -11,6 +11,8 @@
           branch: master
       - 'edinburgh':
           branch: edinburgh
+      - 'fuji':
+          branch: fuji
 
     jobs:
       - '{project-name}-{stream}-verify-pipeline'
