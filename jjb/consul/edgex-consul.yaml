@@ -7,9 +7,11 @@
     stream:
       - 'master':
           branch: master
+      - 'fuji':
+          branch: fuji
 
     jobs:
       - '{project-name}-verify-pipeline':
           status-context: '{project-name}-verify-pipeline'
-      - '{project-name}-merge-pipeline'
+      - '{project-name}-{stream}-merge-pipeline'
       - '{project-name}-pipeline-webhooks'
