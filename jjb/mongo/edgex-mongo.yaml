@@ -19,6 +19,10 @@
       - 'edinburgh':
           branch: 'edinburgh'
           docker_tag: '1.0.1'
+      - 'fuji':
+          branch: 'fuji'
+          docker_tag: '1.1.0'
+          dockerfile_location: 'cmd/'
     jobs:
       - '{project-name}-{stream}-verify-docker'
       - '{project-name}-{stream}-merge-docker'
@@ -35,4 +39,3 @@
           build-node: ubuntu18.04-docker-arm64-4c-2g
           docker_build_args: '-f {dockerfile_location}Dockerfile.aarch64'
           docker_name: docker-edgex-mongo-arm64
-
