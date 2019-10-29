@@ -57,10 +57,10 @@
     regex: '.*pipeline.*'
 
 - view:
-    name: Edinburgh-Staging
-    description: 'List of edinburgh staging jobs'
+    name: Fuji-Staging
+    description: 'List of fuji staging jobs'
     view-type: list
     filter-executors: false
     filter-queue: false
     recurse: false
-    regex: '.*edinburgh-stage.*'
+    regex: '.*fuji-stage.*'
