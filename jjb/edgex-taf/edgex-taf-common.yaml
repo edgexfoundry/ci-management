@@ -1,0 +1,16 @@
+---
+
+- project:
+    name: edgex-taf-common
+    project-name: edgex-taf-common
+    project: edgex-taf-common
+    mvn-settings: edgex-taf-common-settings
+    jenkins_file: 'Jenkinsfile'
+    status-context: '{project-name}-verify-pipeline'
+    stream: {}
+
+    jobs:
+      - '{project-name}-verify-pipeline'
+      - '{project-name}-merge-pipeline'
+      - '{project-name}-pipeline-webhooks':
+        status-context: '{project-name}-pipeline-webhooks'
