@@ -25,6 +25,9 @@
           jenkins_file: snyk/Jenkinsfile
       - 'jmeter':
           jenkins_file: jmeter/Jenkinsfile
+      - 'newman':
+          jenkins_file: newman/Jenkinsfile
+
 
     jobs:
       - '{project-name}-{stream}-verify-pipeline'
