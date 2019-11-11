@@ -11,6 +11,9 @@
       - 'edinburgh':
           branch: 'edinburgh'
           snap-channel: edinburgh/edge
+      - 'fuji':
+          branch: 'fuji'
+          snap-channel: fuji/edge
 
     jobs:
      - '{project-name}-{stream}-stage-snap-arm':
