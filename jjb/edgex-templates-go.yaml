@@ -133,6 +133,7 @@
             GOROOT={go-root}
             PATH={path}
             GOPATH=$HOME/$BUILD_ID/gopath
+            GOPROXY={go-proxy}
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - edgex-codecov:
@@ -169,6 +170,7 @@
             GOROOT={go-root}
             PATH={path}
             GOPATH=$HOME/$BUILD_ID/gopath
+            GOPROXY={go-proxy}
             DEPLOY_TYPE=snapshot
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -211,6 +213,7 @@
             GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
+            GOPROXY={go-proxy}
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -251,6 +254,7 @@
             GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
+            GOPROXY={go-proxy}
             DEPLOY_TYPE=snapshot
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
@@ -298,6 +302,7 @@
             GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
+            GOPROXY={go-proxy}
             DEPLOY_TYPE=staging
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
@@ -342,6 +347,7 @@
             PATH={path}
             GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
+            GOPROXY={go-proxy}
             DEPLOY_TYPE=staging
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -385,6 +391,7 @@
             GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
             GOARCH=arm64
+            GOPROXY={go-proxy}
             DEPLOY_TYPE=release
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
@@ -426,6 +433,7 @@
             PATH={path}
             GOPATH=$HOME/$BUILD_ID/gopath
             GOOS=linux
+            GOPROXY={go-proxy}
             DEPLOY_TYPE=release
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'

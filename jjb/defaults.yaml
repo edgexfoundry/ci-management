@@ -54,6 +54,7 @@
     staging-profile-id: a004df83a6249
     mvn-staging-id: staging
     nexus-snapshot-repo: snapshots
+    go-proxy: https://nexus3.edgexfoundry.org/repository/go-proxy/
 
     # Sonarcloud
     sonarcloud_project_organization: edgexfoundry
