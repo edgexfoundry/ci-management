@@ -4,7 +4,7 @@
     name: edgex-taf-common
     project-name: edgex-taf-common
     project: edgex-taf-common
-    mvn-settings: edgex-taf-common-settings
+    mvn-settings: taf-settings
     jenkins_file: 'Jenkinsfile'
     status-context: '{project-name}-verify-pipeline'
     stream: {}
