@@ -39,15 +39,6 @@
     regex: '.*docs.*'
 
 - view:
-    name: CI-Build-Images
-    description: 'List of Jenkins build image jobs'
-    view-type: list
-    filter-executors: false
-    filter-queue: false
-    recurse: false
-    regex: 'ci-build-images-.*'
-
-- view:
     name: Pipeline-Jobs
     description: 'List of pipeline jobs'
     view-type: list
