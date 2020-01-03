@@ -9,8 +9,6 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'edinburgh':
-          branch: 'edinburgh'
 
     jobs:
       - '{project-name}-{stream}-verify-pipeline'

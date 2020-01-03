@@ -8,9 +8,6 @@
       - 'master':
           branch: 'master'
           snap-channel: latest/edge
-      - 'edinburgh':
-          branch: 'edinburgh'
-          snap-channel: edinburgh/edge
       - 'fuji':
           branch: 'fuji'
           snap-channel: fuji/edge
