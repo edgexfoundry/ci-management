@@ -167,6 +167,89 @@
       # no reason to add github-pull-request here since it doesn't currently
       # work for merge / push
 
+- pipeline_api_docs_boiler_plate: &pipeline_api_docs_boiler_plate
+    name: pipeline_api_docs_boiler_plate
+
+    project-type: pipeline
+    concurrent: true
+    submodule-recursive: true
+    node: '{build-node}'
+
+    ######################
+    # Default parameters #
+    ######################
+
+    branch: master
+    status-context: ''
+    jenkins_file: 'Jenkinsfile'
+
+    #####################
+    # Job Configuration #
+    #####################
+
+    properties:
+      - lf-infra-properties:
+          project: '{project}'
+          build-days-to-keep: '{build-days-to-keep}'
+      - github:
+          url: '{git-url}/{github-org}/{project}'
+      - inject:
+          properties-content: |
+            BUILD_NODE='{build-node}'
+            MVN_SETTINGS={mvn-settings}
+            SEMVER_BRANCH={branch}
+
+    parameters:
+      - string:
+          name: sha1
+          default: '*/{branch}'
+          description: |
+              GitHub PR Trigger provided parameter for specifying the commit
+              to checkout.
+
+              If using GitHub, in a manual build override with a branch path or
+              sha1 hash to a specific commit. For example: '{branch}'
+      - string:
+          name: PROJECT
+          default: '{project}'
+          description: |
+              Parameter to identify a SCM project to build. This is typically
+              the project repo path. For example: ofextensions/circuitsw
+      - string:
+          name: APIVERSION
+          default: '1.1.0'
+          description: |
+              EdgeX API release version, can't be empty
+      - string:
+          name: OASVERSION
+          default: '3.0.0'
+          description: |
+              The OpenApi Specification (OAS) version, can't be empty
+      - string:
+          name: OWNER
+          default: 'edgexfoundry1'
+          description: |
+              API owner (user or organization, case-sensitive), can't be empty
+      - bool:
+          name: ISPRIVATE
+          default: true
+          description: |
+              Defines whether the API has to be private
+
+    pipeline-scm:
+      script-path: '{jenkins_file}'
+      scm:
+        - lf-infra-github-scm:
+            url: '{git-clone-url}{github-org}/{project}'
+            refspec: '+refs/pull/*:refs/remotes/origin/pr/*'
+            branch: '$sha1'
+            submodule-recursive: '{submodule-recursive}'
+            choosing-strategy: default
+            jenkins-ssh-credential: '{jenkins-ssh-credential}'
+            submodule-disable: false
+            submodule-timeout: 10
+
+
 # Job Templates
 
 - job-template:
@@ -225,3 +308,15 @@
           global-settings-file: 'global-settings'
           settings-file: '{mvn-settings}'
       - shell: 'ls'
+
+- job-template:
+    name: '{project-name}-pipeline-swagger-{stream}'
+
+    <<: *pipeline_api_docs_boiler_plate
+
+    build-node: centos7-docker-4c-2g
+
+    builders:
+      - lf-provide-maven-settings:
+          global-settings-file: 'global-settings'
+          settings-file: '{mvn-settings}'

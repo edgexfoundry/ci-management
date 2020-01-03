@@ -1,0 +1,15 @@
+---
+- project:
+    name: edgex-api-docs
+    project-name: edgex-api-docs
+    project: edgex-api-docs
+    mvn-settings: edgex-api-docs-settings
+    jenkins_file: 'Jenkinsfile'
+    stream:
+      - 'master':
+          branch: 'master'
+    status-context: '{project-name}-pipeline-swagger-{stream}'
+    jobs:
+      - '{project-name}-pipeline-swagger-{stream}'
+    views:
+      - project-view
