@@ -16,9 +16,6 @@
       - 'master':
           branch: 'master'        
           docker_tag: 'master'
-      - 'edinburgh':
-          branch: 'edinburgh'
-          docker_tag: '1.0.1'
       - 'fuji':
           branch: 'fuji'
           docker_tag: '1.1.0'

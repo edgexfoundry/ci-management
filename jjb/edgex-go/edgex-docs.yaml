@@ -8,8 +8,6 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'edinburgh':
-          branch: 'edinburgh'
       - 'fuji':
           branch: 'fuji'
 
