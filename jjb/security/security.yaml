@@ -1,6 +1,0 @@
----
-- project:
-    name: security-project-view
-    project-name: security
-    views:
-      - project-view
