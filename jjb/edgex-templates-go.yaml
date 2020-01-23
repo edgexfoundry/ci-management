@@ -20,6 +20,7 @@
     workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
     go-root: /usr/local/go
     path: $PATH:$GOROOT/bin
+    repo-root: ''
 
     #####################
     # Job Configuration #
@@ -134,6 +135,7 @@
             PATH={path}
             GOPATH=$HOME/$BUILD_ID/gopath
             GOPROXY={go-proxy}
+            REPO_ROOT={repo-root}
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - edgex-codecov:
@@ -172,6 +174,7 @@
             GOPATH=$HOME/$BUILD_ID/gopath
             GOPROXY={go-proxy}
             DEPLOY_TYPE=snapshot
+            REPO_ROOT={repo-root}
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
@@ -214,6 +217,7 @@
             GOOS=linux
             GOARCH=arm64
             GOPROXY={go-proxy}
+            REPO_ROOT={repo-root}
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -256,6 +260,7 @@
             GOARCH=arm64
             GOPROXY={go-proxy}
             DEPLOY_TYPE=snapshot
+            REPO_ROOT={repo-root}
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -304,6 +309,7 @@
             GOARCH=arm64
             GOPROXY={go-proxy}
             DEPLOY_TYPE=staging
+            REPO_ROOT={repo-root}
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -349,6 +355,7 @@
             GOOS=linux
             GOPROXY={go-proxy}
             DEPLOY_TYPE=staging
+            REPO_ROOT={repo-root}
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
@@ -393,6 +400,7 @@
             GOARCH=arm64
             GOPROXY={go-proxy}
             DEPLOY_TYPE=release
+            REPO_ROOT={repo-root}
       - shell: '{obj:golang_arm_script}'
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
@@ -435,6 +443,7 @@
             GOOS=linux
             GOPROXY={go-proxy}
             DEPLOY_TYPE=release
+            REPO_ROOT={repo-root}
       - shell: '{obj:pre_build_script}'
       - shell: '{obj:build_script}'
       - lf-infra-create-netrc:
