@@ -8,8 +8,6 @@
     build_script: 'make test && make build docker'
     go-root: '/opt/go-custom/go'
     stream:
-      - 'master':
-          branch: 'master'
       - 'fuji': 
           branch: 'fuji'
 
