@@ -13,9 +13,6 @@
     build-node: centos7-docker-4c-2g
     cron: 'H 11 * * *'
     stream:
-      - 'master':
-          branch: 'master'
-          docker_tag: 'master'
       - 'fuji':
           branch: 'fuji'
           docker_tag: '1.1.0'
