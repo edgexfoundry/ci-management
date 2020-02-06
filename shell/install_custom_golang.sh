@@ -9,6 +9,7 @@ GOARCH=${GOARCH:-amd64}
 sudo mkdir /opt/go-custom
 sudo curl -L https://dl.google.com/go/go${GO_VERSION}.linux-${GOARCH}.tar.gz -o go${GO_VERSION}.linux-${GOARCH}.tar.gz
 sudo tar -C /opt/go-custom -xzf go${GO_VERSION}.linux-${GOARCH}.tar.gz
+sudo chmod -R 777 /opt/go-custom/go
 GOROOT=/opt/go-custom/go
 PATH=$PATH:$GOROOT/bin
 
