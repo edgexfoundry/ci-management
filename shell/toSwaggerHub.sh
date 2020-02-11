@@ -9,6 +9,8 @@ publishToSwagger() {
     oasVersion=$4
     isPrivate=$5
     owner=$6
+    dryRun=${7:-false}
+
     apiPath="$WORKSPACE/api/openapi/"${apiFolder}
 
     echo "[toSwaggerHub] Publishing the API Docs [${apiVersion}] to Swagger"
@@ -20,14 +22,20 @@ publishToSwagger() {
 
             echo "[toSwaggerHub] Publishing API Name [$apiName]"
 
-            echo curl -X POST "https://api.swaggerhub.com/apis/${owner}/${apiName}?isPrivate=${isPrivate}&version=${apiVersion}&oas=${oasVersion}&force=true" \
-                -H "accept:application/json" \
-                -H "Authorization:${apiKey}" \
-                -H "Content-Type:application/yaml" \
-                -d "${apiContent}"
+            if [ "$dryRun" == "false" ]; then
+                curl -X POST "https://api.swaggerhub.com/apis/${owner}/${apiName}?isPrivate=${isPrivate}&version=${apiVersion}&oas=${oasVersion}&force=true" \
+                    -H "accept:application/json" \
+                    -H "Authorization:${apiKey}" \
+                    -H "Content-Type:application/yaml" \
+                    -d "${apiContent}"
+            else
+                echo "[toSwaggerHub] Dry Run enabled...Simulating upload"
+                echo "curl -X POST https://api.swaggerhub.com/apis/${owner}/${apiName}?isPrivate=${isPrivate}&version=${apiVersion}&oas=${oasVersion}&force=true"
+            fi
+
         done
     else
-        echo "Could not API Folder [${apiPath}]. Please make sure the API version exists..."
+        echo "Could not find API Folder [${apiPath}]. Please make sure the API version exists..."
         exit 1
     fi
 }
