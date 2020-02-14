@@ -2,12 +2,13 @@
 
 set -e -o pipefail
 
-# NOTE: APIKEY will need to be set locally from your environment or from Jenkins
-
 echo "--> edgex-go-publish-swagger.sh"
 
 # if no ARCH is set or ARCH is not arm
 if [ -z "$ARCH" ] || [ "$ARCH" != "arm64" ] ; then
+    # NOTE: APIKEY needs to be a pointer to a file with the key. This will need to be set locally from your environment or from Jenkins
+    APIKEY_VALUE=`cat $APIKEY`
+
     API_VERSION=${API_VERSION:-2.0.0}
     API_FOLDER=${API_FOLDER:-v2}
     SWAGGER_DRY_RUN=${SWAGGER_DRY_RUN:-false}
@@ -20,7 +21,7 @@ if [ -z "$ARCH" ] || [ "$ARCH" != "arm64" ] ; then
     ISPRIVATE=true
     OWNER='EdgeXFoundry1'
 
-    publishToSwagger "${APIKEY}" "${API_FOLDER}" "${API_VERSION}" "${OASVERSION}" "${ISPRIVATE}" "${OWNER}" "${SWAGGER_DRY_RUN}"
+    publishToSwagger "${APIKEY_VALUE}" "${API_FOLDER}" "${API_VERSION}" "${OASVERSION}" "${ISPRIVATE}" "${OWNER}" "${SWAGGER_DRY_RUN}"
 else
     echo "$ARCH not supported...skipping."
 fi
