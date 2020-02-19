@@ -6,8 +6,6 @@
     mvn-settings: edgex-go-settings
     build_script: './build.sh {stream}'
     stream:
-      - 'master':
-          branch: 'master'
       - 'fuji':
           branch: 'fuji'
 
