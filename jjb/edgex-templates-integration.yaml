@@ -3,7 +3,14 @@
 - integration_job_boiler_plate: &integration_job_boiler_plate
     name: integration_job-boiler-plate
 
-    project-type: freestyle
+    project-type: matrix
+    axes:
+        - axis:
+            type: user-defined
+            name: FOR_REDIS
+            values:
+                - "true"
+                - "false"
     node: '{build-node}'
 
     ######################
