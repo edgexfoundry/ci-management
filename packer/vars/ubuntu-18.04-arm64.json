@@ -1,0 +1,10 @@
+{
+  "arch": "arm64",
+  "base_image": "Ubuntu 18.04 LTS (arm64) [2019-06-24]",
+  "cloud_user_data": "common-packer/provision/ubuntu-user_data.sh",
+  "distro": "Ubuntu 18.04",
+  "flavor": "lf-standard-1",
+  "source_ami_filter_name": "*ubuntu*18.04*",
+  "source_ami_filter_owner": "099720109477",
+  "ssh_user": "ubuntu"
+}
