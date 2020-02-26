@@ -11,10 +11,10 @@
       - 'master':
           branch: 'master'
       - 'fuji':
-          branch: 'fuji'          
+          branch: 'fuji'
     build-machine:
-      - 'ubuntu18.04-docker-arm64-4c-2g':
-          build-node: 'ubuntu18.04-docker-arm64-4c-2g'
+      - 'ubuntu18.04-docker-arm64-4c-16g':
+          build-node: 'ubuntu18.04-docker-arm64-4c-16g'
       - 'centos7-blackbox-4c-2g':
           build-node: 'centos7-blackbox-4c-2g'
 
