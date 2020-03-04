@@ -87,7 +87,7 @@
       - github
       - pollscm:
           cron: ''
-      - timed: 'H 12 * * *'
+      - timed: 'H 04 * * *'
 
 # Job Templates
 
