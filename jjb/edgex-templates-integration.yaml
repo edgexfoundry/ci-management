@@ -7,10 +7,15 @@
     axes:
         - axis:
             type: user-defined
-            name: FOR_REDIS
+            name: DATABASE
             values:
-                - "true"
-                - "false"
+                - "redis"
+                - "mongo"
+        - axis:
+            type: label-expression
+            name: node
+            values:
+                - '{build-node}'
     node: '{build-node}'
 
     ######################
@@ -24,6 +29,7 @@
     post_build_script: ''
     status-context: ''
     workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
+    child-workspace: '${{COMBINATION}}'
     #####################
     # Job Configuration #
     #####################
