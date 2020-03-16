@@ -17,7 +17,7 @@
     build_script: ''
     post_build_script: ''
     status-context: ''
-    workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
+    workspace: '$HOME/$JOB_NAME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
     go-root: /usr/local/go
     path: $PATH:$GOROOT/bin
     repo-root: ''
