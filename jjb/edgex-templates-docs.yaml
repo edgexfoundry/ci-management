@@ -17,7 +17,7 @@
     post_build_script: ''
     status-context: ''
     nexus-repo: docs
-    workspace: '$HOME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
+    workspace: '$HOME/$JOB_NAME/$BUILD_ID/gopath/src/github.com/edgexfoundry/{project-name}/'
     #####################
     # Job Configuration #
     #####################
