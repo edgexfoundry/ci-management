@@ -1,16 +1,18 @@
 ---
 - project:
-    name: edgex-go-snap
-    project-name: edgex-go-snap
+    name: edgex-go-snap-legacy
+    project-name: edgex-go-snap-legacy
     project: edgex-go
     mvn-settings: edgex-go-settings
     stream:
-      - 'master':
-          branch: 'master'
-          snap-channel: latest/edge
+      - 'fuji':
+          branch: 'fuji'
+          snap-channel: fuji/edge
 
     jobs:
-     - '{project-name}-release-snap':
+     - '{project-name}-{stream}-stage-snap-arm':
+         build-node: ubuntu18.04-docker-arm64-4c-16g
+     - '{project-name}-{stream}-stage-snap':
          build-node: centos7-docker-4c-2g
      - '{project-name}-{stream}-verify-snap-arm':
          build-node: ubuntu18.04-docker-arm64-4c-16g
