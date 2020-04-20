@@ -1,32 +1,23 @@
 ---
 - project:
     name: edgex-go
-    project-name: edgex-go
+    project-name: edgex-go-snap
     project: edgex-go
     mvn-settings: edgex-go-settings
-    build_script: 'make build && make docker'
     stream:
-      - 'fuji':
-          branch: 'fuji'
-          pre_build_script: !include-raw-escape: shell/install_custom_golang.sh
-          build_script: 'make test && make build docker'
-          go-root: '/opt/go-custom/go'
+      - 'master':
+          branch: 'master'
+          snap-channel: latest/edge
 
     jobs:
-      - '{project-name}-{stream}-verify-go':
-          status-context: '{project-name}-{stream}-verify'
-      - '{project-name}-{stream}-verify-go-arm':
-          status-context: '{project-name}-{stream}-verify-arm'
-      - '{project-name}-{stream}-merge-go':
-          post_build_script: !include-raw-escape:
-            - shell/edgexfoundry-go-docker-push.sh
-      - '{project-name}-{stream}-merge-go-arm':
-          post_build_script: !include-raw-escape:
-            - shell/edgexfoundry-go-docker-push.sh
-      - '{project-name}-{stream}-stage-go':
-          post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
-      - '{project-name}-{stream}-stage-go-arm':
-          post_build_script: !include-raw-escape: shell/edgexfoundry-go-docker-push.sh
+     - '{project-name}-release-snap':
+         build-node: centos7-docker-4c-2g
+     - '{project-name}-{stream}-verify-snap-arm':
+         build-node: ubuntu18.04-docker-arm64-4c-16g
+         status-context: '{project-name}-{stream}-verify-arm'
+     - '{project-name}-{stream}-verify-snap':
+         build-node: centos7-docker-4c-2g
+         status-context: '{project-name}-{stream}-verify'
 
     views:
       - project-view

@@ -37,12 +37,3 @@
     filter-queue: false
     recurse: false
     regex: '.*docs.*'
-
-- view:
-    name: Fuji-Staging
-    description: 'List of fuji staging jobs'
-    view-type: list
-    filter-executors: false
-    filter-queue: false
-    recurse: false
-    regex: '.*fuji-stage.*'

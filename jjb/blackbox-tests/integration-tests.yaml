@@ -10,8 +10,6 @@
     stream:
       - 'master':
           branch: 'master'
-      - 'fuji':
-          branch: 'fuji'
     build-machine:
       - 'ubuntu18.04-docker-arm64-4c-16g':
           build-node: 'ubuntu18.04-docker-arm64-4c-16g'
