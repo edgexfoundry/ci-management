@@ -5,9 +5,6 @@
     project: device-mqtt-go
     mvn-settings: device-mqtt-go-settings
     stream:
-      - 'master':
-          branch: 'master'
-          snap-channel: latest/edge
       - 'fuji':
           branch: 'fuji'
           snap-channel: fuji/edge
