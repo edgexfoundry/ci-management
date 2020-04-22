@@ -5,9 +5,9 @@
     project: device-modbus-go
     mvn-settings: device-modbus-go-settings
     stream:
-      - 'fuji':
-          branch: 'fuji'
-          snap-channel: fuji/edge
+      - 'master':
+          branch: 'master'
+          snap-channel: latest/edge
 
     jobs:
      - '{project-name}-{stream}-stage-snap-arm':

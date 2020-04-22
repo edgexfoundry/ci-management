@@ -1,16 +1,20 @@
 ---
 - project:
-    name: edgex-go-snap
-    project-name: edgex-go-snap
-    project: edgex-go
-    mvn-settings: edgex-go-settings
+    name: edgex-ui-go-snap
+    project-name: edgex-ui-go-snap
+    project: edgex-ui-go
+    mvn-settings: edgex-ui-go-settings
     stream:
       - 'master':
           branch: 'master'
           snap-channel: latest/edge
 
     jobs:
+     - '{project-name}-{stream}-stage-snap-arm':
+         build-node: ubuntu18.04-docker-arm64-4c-16g
      - '{project-name}-release-snap':
+         build-node: centos7-docker-4c-2g
+     - '{project-name}-{stream}-stage-snap':
          build-node: centos7-docker-4c-2g
      - '{project-name}-{stream}-verify-snap-arm':
          build-node: ubuntu18.04-docker-arm64-4c-16g

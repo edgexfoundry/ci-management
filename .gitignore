@@ -6,6 +6,7 @@ jenkins.ini
 
 # Ignore Sandbox temporary files
 jjb/*/releng-*.yaml
+jjb/sandbox/
 
 # Maven
 target/
