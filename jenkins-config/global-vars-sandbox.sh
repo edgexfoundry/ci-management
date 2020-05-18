@@ -6,6 +6,7 @@ JENKINS_HOSTNAME=vex-yul-edgex-jenkins-2
 LOGS_SERVER=https://logs.edgexfoundry.org
 NEXUS_URL=https://nexus.edgexfoundry.org
 REGISTRY_PORTS=10001 10002 10003
+S3_BUCKET=
 SIGUL_BRIDGE_IP=10.30.120.3
 SIGUL_KEY=edgex-sandbox
 SILO=sandbox
