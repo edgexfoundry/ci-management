@@ -18,7 +18,7 @@ if [ -z "$ARCH" ] || [ "$ARCH" != "arm64" ] ; then
     . $SCRIPTS_ROOT/toSwaggerHub.sh
 
     OASVERSION='3.0.0'
-    ISPRIVATE=true
+    ISPRIVATE=false
     OWNER='EdgeXFoundry1'
 
     for API_FOLDER in ${API_FOLDERS}; do
