@@ -16,6 +16,7 @@ fi
 export docker_compose_test_tools=$PWD/docker-compose-test-tools.yml
 
 docker run --rm -v $PWD:$PWD:rw,z -w $PWD -v /var/run/docker.sock:/var/run/docker.sock --privileged \
--e SECURITY_SERVICE_NEEDED=$SECURITY_SERVICE_NEEDED -e DATABASE=$DATABASE --env-file $ENV_FILE \
+-e SECURITY_SERVICE_NEEDED=$SECURITY_SERVICE_NEEDED --env-file $ENV_FILE \
 --entrypoint /bin/sh $DOCKER_COMPOSE deploy-edgeX.sh
+
 
