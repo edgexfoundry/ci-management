@@ -3,6 +3,7 @@
     jobs:
       - '{project-name}-github-ci-jobs'
       - github-packer-verify
+      - github-jjb-verify-upstream-gjjb
 
     name: ci-management-jobs
     project: ci-management
