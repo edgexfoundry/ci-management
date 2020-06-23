@@ -10,7 +10,6 @@
             name: DATABASE
             values:
                 - "redis"
-                - "mongo"
         - axis:
             type: label-expression
             name: node
