@@ -32,6 +32,11 @@ for image in "${images[@]}"; do
     'snapshot' )
       docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION
       docker push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION
+      docker manifest create "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}":$GIT_SHA-$VERSION $ARCH
+      docker manifest annotate "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}":$GIT_SHA-$VERSION \
+        "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}"$ARCH:$GIT_SHA-$VERSION \
+        --os linux --arch $ARCH
+      docker manifest push "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10003}"
       ;;
     'staging' )
       docker tag $image_id "${image_repo/edgexfoundry/nexus3.edgexfoundry.org:10004}"$ARCH:$GIT_SHA-$VERSION
