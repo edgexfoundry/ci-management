@@ -128,20 +128,20 @@ ARG ARCH
 # We do this because we can't easily run snapd (and thus snaps) inside a 
 # docker container without disabling important security protections enabled 
 # for docker containers.
-# TODO: add a little bit of error checking for the curl calls in case we ever
-# are on a proxy or something and we end up downloading a login page or
-# or something like that
 RUN apt-get update && \
     apt-get dist-upgrade --yes && \
     apt-get install --yes \
     curl sudo jq squashfs-tools && \
     for thesnap in core core18 snapcraft; do \
-        dlUrl=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_url' -r); \
-        dlSHA=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_sha512' -r); \
-        curl -s -L $dlUrl --output $thesnap.snap; \
-        echo "$dlSHA $thesnap.snap" > $thesnap.snap.sha512; \
-        sha512sum -c $thesnap.snap.sha512; \
-        mkdir -p /snap/$thesnap && unsquashfs -n -d /snap/$thesnap/current $thesnap.snap && rm $thesnap.snap; \
+        dlUrl=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_url' -r) && \
+        dlSHA=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_sha512' -r) && \
+        curl -s -L $dlUrl --output $thesnap.snap && \
+        echo "$dlSHA $thesnap.snap" > $thesnap.snap.sha512 && \
+        sha512sum -c $thesnap.snap.sha512 && \
+        mkdir -p /snap/$thesnap && \
+        unsquashfs -n -d /snap/$thesnap/current $thesnap.snap && \
+        rm $thesnap.snap.sha512 && \
+        rm $thesnap.snap; \
     done && \
     apt remove --yes --purge curl jq squashfs-tools && \
     apt-get autoclean --yes && \
