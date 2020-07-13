@@ -128,6 +128,10 @@ ARG ARCH
 # We do this because we can't easily run snapd (and thus snaps) inside a 
 # docker container without disabling important security protections enabled 
 # for docker containers.
+# Note that now snapcraft depends on snapd for the "snap pack" command, so we 
+# have to also install snapd as an apt package, even though snapd is not 
+# functional inside the docker container, we do this last so it doesn't get 
+# cleaned up
 RUN apt-get update && \
     apt-get dist-upgrade --yes && \
     apt-get install --yes \
@@ -145,7 +149,9 @@ RUN apt-get update && \
     done && \
     apt remove --yes --purge curl jq squashfs-tools && \
     apt-get autoclean --yes && \
-    apt-get clean --yes
+    apt-get clean --yes && \
+    apt-get install snapd --yes
+
 
 # The upstream dockerfile just uses this file locally from the repo since it's
 # in the same build context, but rather than copy that file here into the 
