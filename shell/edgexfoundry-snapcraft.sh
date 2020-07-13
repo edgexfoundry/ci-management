@@ -70,29 +70,29 @@ case "$JOB_TYPE" in
     "stage")
         # Stage jobs build the snap locally and release it
         pushd /build > /dev/null
-        snapcraft clean
-        snapcraft
+        unbuffer snapcraft clean
+        unbuffer snapcraft
         popd > /dev/null
         pushd /build > /dev/null
-        snapcraft login --with /build/edgex-snap-store-login
+        unbuffer snapcraft login --with /build/edgex-snap-store-login
         # Push the snap up to the store and release it on the specified
         # channel
-        snapcraft push "$SNAP_NAME"*.snap --release "$SNAP_CHANNEL" 
+        unbuffer snapcraft push "$SNAP_NAME"*.snap --release "$SNAP_CHANNEL" 
         # Also force an update of the meta-data
-        snapcraft push-metadata "$SNAP_NAME"*.snap --force
+        unbuffer snapcraft push-metadata "$SNAP_NAME"*.snap --force
         popd > /dev/null
     ;;
     "release")
         # Release jobs will promote an already built snap revision
         # in the store to a channel.
-        snapcraft login --with /build/edgex-snap-store-login
-        snapcraft release "$SNAP_NAME" "$SNAP_REVISION" "$SNAP_CHANNEL"
+        unbuffer snapcraft login --with /build/edgex-snap-store-login
+        unbuffer snapcraft release "$SNAP_NAME" "$SNAP_REVISION" "$SNAP_CHANNEL"
     ;;
     *)
         # Do normal build and nothing else to verify the snap builds
         pushd /build > /dev/null
-        snapcraft clean
-        snapcraft
+        unbuffer snapcraft clean
+        unbuffer snapcraft
         popd > /dev/null
     ;;
 esac
@@ -150,7 +150,7 @@ RUN apt-get update && \
     apt remove --yes --purge curl jq squashfs-tools && \
     apt-get autoclean --yes && \
     apt-get clean --yes && \
-    apt-get install snapd --yes
+    apt-get install snapd expect --yes
 
 
 # The upstream dockerfile just uses this file locally from the repo since it's
