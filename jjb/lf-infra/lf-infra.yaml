@@ -1,0 +1,14 @@
+---
+- project:
+    name: lf-infra-view
+    views:
+      - common-view
+    view-name: lf-infra
+    view-regex: "^lf-.*$"
+
+- project:
+    name: global-pipelines
+    project-name: lf-infra-pipelines
+    project: pipelines
+    jobs:
+      - lf-pipelines-verify
