@@ -28,12 +28,3 @@
     filter-queue: false
     recurse: false
     regex: '.*snap.*'
-
-- view:
-    name: docs
-    description: 'List of docs jobs'
-    view-type: list
-    filter-executors: false
-    filter-queue: false
-    recurse: false
-    regex: '.*docs.*'
