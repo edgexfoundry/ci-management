@@ -10,15 +10,5 @@
           snap-channel: latest/edge
 
     jobs:
-     - '{project-name}-{stream}-stage-snap-arm':
-         build-node: ubuntu18.04-docker-arm64-4c-16g
      - '{project-name}-release-snap':
          build-node: centos7-docker-4c-2g
-     - '{project-name}-{stream}-stage-snap':
-         build-node: centos7-docker-4c-2g
-     - '{project-name}-{stream}-verify-snap-arm':
-         build-node: ubuntu18.04-docker-arm64-4c-16g
-         status-context: '{project-name}-{stream}-verify-arm'
-     - '{project-name}-{stream}-verify-snap':
-         build-node: centos7-docker-4c-2g
-         status-context: '{project-name}-{stream}-verify'
