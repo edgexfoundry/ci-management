@@ -73,7 +73,7 @@
             dest: '/opt'
             creates: '/opt/golang/111'
             remote_src: true
-          become: true       
+          become: true
 
     - name: 'Install Glide {{glide_version}}'
       block:
@@ -130,3 +130,10 @@
         state: present
       when: ansible_distribution == 'Ubuntu'
       become: true
+
+    - name: 'Set docker proxy'
+      lineinfile:
+        dest: /etc/docker/daemon.json
+        line: '  "registry-mirrors": ["https://nexus3.edgexfoundry.org"],'
+        state: present
+        insertafter: '{'
