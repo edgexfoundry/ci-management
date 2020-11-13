@@ -134,6 +134,7 @@
     - name: 'Set docker proxy'
       lineinfile:
         dest: /etc/docker/daemon.json
-        line: '  "registry-mirrors": ["https://nexus3.edgexfoundry.org"],'
+        line: '  "registry-mirrors": ["https://nexus3.edgexfoundry.org:10001"],'
         state: present
         insertafter: '{'
+      become: true
