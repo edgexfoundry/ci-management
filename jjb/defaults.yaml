@@ -65,3 +65,7 @@
     container-snapshot-registry: nexus3.edgexfoundry.org:10003
     container-staging-registry: nexus3.edgexfoundry.org:10004
     container-push-registry: '{container-staging-registry}'
+
+    # openstack-cron notification defaults
+    failure-notification: "releng+edgex@linuxfoundation.org"
+    failure-notification-prefix: "[releng]"
