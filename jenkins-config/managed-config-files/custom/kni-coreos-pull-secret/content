@@ -1,0 +1,20 @@
+{
+  "auths": {
+    "cloud.openshift.com": {
+      "auth": "$KNI_CLOUD_PSW",
+      "email": "$KNI_CLOUD_USR"
+    },
+    "quay.io": {
+      "auth": "$KNI_CLOUD_PSW",
+      "email": "$KNI_CLOUD_USR"
+    },
+    "registry.connect.redhat.com": {
+      "auth": "$KNI_REDHAT_PSW",
+      "email": "$KNI_REDHAT_USR"
+    },
+    "registry.redhat.io": {
+      "auth": "$KNI_REDHAT_PSW",
+      "email": "$KNI_REDHAT_USR"
+    }
+  }
+}
