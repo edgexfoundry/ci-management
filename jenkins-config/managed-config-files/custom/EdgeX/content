@@ -1,0 +1,4 @@
+[login.ubuntu.com]
+$MACAROON_USR = $MACAROON_PSW
+$UNBOUND_USR = $UNBOUND_PSW
+email = collab-it+edgexfoundry-snap@linuxfoundation.org

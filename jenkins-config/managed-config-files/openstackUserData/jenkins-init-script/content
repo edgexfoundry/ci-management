@@ -1,0 +1,14 @@
+#!/bin/bash
+until host github.com &>/dev/null
+do
+    echo "Waiting until github.com is resolvable..."
+done
+
+git clone https://github.com/lfit/releng-global-jjb.git /opt/ciman/global-jjb
+
+#(cd /opt/ciman/global-jjb
+#    git fetch https://gerrit.linuxfoundation.org/infra/releng/global-jjb refs/changes/78/14778/4
+#    git checkout FETCH_HEAD 0)
+
+/opt/ciman/global-jjb/jenkins-init-scripts/init.sh
+rm -rf /opt/ciman/releng-global-jjb/

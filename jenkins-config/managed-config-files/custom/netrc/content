@@ -1,0 +1,1 @@
+machine nexus3.edgexfoundry.org login $EDGEX_GO_USR password $EDGEX_GO_PSW
