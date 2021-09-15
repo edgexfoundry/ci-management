@@ -9,7 +9,7 @@
     <mirror>
       <id>release-mirror</id>
       <name>Local Nexus mirror for builds</name>
-      <url>${env.NEXUS_URL}/content/repositories/public/</url>
+      <url>^${env.NEXUS_URL}/content/repositories/public/</url>
       <mirrorOf>central</mirrorOf>
     </mirror>
   </mirrors>
@@ -21,7 +21,7 @@
         <repository>
           <id>releases</id>
           <name>releases</name>
-          <url>${env.NEXUS_URL}/content/repositories/releases/</url>
+          <url>^${env.NEXUS_URL}/content/repositories/releases/</url>
           <releases>
             <enabled>true</enabled>
             <updatePolicy>never</updatePolicy>
@@ -35,7 +35,7 @@
         <pluginRepository>
           <id>releases</id>
           <name>releases</name>
-          <url>${env.NEXUS_URL}/content/repositories/releases/</url>
+          <url>^${env.NEXUS_URL}/content/repositories/releases/</url>
           <releases>
             <enabled>true</enabled>
             <updatePolicy>never</updatePolicy>
@@ -53,7 +53,7 @@
         <repository>
           <id>staging</id>
           <name>staging</name>
-          <url>${env.NEXUS_URL}/content/repositories/staging/</url>
+          <url>^${env.NEXUS_URL}/content/repositories/staging/</url>
           <releases>
             <enabled>true</enabled>
           </releases>
@@ -70,7 +70,7 @@
         <repository>
           <id>snapshots</id>
           <name>snapshots</name>
-          <url>${env.NEXUS_URL}/content/repositories/snapshots/</url>
+          <url>^${env.NEXUS_URL}/content/repositories/snapshots/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
@@ -83,7 +83,7 @@
         <pluginRepository>
           <id>snapshots</id>
           <name>snapshots</name>
-          <url>${env.NEXUS_URL}/content/repositories/snapshots/</url>
+          <url>^${env.NEXUS_URL}/content/repositories/snapshots/</url>
           <releases>
             <enabled>false</enabled>
           </releases>
