@@ -1,7 +1,11 @@
 ---
 - project:
     jobs:
-      - '{project-name}-github-ci-jobs'
+      - github-jenkins-cfg-verify
+      - github-jenkins-sandbox-cleanup
+      - github-jjb-deploy-job
+      - github-jjb-merge
+      - github-jjb-verify
       - github-packer-verify
 
     name: ci-management-jobs
