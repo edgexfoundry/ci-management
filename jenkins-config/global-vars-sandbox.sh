@@ -7,6 +7,6 @@ LOGS_SERVER=https://logs.edgexfoundry.org
 NEXUS_URL=https://nexus.edgexfoundry.org
 REGISTRY_PORTS=10001 10002 10003
 S3_BUCKET=
-SIGUL_BRIDGE_IP=10.30.120.3
+SIGUL_BRIDGE_IP=199.204.45.55
 SIGUL_KEY=edgex-sandbox
 SILO=sandbox
