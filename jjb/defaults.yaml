@@ -33,7 +33,7 @@
     submodule-recursive: true
 
     # default pr_whitelist to some LF RelEng staff
-    github_pr_whitelist:
+    github_pr_allowlist:
       - jpwku
       - tykeal
       - zxiiro

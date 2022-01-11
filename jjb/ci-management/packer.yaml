@@ -35,4 +35,6 @@
       - centos-7
       - ubuntu-18.04-arm64
       - ubuntu-18.04
+      - ubuntu-20.04-arm64
+      - ubuntu-20.04
     templates: docker
