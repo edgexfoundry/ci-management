@@ -19,5 +19,5 @@ query_plugins_info=True
 [sandbox]
 user=$JOBBUILDER_SANDBOX_USR
 password=$JOBBUILDER_SANDBOX_PSW
-url=https://jenkins.edgexfoundry.org
+url=https://jenkins.edgexfoundry.org/sandbox
 query_plugins_info=True
