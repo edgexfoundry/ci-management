@@ -58,7 +58,6 @@
 
     # Sonarcloud
     sonarcloud_project_organization: edgexfoundry
-    sonarcloud_api_token: 3e68831b5a5b2b70a5c6698c8f6878f251c1ee97
 
     # Nexus3 docker registries
     container-public-registry: docker.io
