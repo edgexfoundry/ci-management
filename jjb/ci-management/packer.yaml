@@ -9,6 +9,7 @@
     project-name: ci-management
     branch: master
     archive-artifacts: '**/*.log'
+    github-org: edgexfoundry
 
     build-node: centos7-builder-2c-1g
     build-timeout: 90
@@ -27,6 +28,7 @@
     project-name: ci-management
     branch: master
     archive-artifacts: '**/*.log'
+    github-org: edgexfoundry
 
     build-node: centos7-builder-2c-1g
     build-timeout: 90

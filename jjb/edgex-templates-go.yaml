@@ -1,6 +1,6 @@
 ---
 # Job definition Anchors
-- go_job_boiler_plate: &go_job_boiler_plate
+- _go_job_boiler_plate: &go_job_boiler_plate
     name: go_job-boiler-plate
 
     project-type: freestyle
@@ -53,7 +53,7 @@
       - edgex-infra-publish
       - edgex-jenkins-alerts
 
-- go_verify_boiler_plate: &go_verify_boiler_plate
+- _go_verify_boiler_plate: &go_verify_boiler_plate
     name: go_verify_boiler_plate
 
     concurrent: true
@@ -81,7 +81,7 @@
             - '{branch}'
 
 
-- go_merge_boiler_plate: &go_merge_boiler_plate
+- _go_merge_boiler_plate: &go_merge_boiler_plate
     name: go_merge_boiler_plate
 
     scm:

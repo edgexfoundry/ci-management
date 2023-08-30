@@ -8,6 +8,7 @@
     mvn-settings: performance-test-settings
     build-timeout: 30
     jenkins_file: 'Jenkinsfile'
+    github-org: edgexfoundry
     stream:
       - 'master':
           branch: 'master'

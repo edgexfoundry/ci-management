@@ -1,6 +1,6 @@
 ---
 # Job definition Anchors
-- pipeline_job_boiler_plate: &pipeline_job_boiler_plate
+- _pipeline_job_boiler_plate: &pipeline_job_boiler_plate
     name: pipeline_job_boiler_plate
 
     project-type: pipeline
@@ -47,7 +47,7 @@
 
     publishers: {}
 
-- pipeline_verify_boiler_plate: &pipeline_verify_boiler_plate
+- _pipeline_verify_boiler_plate: &pipeline_verify_boiler_plate
     name: pipeline_verify_boiler_plate
     pipeline-scm:
       script-path: '{jenkins_file}'
@@ -77,7 +77,7 @@
             - '{branch}'
 
 
-- pipeline_merge_boiler_plate: &pipeline_merge_boiler_plate
+- _pipeline_merge_boiler_plate: &pipeline_merge_boiler_plate
     name: pipeline_merge_boiler_plate
     pipeline-scm:
       script-path: '{jenkins_file}'
@@ -99,7 +99,7 @@
       # no reason to add github-pull-request here since it doesn't currently
       # work for merge / push
 
-- pipeline_webhooks_boiler_plate: &pipeline_webhooks_boiler_plate
+- _pipeline_webhooks_boiler_plate: &pipeline_webhooks_boiler_plate
     # Freestyle job to have jenkins create and maintain the github push
     # webhook. Currently the github jenkins plugin cannot create the push
     # webhook using the pipeline scm section of the job.

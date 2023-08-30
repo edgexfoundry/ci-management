@@ -1,6 +1,6 @@
 ---
 # Job definition Anchors
-- snap_job_boiler_plate: &snap_job_boiler_plate
+- _snap_job_boiler_plate: &snap_job_boiler_plate
     name: snap_job-boiler-plate
 
     project-type: freestyle
@@ -51,7 +51,7 @@
       - edgex-infra-publish
       - edgex-jenkins-alerts
 
-- snap_verify_boiler_plate: &snap_verify_boiler_plate
+- _snap_verify_boiler_plate: &snap_verify_boiler_plate
     name: snap_verify_boiler_plate
 
     concurrent: true
@@ -67,7 +67,7 @@
           submodule-disable: false
           submodule-timeout: 10
 
-- snap_merge_boiler_plate: &snap_merge_boiler_plate
+- _snap_merge_boiler_plate: &snap_merge_boiler_plate
     name: snap_merge_boiler_plate
 
     scm:
