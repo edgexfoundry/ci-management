@@ -13,6 +13,7 @@
     project-name: ci-management
     build-node: centos7-builder-2c-1g
     build-timeout: 20
+    github-org: edgexfoundry
 
 - project:
     name: builder-openstack
