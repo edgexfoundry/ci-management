@@ -4,6 +4,7 @@
     project-name: device-grove-c-snap
     project: device-grove-c
     mvn-settings: device-grove-c-settings
+    github-org: edgexfoundry
     stream:
       - 'master':
           branch: 'master'

@@ -4,6 +4,7 @@
     project-name: edgex-ui-go-snap
     project: edgex-ui-go
     mvn-settings: edgex-ui-go-settings
+    github-org: edgexfoundry
     stream:
       - 'master':
           branch: 'master'

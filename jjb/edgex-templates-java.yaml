@@ -1,6 +1,6 @@
 ---
 # Job definition Anchors
-- job_boiler_plate: &job_boiler_plate
+- _job_boiler_plate: &job_boiler_plate
     name: job-boiler-plate
 
     project-type: freestyle
@@ -39,7 +39,7 @@
     publishers:
       - edgex-infra-publish
 
-- verify_boiler_plate: &verify_boiler_plate
+- _verify_boiler_plate: &verify_boiler_plate
     name: verify_boiler_plate
 
     concurrent: true
@@ -67,7 +67,7 @@
             - '{branch}'
 
 
-- merge_boiler_plate: &merge_boiler_plate
+- _merge_boiler_plate: &merge_boiler_plate
     name: merge_boiler_plate
 
     scm:

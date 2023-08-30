@@ -2,7 +2,7 @@
 ###########
 # ANCHORS #
 ###########
-- docker_job_boiler_plate: &docker_job_boiler_plate
+- _docker_job_boiler_plate: &docker_job_boiler_plate
     name: docker_job-boiler-plate
 
     project-type: freestyle
@@ -51,7 +51,7 @@
     publishers:
       - edgex-infra-publish
 
-- docker_verify_boiler_plate: &docker_verify_boiler_plate
+- _docker_verify_boiler_plate: &docker_verify_boiler_plate
     name: docker_verify_boiler_plate
 
     concurrent: true
@@ -79,7 +79,7 @@
             - '{branch}'
 
 
-- docker_merge_boiler_plate: &docker_merge_boiler_plate
+- _docker_merge_boiler_plate: &docker_merge_boiler_plate
     name: docker_merge_boiler_plate
 
     scm:

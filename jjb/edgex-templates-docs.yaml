@@ -1,6 +1,6 @@
 ---
 # Job definition Anchors
-- docs_job_boiler_plate: &docs_job_boiler_plate
+- _docs_job_boiler_plate: &docs_job_boiler_plate
     name: docs_job-boiler-plate
 
     project-type: freestyle
@@ -49,7 +49,7 @@
       - edgex-infra-publish
       - edgex-jenkins-alerts
 
-- docs_verify_boiler_plate: &docs_verify_boiler_plate
+- _docs_verify_boiler_plate: &docs_verify_boiler_plate
     name: docs_verify_boiler_plate
 
     concurrent: true
@@ -76,7 +76,7 @@
           white-list-target-branches:
             - '{branch}'
 
-- docs_merge_boiler_plate: &docs_merge_boiler_plate
+- _docs_merge_boiler_plate: &docs_merge_boiler_plate
     name: docs_merge_boiler_plate
 
     scm:

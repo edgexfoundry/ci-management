@@ -1,6 +1,6 @@
 ---
 # Job definition Anchors
-- performance_job_boiler_plate: &performance_job_boiler_plate
+- _performance_job_boiler_plate: &performance_job_boiler_plate
     name: performance_job-boiler-plate
 
     project-type: pipeline
@@ -72,7 +72,7 @@
           description: |
               Trigger JMeter script, can't be empty
 
-- performance_verify_boiler_plate: &performance_verify_boiler_plate
+- _performance_verify_boiler_plate: &performance_verify_boiler_plate
     name: performance_verify_boiler_plate
 
     scm:
@@ -86,7 +86,7 @@
           submodule-disable: false
           submodule-timeout: 10
 
-- performance_test_boiler_plate: &performance_test_boiler_plate
+- _performance_test_boiler_plate: &performance_test_boiler_plate
     name: performance_test_boiler_plate
 
     scm:
