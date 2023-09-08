@@ -11,6 +11,7 @@
     archive-artifacts: '**/*.log'
     github-org: edgexfoundry
 
+    packer-cloud-settings: packer-cloud-env-hcl
     build-node: centos7-builder-2c-1g
     build-timeout: 90
 
@@ -30,6 +31,7 @@
     archive-artifacts: '**/*.log'
     github-org: edgexfoundry
 
+    packer-cloud-settings: packer-cloud-env-hcl
     build-node: centos7-builder-2c-1g
     build-timeout: 90
 
