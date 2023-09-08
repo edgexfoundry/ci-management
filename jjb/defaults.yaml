@@ -6,7 +6,7 @@
 
     # lftools
     lftools-version:  <1.0.0
-    packer-version: 1.2.3
+    packer-version: 1.9.1
 
     # lf-infra-defaults
     jenkins-ssh-credential: 'edgex-jenkins-ssh'
