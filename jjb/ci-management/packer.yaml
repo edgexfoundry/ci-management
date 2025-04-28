@@ -37,8 +37,12 @@
 
     platforms:
       - centos-7
+      - centos-cs-8
+      - centos-cs-9
       - ubuntu-18.04-arm64
       - ubuntu-18.04
       - ubuntu-20.04-arm64
       - ubuntu-20.04
+      - ubuntu-24.04-arm64
+      - ubuntu-24.04
     templates: docker
