@@ -45,7 +45,7 @@
           files:
             - file-id: 'jenkins-log-archives-settings'
               variable: 'SETTINGS_FILE'
-      - shell: !include-raw:
+      - shell: !include-raw-verbatim:
           - ../shell/edgex-infra-ship-logs.sh
       - description-setter:
           regexp: '^Build logs: .*'
