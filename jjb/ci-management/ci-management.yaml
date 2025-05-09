@@ -14,6 +14,7 @@
     build-node: ubuntu20.04-docker-2c-8g
     build-timeout: 20
     github-org: edgexfoundry
+    packer-cloud-settings: packer-cloud-env-hcl
 
 - project:
     name: builder-openstack
