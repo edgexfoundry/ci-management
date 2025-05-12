@@ -1,0 +1,8 @@
+source_ami_filter_name = "*ubuntu*24.04*"
+source_ami_filter_owner = "aws-marketplace"
+source_ami_filter_product_code = "01a8b7cc84780badb"
+base_image = "Ubuntu 24.04.2 LTS (x86_64) [2025-04-03]"
+distro = "Ubuntu 24.04"
+docker_source_image = "ubuntu:24.04"
+ssh_user = "ubuntu"
+cloud_user_data = "common-packer/provision/ubuntu-user_data.sh"
