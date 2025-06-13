@@ -26,10 +26,13 @@
         glide_url: https://github.com/Masterminds/glide/releases/download/{{glide_version}}/glide-{{glide_version}}-linux-arm64.tar.gz
       when: "'aarch64' in ansible_architecture"
 
-    - name: 'Install Docker Compose {{docker_compose_version}}'
-      pip:
-        name: 'docker-compose=={{docker_compose_version}}'
-        extra_args: --user
+    - name: 'Install Docker Compose'
+      apt:
+        name:
+          - docker-compose-plugin
+        state: present
+      when: ansible_distribution == 'Ubuntu'
+      become: true
 
     - name: 'Install GoLang {{golang_version}}'
       block:
