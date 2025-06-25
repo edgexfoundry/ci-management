@@ -126,7 +126,7 @@ source "docker" "docker" {
   image   = "${var.docker_source_image}"
 }
 
-source "openstack" "docker" {
+source "openstack" "local-docker" {
   flavor            = "${var.flavor}"
   image_disk_format = "${var.vm_image_disk_format}"
   image_name        = "ZZCI - ${var.distro} - docker - ${var.arch} - ${legacy_isotime("20060102-150405.000")}"
@@ -146,7 +146,7 @@ source "openstack" "docker" {
 }
 
 build {
-  sources = ["source.docker.docker", "source.openstack.docker"]
+  sources = ["source.docker.docker", "source.openstack.local-docker"]
 
   provisioner "shell" {
     execute_command = "chmod +x {{ .Path }}; if [ \"$UID\" == \"0\" ]; then {{ .Vars }} '{{ .Path }}'; else {{ .Vars }} sudo -E '{{ .Path }}'; fi"
